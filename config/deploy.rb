@@ -1,7 +1,7 @@
 set :application, "Versionize"
 set :repository,  "git@github.com:runemadsen/Versionize.git"
 
-set :deploy_to, "/public_html/versionize.com"
+set :deploy_to, "home/rune/public_html/versionize.com"
 set :user, "rune"
 set :branch, "release"
 #set :use_sudo, false
