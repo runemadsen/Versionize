@@ -1,22 +1,23 @@
 set :application, "Versionize"
-set :repository,  "set your repository location here"
+set :repository,  "git@github.com:runemadsen/Versionize.git"
 
-set :scm, :subversion
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :deploy_to, "/public_html/versionize.com"
+set :user, "rune"
+set :branch, "release"
+#set :use_sudo, false
+set :use_sudo, true
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+set :scm, :git
 
-# If you are using Passenger mod_rails uncomment this:
-# if you're still using the script/reapear helper you will need
-# these http://github.com/rails/irs_process_scripts
+role :web, "184.106.217.110:30000"
+role :app, "184.106.217.110:30000"
+role :db, "184.106.217.110:30000", :primary => true
 
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+# Passenger stuff
+namespace :deploy do
+ task :start do ; end
+ task :stop do ; end
+ task :restart, :roles => :app, :except => { :no_release => true } do
+ run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+ end
+end
