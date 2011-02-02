@@ -4,8 +4,8 @@ set :repository,  "git@github.com:runemadsen/Versionize.git"
 set :deploy_to, "public_html/versionize.com"
 set :user, "rune"
 set :branch, "release"
-#set :use_sudo, false
-set :use_sudo, true
+set :use_sudo, false
+#set :use_sudo, true
 
 set :scm, :git
 
