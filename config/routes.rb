@@ -4,6 +4,8 @@ Versionize::Application.routes.draw do
   get "user_sessions/new"
   
   resources :user_sessions
+  resource :account, :controller => "users"
+  resources :users
 
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
