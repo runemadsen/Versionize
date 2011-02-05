@@ -22,4 +22,4 @@ production:
     database: versionize_production
     host: localhost
     username: root
-    password: root
+    password: Enurmadsen1

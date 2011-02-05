@@ -75,7 +75,7 @@ _____________________________________________ */
 }
 
 .input_remember {
-	margin-left: 160px;
+	margin-left: 180px;
 	background: #25331f;
 	border: none;
 }
@@ -94,5 +94,5 @@ _____________________________________________ */
 	height: 30px;
 	background: url('../images/input_login.jpg') no-repeat;
     border: none;
-	margin-left: 20px;
+	margin-left: 10px;
 }
