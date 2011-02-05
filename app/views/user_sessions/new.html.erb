@@ -1,16 +1,37 @@
-<h1>Login</h1>
+<div class="grid_1">&nbsp;</div>
+<div class="grid_5">
 	
-<% form_for @user_session, :url => {:action => "create"} do |f| %>
-  <%#= f.error_messages %>
-  <%= f.label :email %><br />
-  <%= f.text_field :email %><br />
-  <br />
-  <%= f.label :password %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
-  <br />
-  <%= f.submit "Login" %>
-<% end %>
+	<img src="/images/logo_beta.jpg" alt="Versionize" id="front_logo">
+	
+	<p id="front_text">Versionize is a website for creating and sharing ideas. You can use it as a personal tool to write down hunches, create new versions of these hunches and keep developing them until they form a structured idea. You can also make these ideas public, so everyone else can create new versions of your ideas.</p>
+	
+	<p id="front_twitter">Follow <span id="front_twitter_green"><a href="http://www.twitter.com/versionize">@versionize</a></span> on Twitter for updates</p>
+</div>
+	
+<div class="grid_6">
+	
+	<div id="front_boxes_top">&nbsp;</div>
 
-<%= link_to "Don't have an account? Create a user", :controller => :users, :action => :new %>
+	<% form_for @user_session, :url => {:action => "create"} do |f| %>
+	  <%#= f.error_messages %>
+	
+	<!-- (:comment_text, "Enter your comment...", 
+		) -->
+	
+	
+	  <%= f.text_field :email, :class => "front_input input_email", :value => "Email", 	
+						:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+						:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
+	
+	  <%= f.password_field :password, :class => "front_input input_password", :value => "Password",
+						:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+						:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
+	  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
+	  <br />
+	  <%= f.submit "Login" %>
+	<% end %>
+
+	<%= link_to "Don't have an account? Create a user", :controller => :users, :action => :new %>
+</div>
+<div class="clear"></div>
+
