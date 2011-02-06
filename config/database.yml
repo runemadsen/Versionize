@@ -15,7 +15,7 @@ test:
     database: versionize_test
     host: localhost
     username: root
-    password: root
+    password: Enurmadsen1
 
 production:
     adapter: mysql2
