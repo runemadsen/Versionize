@@ -6,6 +6,7 @@ gem 'capistrano'
 gem 'authlogic'
 gem 'grit'
 gem "rails3-generators"
+gem "autotest"
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
@@ -24,6 +25,6 @@ gem "rails3-generators"
 #   gem 'webrat'
 # end
 
-group :test do
-  gem 'rspec-rails', '>= 2.0.0.beta.10'
+group :test, :development do
+  gem "rspec-rails", "~> 2.4"
 end
