@@ -1,1 +1,7 @@
 This is a users ideas
+
+<ul>
+<% for idea in @current_user.ideas %>
+	<li><%= link_to idea.name, idea_url(idea) %></li>
+<% end %>
+</ul>
