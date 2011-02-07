@@ -23,3 +23,7 @@ gem "rails3-generators"
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+group :test do
+  gem 'rspec-rails', '>= 2.0.0.beta.10'
+end
