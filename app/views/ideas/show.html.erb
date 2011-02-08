@@ -4,11 +4,22 @@
 
 	<p><%= @repo.commits.first.tree.contents.first.data %></p>
 	
+	<p>Commits: <%= @repo.commits.inspect %></p>
+	
+	<% for c in @repo.commits do %>
+		<%= c.tree.contents.first.data %><br />
+	<% end %>
+	
+	
+	
 </div>
 <div class="grid_4">
 	
 	<p><%= link_to "Create a new version / edit", edit_idea_path, :class => "link_button" %></p>
 	
-	<p>Number of commits: <%= @repo.commits.count %></p>
+	<p>Num commits: <%= @repo.commits.count %></p>
+	
+	<p>Parents: <%= @repo.commits.first.parents.inspect %></p>
+	<p>Log: <%= @repo.log %></p>
 </div>
 <dic class="clear"></div>

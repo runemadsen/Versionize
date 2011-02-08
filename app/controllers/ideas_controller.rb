@@ -27,17 +27,17 @@ class IdeasController < ApplicationController
     begin
       idea = Idea.find(params[:id])
       repo = Repo.new(idea.repo)
-      index = Index.new(repo)
+      index = repo.index
+      index.read_tree('master')
       index.add('mytext.txt', params[:text])
       # remember to set actor user credentials in commit
-      index.commit('Text commit')
-    
+      index.commit('Text commit', [repo.commits.first])
       flash[:notice] = "Version created!"
-      redirect_to idea_url(@idea)
-    rescue
-      flash[:error] = "There was a problem!"
-      redirect_to idea_url(@idea)
+    rescue Exception => e 
+      flash[:error] = "There was a problem! #{e}"
     end
+    
+    redirect_to idea_url(@idea)
 
   end
   
