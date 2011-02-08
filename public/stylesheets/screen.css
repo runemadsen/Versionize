@@ -12,8 +12,55 @@ body {
 }
 
 p {
+	margin: 12px 0px;
 	line-height: 22px;
 }
+
+a {
+	color: #3f6d2c;
+}
+
+a.link_button {
+	font-size: 18px;
+	font-weight: bold;
+	
+}
+
+h1 {
+	font-size: 20px;
+	margin-bottom: 12px;
+}
+
+/* Header
+_____________________________________________ */
+
+#header {
+	height: 42px;
+	margin-top: 12px;
+	margin-bottom: 48px;
+}
+
+/* Notice
+_____________________________________________ */
+
+#notice {
+	padding: 10px 5px 10px 5px;
+	background-color: #3f6d2c;
+	color: #ffffff;
+	margin-bottom: 12px;
+}
+
+/* Error
+_____________________________________________ */
+
+#error {
+	padding: 10px 5px 10px 5px;
+	background-color: #d25340;
+	color: #ffffff;
+	margin-bottom: 12px;
+}
+
+
 
 /* Front
 _____________________________________________ */

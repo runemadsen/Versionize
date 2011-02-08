@@ -1,5 +1,8 @@
 class IdeasController < ApplicationController
   
+  require 'grit'
+  include Grit
+  
   before_filter :require_user
   
   def index
@@ -15,10 +18,12 @@ class IdeasController < ApplicationController
   
   def create
     
-    @idea = Idea.new(params[:idea])
-    @idea.user = @current_user
+    repo_name = 'repos/repo' + (Idea.count + 1).to_s + '.git'
+    repo = Repo.init_bare(repo_name)
     
-    # create git repo and put in idea model
+    @idea = Idea.new(params[:idea])
+    @idea.repo = repo_name
+    @idea.user = @current_user
     
     if @idea.save
       flash[:notice] = "Idea Saved!"
