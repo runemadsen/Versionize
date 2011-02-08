@@ -2,13 +2,13 @@
 	
 	<h1><%= @idea.name %></h1>
 
-	<p><%= @text %></p>
+	<p><%= @repo.commits.first.tree.contents.first.data %></p>
 	
 </div>
 <div class="grid_4">
 	
-	<p>Create a new version / edit</p>
+	<p><%= link_to "Create a new version / edit", edit_idea_path, :class => "link_button" %></p>
 	
-	<p>[idea revisions]</p>
+	<p>Number of commits: <%= @repo.commits.count %></p>
 </div>
 <dic class="clear"></div>

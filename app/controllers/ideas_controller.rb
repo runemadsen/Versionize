@@ -10,12 +10,35 @@ class IdeasController < ApplicationController
   
   def show
      @idea = Idea.find params[:id]
-     repo = Repo.new @idea.repo
-     @text = repo.commits.first.tree.contents.first.data
+     @repo = Repo.new @idea.repo
   end
   
   def new
     @idea = Idea.new
+  end
+  
+  def edit
+    @idea = Idea.find params[:id]
+    @repo = Repo.new @idea.repo
+  end
+  
+  def update
+    
+    begin
+      idea = Idea.find(params[:id])
+      repo = Repo.new(idea.repo)
+      index = Index.new(repo)
+      index.add('mytext.txt', params[:text])
+      # remember to set actor user credentials in commit
+      index.commit('Text commit')
+    
+      flash[:notice] = "Version created!"
+      redirect_to idea_url(@idea)
+    rescue
+      flash[:error] = "There was a problem!"
+      redirect_to idea_url(@idea)
+    end
+
   end
   
   def create
@@ -24,8 +47,8 @@ class IdeasController < ApplicationController
     repo = Repo.init_bare(repo_name)
     index = Index.new(repo)
     index.add('mytext.txt', params[:text])
-    index.commit('Text commit')
     # remember to set actor user credentials in commit
+    index.commit('Text commit')
     
     @idea = Idea.new(params[:idea])
     @idea.repo = repo_name

@@ -1,0 +1,18 @@
+<div class="grid_8">
+
+<h1><%= @idea.name %></h1>
+
+<% form_for @idea, :html => {:method => :put} do |f| %>
+
+<%= label_tag 'text', 'Describe your idea' %><br/>
+<%= text_area_tag 'text', @repo.commits.first.tree.contents.first.data %></p>
+
+<p><%= submit_tag 'Create version' %></p>
+
+<% end %>
+
+</div>
+<div class="grid_4">
+	Help text here
+</div>
+<div class="clear"></div>
