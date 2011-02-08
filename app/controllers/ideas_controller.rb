@@ -10,6 +10,8 @@ class IdeasController < ApplicationController
   
   def show
      @idea = Idea.find params[:id]
+     repo = Repo.new @idea.repo
+     @text = repo.commits.first.tree.contents.first.data
   end
   
   def new
@@ -20,6 +22,10 @@ class IdeasController < ApplicationController
     
     repo_name = 'repos/repo' + (Idea.count + 1).to_s + '.git'
     repo = Repo.init_bare(repo_name)
+    index = Index.new(repo)
+    index.add('mytext.txt', params[:text])
+    index.commit('Text commit')
+    # remember to set actor user credentials in commit
     
     @idea = Idea.new(params[:idea])
     @idea.repo = repo_name
