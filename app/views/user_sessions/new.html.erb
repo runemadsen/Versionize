@@ -6,23 +6,12 @@
 	<%= flash[:notice] %>
 	<%= flash[:error] %>
 	
-	<p id="front_text">Versionize is a website for creating and sharing ideas. You can use it as a personal tool to write down hunches, create new versions of these hunches and keep developing them until they form a structured idea. You can also make these ideas public, so everyone else can create new versions of your ideas.</p>
-	
-	<p id="front_twitter">We are currently only open for beta-testers. Follow <span id="front_twitter_green"><a href="http://www.twitter.com/versionize" target="_blank">@versionize</a></span> on Twitter for updates</p>
-	
-	<%= form_tag(:controller => "invites", :action => "create") do %>
-		<%= label_tag 'invitemail', 'Sign up with your email and get an account when we beta-test' %><br/>
-		<%= text_field_tag 'invitemail' %></p>
-		<%= submit_tag 'Submit' %></p>
-	<% end %>
-</div>
-	
-<div class="grid_6" id="front_boxes">
+	<p id="front_text">We are currently open for alpha-testers only. <%= link_to 'Visit the front page', '/' %> to subscribe yourself to the mailinglist. We will email you a password as soon as we have a beta ready.</p>
 	
 	<% form_for @user_session, :url => {:action => "create"} do |f| %>
 	  <%#= f.error_messages %>
 	
-	  <%= f.text_field :email, :class => "front_input input_email", :value => "Email", 	
+	  <%= f.text_field :email, :class => "front_input", :value => "Email", 	
 						:onFocus => "if(this.value==this.defaultValue) this.value='';", 
 						:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
 	
@@ -31,10 +20,15 @@
 						:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
 	  
 		<%= f.check_box :remember_me, :class => "input_remember" %><%= f.label :remember_me, :class => "input_remember_label" %>
-		<%= f.submit "Login", :class => "input_login" %>
+		<%= f.submit "Login", :class => "input_submit" %>
 	<% end %>
 
 	<%#= link_to "Don't have an account? Create a user", :controller => :users, :action => :new %>
+	
+</div>
+	
+<div class="grid_6" id="front_boxes">
+	
 </div>
 <div class="clear"></div>
 

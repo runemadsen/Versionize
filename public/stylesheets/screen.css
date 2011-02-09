@@ -7,7 +7,7 @@ _____________________________________________ */
 
 body {
 	font-family: Helvetica, Arial, Verdana;
-	font-size: 14px;
+	font-size: 15px;
 	color: #1b1b1b;
 }
 
@@ -28,6 +28,12 @@ a.link_button {
 
 h1 {
 	font-size: 20px;
+	margin-bottom: 12px;
+}
+
+h2 {
+	font-size: 17px;
+	margin-top: 24px;
 	margin-bottom: 12px;
 }
 
@@ -77,9 +83,10 @@ _____________________________________________ */
 	margin-top: 33px;
 }
 
-#front_twitter {
-	margin-top: 33px;
-	font-weight: bold;
+#front_join {
+	margin-bottom: 6px;
+	font-size: 13px;
+	color: #999999;
 }
 
 #front_twitter_green a,
@@ -98,33 +105,38 @@ _____________________________________________ */
 }
 
 .front_input {
-	font-size: 15px;
+	width: 370px;
+	height: 43px;
+	padding-left: 10px;
+	background-color: #e6e7e6;
+	border: none;
+	border-bottom: 5px solid #999999;
+	font-size: 17px;
+}
+
+.input_submit {
+	font-size: 13px;
 	color: #ffffff;
 	font-weight: bold;
-	padding-left: 23px;
-	width: 276px;
-	height: 34px;
-	border: none;
+	width: 68px;
+	height: 30px;
+	background: url('../images/input_submit.jpg') no-repeat;
+    border: none;
+	margin-top: 11px;
+	float: right;
 }
 
-.input_email {
-	background-color: #282828;
-	margin-top: 292px;
-	margin-left: 80px;
-}
+/* Login boxes
+_____________________________________________ */
 
 .input_password {
-	
-	background-color: #3f3333;
-	margin-top: 31px;
-	margin-left: 80px;
-	margin-bottom: 28px;
+	margin-top: 12px;
 }
 
 .input_remember {
-	margin-left: 180px;
-	background: #25331f;
 	border: none;
+	margin-left: 180px;
+	margin-top: 20px;
 }
 
 .input_remember_label {
