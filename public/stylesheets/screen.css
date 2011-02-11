@@ -2,6 +2,12 @@ body, html {
 	height: 100%;
 }
 
+/*.container_12 {
+	background-image: url('../images/grid.jpg');
+	background-position: top;
+	background-repeat: repeat-y;
+}*/
+
 /* Fonts
 _____________________________________________ */
 
@@ -37,6 +43,35 @@ h2 {
 	margin-bottom: 12px;
 }
 
+/* Form styling
+_____________________________________________ */
+
+.input_box {
+	background-color: #FFFFFF;
+	border: 2px solid #f5f5f5;
+	font-family: Helvetica, Arial, Verdana;
+}
+
+.input_box:focus {
+	border: 2px solid #e4ecf9;
+}
+
+.input_name {
+	width: 608px;
+	height: 47px;
+	padding-left: 12px;
+	font-size: 26px;
+	color: #323232;
+}
+
+.input_text {
+	width: 596px;
+	height: 150px;
+	padding: 12px;
+	font-size: 15px;
+	color: #323232;
+}
+
 /* Header
 _____________________________________________ */
 
@@ -44,6 +79,22 @@ _____________________________________________ */
 	height: 42px;
 	margin-top: 12px;
 	margin-bottom: 48px;
+}
+
+#logo {
+	float: left;
+}
+
+#contact_message {
+	color: #999999;
+	margin-left: 40px;
+	line-height: 42px;
+	height: 42px;
+	float: left;
+}
+
+#contact_message a {
+	color: #999999;
 }
 
 /* Notice
@@ -104,6 +155,9 @@ _____________________________________________ */
 	background-repeat: repeat-y;
 }
 
+/* Front form stuff
+_____________________________________________ */
+
 .front_input {
 	width: 370px;
 	height: 43px;
@@ -114,7 +168,7 @@ _____________________________________________ */
 	font-size: 17px;
 }
 
-.input_submit {
+.front_input_submit {
 	font-size: 13px;
 	color: #ffffff;
 	font-weight: bold;
@@ -126,26 +180,23 @@ _____________________________________________ */
 	float: right;
 }
 
-/* Login boxes
-_____________________________________________ */
-
-.input_password {
+.front_input_password {
 	margin-top: 12px;
 }
 
-.input_remember {
+.front_input_remember {
 	border: none;
 	margin-left: 180px;
 	margin-top: 20px;
 }
 
-.input_remember_label {
+.front_input_remember_label {
 	font-size: 13px;
 	color: #25331f;
 	font-weight: bold;
 }
 
-.input_login {
+.front_input_login {
 	font-size: 13px;
 	color: #ffffff;
 	font-weight: bold;

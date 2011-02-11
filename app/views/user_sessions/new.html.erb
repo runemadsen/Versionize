@@ -15,11 +15,11 @@
 						:onFocus => "if(this.value==this.defaultValue) this.value='';", 
 						:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
 	
-	  <%= f.password_field :password, :class => "front_input input_password", :value => "Password",
+	  <%= f.password_field :password, :class => "front_input front_input_password", :value => "Password",
 						:onFocus => "if(this.value==this.defaultValue) this.value='';", 
 						:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
 	  
-		<%= f.check_box :remember_me, :class => "input_remember" %><%= f.label :remember_me, :class => "input_remember_label" %>
+		<%= f.check_box :remember_me, :class => "front_input_remember" %><%= f.label :remember_me, :class => "input_remember_label" %>
 		<%= f.submit "Login", :class => "input_submit" %>
 	<% end %>
 
