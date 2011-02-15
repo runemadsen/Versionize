@@ -63,4 +63,10 @@ class IdeasController < ApplicationController
     end
   end
   
+  def get_link
+    respond_to do |format|
+      format.js
+    end
+  end
+  
 end

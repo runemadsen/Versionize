@@ -2,11 +2,23 @@
 
 <% form_for @idea, :url => {:action => "create"} do |f| %>
 
-<p><%= f.text_field :name, :value => "Idea name", :class => 'input_box input_name',
+<%= f.text_field :name, :value => "Idea name", :class => 'input_box input_name',
  	:onFocus => "if(this.value==this.defaultValue) this.value='';", 
-	:onBlur => "if(this.value=='') this.value=this.defaultValue;" %></p>
+	:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
 
-<p><%= text_area_tag 'text', "Idea description", :class => 'input_box input_text' %></p>
+<p><%= text_area_tag 'text', "Idea description", :class => 'input_box input_text',
+ 		:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+		:onBlur => "if(this.value=='') this.value=this.defaultValue;" %></p>
+		
+<div id="media_box">
+	<ul>
+		<li><%= link_to "Link", get_link_ideas_path, :remote => true %></li>
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<div id="extras">
+</div>
 
 <p><%= submit_tag 'Create idea' %></p>
 

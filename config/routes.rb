@@ -6,8 +6,13 @@ Versionize::Application.routes.draw do
   resources :user_sessions
   resource :account, :controller => "users"
   resources :users
-  resources :ideas
   resources :invites
+  
+  resources :ideas do
+    collection do
+      get  :get_link
+    end
+  end
 
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
