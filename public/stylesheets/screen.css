@@ -70,6 +70,16 @@ _____________________________________________ */
 	padding: 12px;
 	font-size: 15px;
 	color: #323232;
+	margin: 12px 0px;
+}
+
+.input_link {
+	width: 608px;
+	height: 32px;
+	padding-left: 12px;
+	font-size: 19px;
+	color: #323232;
+	margin-top: 12px;
 }
 
 /* Insert media box styling
@@ -103,10 +113,6 @@ _____________________________________________ */
 
 #media_box ul li:hover {
 	background-color: #d25340;
-}
-
-#media_box ul li a.disabled_link {
-	color: #e4e4e4;
 }
 
 /* Header
