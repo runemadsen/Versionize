@@ -13,6 +13,7 @@ class InvitesController < ApplicationController
     rescue ActiveRecord::RecordInvalid => e
       flash[:error] = "Something went wrong: #{e}"
       redirect_to invites_path
+      
     end
   end
   
