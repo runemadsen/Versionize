@@ -17,9 +17,9 @@ default_run_options[:shell] = false
 
 set :scm, :git
 
-role :web, "184.106.217.110"
-role :app, "184.106.217.110"
-role :db, "184.106.217.110", :primary => true
+role :web, "50.56.76.236"
+role :app, "50.56.76.236"
+role :db, "50.56.76.236", :primary => true
 
 # Passenger stuff
 namespace :deploy do
