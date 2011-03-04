@@ -6,9 +6,14 @@ class InvitesController < ApplicationController
   end
   
   def create
-    invite = Invite.new(:email => params[:invitemail])
-    invite.save
-    render 'thanks'
+    begin
+      invite = Invite.new(:email => params[:invitemail])
+      invite.save
+      render 'thanks'
+    rescue ActiveRecord::RecordInvalid => e
+      flash[:error] = "Something went wrong: #{e}"
+      redirect_to invites_path
+    end
   end
   
 end
