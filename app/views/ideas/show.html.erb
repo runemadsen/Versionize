@@ -1,16 +1,14 @@
 <div class="grid_8">
 	
 	<h1><%= @idea.name %></h1>
-
-	<p><%= @repo.commits.first.tree.contents.first.data %></p>
 	
-	<p>Commits: <%= @repo.commits.inspect %></p>
+	<%= (@repo.commits.first.tree/'mytext.txt').data %><br /><br />
 	
-	<% for c in @repo.commits do %>
-		<%= c.tree.contents.first.data %><br />
+	<% links = @repo.commits.first.tree/'links.json' %>
+	<% links = JSON.parse(links.data) %>
+	<% for link in links %>
+		Link: <%= link %><br />
 	<% end %>
-	
-	
 	
 </div>
 <div class="grid_4">
