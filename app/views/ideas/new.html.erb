@@ -12,15 +12,15 @@
 		
 <div id="media_box">
 	<ul>
-		<li><%= link_to "Link", get_link_ideas_path, :remote => true %></li>
+		<li><%= link_to_function("Add link", "add_formfield(this, \"#{escape_javascript(render('link'))}\")") %></li>
 	</ul>
 	<div class="clear"></div>
 </div>
 
 <div id="extras">
-	<%= text_field_tag "links[]", "http://", :class => "input_box input_link" %>
-	<%= text_field_tag "links[]", "http://", :class => "input_box input_link" %>
-	<%= text_field_tag "links[]", "http://", :class => "input_box input_link" %>
+	<%#= text_field_tag "links[]", "http://", :class => "input_box input_link" %>
+	<%#= text_field_tag "links[]", "http://", :class => "input_box input_link" %>
+	<%#= text_field_tag "links[]", "http://", :class => "input_box input_link" %>
 </div>
 
 <p><%= submit_tag 'Create idea' %></p>
