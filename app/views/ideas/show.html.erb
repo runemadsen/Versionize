@@ -2,7 +2,7 @@
 	
 	<h1><%= @idea.name %></h1>
 	
-	<%= (@repo.commits.first.tree/'mytext.txt').data %><br /><br />
+	<%= (@repo.commits.first.tree/'mytext.txt').data %> <br /><br />
 	
 	<% links = @repo.commits.first.tree/'links.json' %>
 	<% links = JSON.parse(links.data) %>
