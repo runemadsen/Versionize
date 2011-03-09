@@ -45,7 +45,11 @@ class IdeasController < ApplicationController
     repo_name = 'repos/repo' + (Idea.count + 1).to_s + '.git'
     repo = Repo.init_bare(repo_name)
     index = Index.new(repo)
-    index.add('links.json', params[:links].to_json)
+    
+    unless params[:links] == nil
+      index.add('links.json', params[:links].to_json)
+    end
+    
     index.add('mytext.txt', params[:text])
     # remember to set actor user credentials in commit
     index.commit('Text commit')

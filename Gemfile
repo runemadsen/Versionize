@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
+gem 'authlogic'
 gem 'rails', '3.0.3'
 gem 'mysql2'
 gem 'capistrano'
-gem 'authlogic'
 gem 'grit'
 gem "rails3-generators"
 gem "autotest"
@@ -28,5 +28,5 @@ gem 'jquery-rails', '>= 0.2.6'
 # end
 
 group :test, :development do
-  gem "rspec-rails", "~> 2.4"
+  gem "rspec-rails", ">= 2.4"
 end

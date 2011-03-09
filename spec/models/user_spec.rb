@@ -1,21 +1,15 @@
 require 'spec_helper'
 
-describe "A User" do
-  
-  before do
-    @attr = { :email => "user@example.com",
-              :password => 'test1234',
-              :password_confirmation => 'test1234'
-            }
+describe User do
+  before(:each) do
+    @valid_attributes = {
+      :email => "akm2000@gmail.com",
+      :password => "D1ff1cultPa55w0rd",
+      :password_confirmation => "D1ff1cultPa55w0rd",
+    }
   end
-  
-  it "should create a new instance" do
-     
-    @user = User.new(@attr) 
-    @user.should be_valid
-    @user.save.should be_true
-    puts @user.errors.full_messages.to_sentence
-    
+
+  it "should create a new instance given valid attributes" do
+    User.create!(@valid_attributes)
   end
-  
 end
