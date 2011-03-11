@@ -6,7 +6,7 @@
  	:onFocus => "if(this.value==this.defaultValue) this.value='';", 
 	:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
 
-<%= text_area_tag 'text', "Idea description", :class => 'input_box input_text',
+<%= text_area_tag :description, "Idea description", :class => 'input_box input_text',
  		:onFocus => "if(this.value==this.defaultValue) this.value='';", 
 		:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
 		
@@ -18,9 +18,6 @@
 </div>
 
 <div id="extras">
-	<%#= text_field_tag "links[]", "http://", :class => "input_box input_link" %>
-	<%#= text_field_tag "links[]", "http://", :class => "input_box input_link" %>
-	<%#= text_field_tag "links[]", "http://", :class => "input_box input_link" %>
 </div>
 
 <p><%= submit_tag 'Create idea' %></p>

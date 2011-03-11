@@ -2,12 +2,12 @@
 	
 	<h1><%= @idea.name %></h1>
 	
-	<%= (@repo.commits.first.tree/'mytext.txt').data %> <br /><br />
+	<%= @description %> <br /><br />
 	
-	<% links = @repo.commits.first.tree/'links.json' %>
-	<% links = JSON.parse(links.data) %>
-	<% for link in links %>
-		Link: <%= link %><br />
+	<% unless @links.nil? %>
+		<% for link in @links %>
+			Link: <%= link %><br />
+		<% end %>
 	<% end %>
 	
 </div>

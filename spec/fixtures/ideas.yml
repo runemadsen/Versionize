@@ -1,0 +1,10 @@
+idea_links:
+    name: My fixture idea
+    repo: repos/testrepo_links.git
+    
+idea_nolinks:
+    name: My fixture idea
+    repo: repos/testrepo_nolinks.git
+    
+    
+    
