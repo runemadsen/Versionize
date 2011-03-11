@@ -22,12 +22,15 @@ describe IdeasController do
     index2.add(Idea::FILENAME_LINKS, '["http://www.domain1.com", "http://www.domain2.com", "http://www.domain3.com"]')
     index2.commit(Idea::COMMIT_MESSAGE)
     
+    @repo3 = Repo.init_bare 'repos/testrepo_bare'
+    
   end
   
   after do
     
     FileUtils.rm_rf 'repos/testrepo_nolinks.git'
     FileUtils.rm_rf 'repos/testrepo_links.git'
+    FileUtils.rm_rf 'repos/testrepo_bare'
     
   end
   
@@ -51,6 +54,30 @@ describe IdeasController do
         response.should be_success
       end
       
+    end
+    
+    describe "POST create" do
+      
+      it "should create repo and save idea without links" do
+        Repo.should_receive(:init_bare).with(Idea::REPO_PATH + (Idea.count + 1).to_s + Idea::REPO_EXT).and_return(@repo3)
+        post :create, { :idea => {:name => "My Idea"}, :description => "This is my description" }
+        assigns[:idea].should_not be_nil
+        assigns[:repo].should_not be_nil
+        (assigns[:repo].commits.first.tree/Idea::FILENAME_LINKS).should be_nil
+        
+        response.should redirect_to(idea_path(assigns[:idea]))
+      end
+      
+      it "should create repo and save idea without links" do
+        Repo.should_receive(:init_bare).with(Idea::REPO_PATH + (Idea.count + 1).to_s + Idea::REPO_EXT).and_return(@repo3)
+        post :create, { :idea => {:name => "My Idea"}, :description => "This is my description", :links => ["www.runemadsen.com", "www.pol.dk"] }
+        assigns[:idea].should_not be_nil
+        assigns[:repo].should_not be_nil
+        (assigns[:repo].commits.first.tree/Idea::FILENAME_LINKS).should_not be_nil
+        
+        response.should redirect_to(idea_path(assigns[:idea]))
+      end
+        
     end
     
     describe "GET show" do
@@ -81,26 +108,6 @@ describe IdeasController do
         
       end
 
-    end
-    
-    describe "POST create" do
-      
-      it "should create a bare repo" do
-        post :create, { :idea => {:name => "My Idea"}, :description => "This is my description" }
-        assigns[:idea].should_not be_nil
-        assigns[:repo].should_not be_nil
-      end
-      
-      it "should redirect to show" do
-        post :create, :idea => {:name => "My Idea"}
-        response.should redirect_to(idea_path(assigns[:idea]))
-      end
-        
-      it "should not create links.json if no links params exist" do 
-      end
-                    
-      it "should save links params if links params exit" do 
-      end
     end
     
     describe "GET edit" do

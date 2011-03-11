@@ -8,7 +8,7 @@ class IdeasController < ApplicationController
   def show
      @idea = Idea.find params[:id]
      @repo = Repo.new @idea.repo
-     @description = (@repo.commits.first.tree/'description.txt').data
+     @description = (@repo.commits.first.tree/Idea::FILENAME_DESC).data
 
      @links = @repo.commits.first.tree/Idea::FILENAME_LINKS
      
@@ -25,8 +25,8 @@ class IdeasController < ApplicationController
   def create    
     begin
       repo_name = Idea::REPO_PATH + (Idea.count + 1).to_s + Idea::REPO_EXT
-      repo = Repo.init_bare(repo_name)
-      index = Index.new(repo)
+      @repo = Repo.init_bare(repo_name)
+      index = Index.new(@repo)
       
       index.add(Idea::FILENAME_DESC, params[:description])
     
@@ -58,7 +58,7 @@ class IdeasController < ApplicationController
   def edit
     @idea = Idea.find params[:id]
     @repo = Repo.new @idea.repo
-    @description = (@repo.commits.first.tree/'description.txt').data
+    @description = (@repo.commits.first.tree/Idea::FILENAME_DESC).data
     
     @links = @repo.commits.first.tree/Idea::FILENAME_LINKS
      
