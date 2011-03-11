@@ -11,6 +11,7 @@ class IdeasController < ApplicationController
      @description = (@repo.commits.first.tree/'description.txt').data
 
      @links = @repo.commits.first.tree/Idea::FILENAME_LINKS
+     
      unless @links.nil?
        @links = JSON.parse(@links.data)
      end
@@ -57,6 +58,14 @@ class IdeasController < ApplicationController
   def edit
     @idea = Idea.find params[:id]
     @repo = Repo.new @idea.repo
+    @description = (@repo.commits.first.tree/'description.txt').data
+    
+    @links = @repo.commits.first.tree/Idea::FILENAME_LINKS
+     
+    unless @links.nil?
+      @links = JSON.parse(@links.data)
+    end
+     
   end
   
   def update

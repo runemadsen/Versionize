@@ -7,6 +7,12 @@
 <%= label_tag 'text', 'Describe your idea' %><br/>
 <%= text_area_tag 'text', @repo.commits.first.tree.contents.first.data %></p>
 
+<% unless @links.nil? %>
+	<% for link in @links %>
+		<%= render :partial => 'link', :locals => { :field_value => link }%>
+	<% end %>
+<% end %>
+
 <p><%= submit_tag 'Create version' %></p>
 
 <% end %>

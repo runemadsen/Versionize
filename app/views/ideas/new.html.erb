@@ -12,7 +12,7 @@
 		
 <div id="media_box">
 	<ul>
-		<li><%= link_to_function("Add link", "add_formfield(this, \"#{escape_javascript(render('link'))}\")") %></li>
+		<li><%= link_to_function("Add link", "add_formfield(this, \"#{escape_javascript(render :partial => "link", :locals => {:field_value => 'http://'})}\")") %></li>
 	</ul>
 	<div class="clear"></div>
 </div>

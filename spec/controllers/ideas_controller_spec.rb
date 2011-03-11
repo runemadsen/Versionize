@@ -9,11 +9,13 @@ describe IdeasController do
     
     @desc = "This is my RSpec idea description"
     
+    @idea1 = ideas(:idea_nolinks)
     @repo1 = Repo.init_bare 'repos/testrepo_nolinks.git'
     index1 = Index.new(@repo1)
     index1.add(Idea::FILENAME_DESC, @desc)
     index1.commit(Idea::COMMIT_MESSAGE)
     
+    @idea2 = ideas(:idea_links)
     @repo2 = Repo.init_bare 'repos/testrepo_links.git'
     index2 = Index.new(@repo2)
     index2.add(Idea::FILENAME_DESC, @desc)
@@ -51,12 +53,11 @@ describe IdeasController do
       
     end
     
-    describe "visits an ideas show page" do
+    describe "GET show" do
       
       it "should show the idea without links" do
         
-        idea = ideas(:idea_nolinks)
-        Idea.should_receive(:find).with("37").and_return(idea)
+        Idea.should_receive(:find).with("37").and_return(@idea1)
         
         get :show, :id => "37"
         
@@ -69,14 +70,12 @@ describe IdeasController do
       
       it "should show the idea with links" do
         
-        idea = ideas(:idea_links)
-        Idea.should_receive(:find).with("37").and_return(idea)
+        Idea.should_receive(:find).with("37").and_return(@idea2)
         
         get :show, :id => "37"
         
         response.should be_success
         assigns[:repo].should_not be_nil
-        assigns[:links].should_not be_nil
         assigns[:links].should be_an_instance_of Array
         assigns[:description].should == @desc
         
@@ -84,7 +83,7 @@ describe IdeasController do
 
     end
     
-    describe "creates new idea" do
+    describe "POST create" do
       
       it "should create a bare repo" do
         post :create, { :idea => {:name => "My Idea"}, :description => "This is my description" }
@@ -102,6 +101,36 @@ describe IdeasController do
                     
       it "should save links params if links params exit" do 
       end
+    end
+    
+    describe "GET edit" do
+        
+        it "should show idea without links" do
+          
+          Idea.should_receive(:find).with("37").and_return(@idea1)
+
+          get :edit, :id => "37"
+
+          response.should be_success
+          assigns[:repo].should_not be_nil
+          assigns[:links].should be_nil
+          assigns[:description].should == @desc
+          
+        end
+        
+        it "should show idea with links" do
+          
+          Idea.should_receive(:find).with("37").and_return(@idea2)
+
+          get :edit, :id => "37"
+
+          response.should be_success
+          assigns[:repo].should_not be_nil
+          assigns[:links].should be_an_instance_of Array
+          assigns[:description].should == @desc
+          
+        end
+        
     end
     
     
