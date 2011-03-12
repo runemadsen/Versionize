@@ -14,11 +14,12 @@ describe IdeasController do
   end
   
   describe "A logged in user" do
+
+    before do
+      UserSession.create(users(:rune))
+    end
     
     before do
-      
-      UserSession.create(users(:rune))
-
       @desc = "This is my RSpec idea description"
       @desc_updated = "This is my updated RSpec description"
 
@@ -27,8 +28,6 @@ describe IdeasController do
       index1 = Index.new(@repo1)
       index1.add(Idea::FILENAME_DESC, @desc)
       index1.commit(Idea::COMMIT_MESSAGE)
-
-      puts "Creating the repo: 1"
 
       @idea2 = ideas(:idea_links)
       @repo2 = Repo.init_bare 'repos/testrepo_links.git'
@@ -39,6 +38,12 @@ describe IdeasController do
 
       @repo3 = Repo.init_bare 'repos/testrepo_bare'
 
+    end
+    
+    after do
+      FileUtils.rm_rf 'repos/testrepo_nolinks.git'
+      FileUtils.rm_rf 'repos/testrepo_links.git'
+      FileUtils.rm_rf 'repos/testrepo_bare'
     end
     
     describe "GET index" do
@@ -62,6 +67,7 @@ describe IdeasController do
         assigns[:repo].should_not be_nil
         (assigns[:repo].commits.first.tree/Idea::FILENAME_DESC).data.should == @desc
         (assigns[:repo].commits.first.tree/Idea::FILENAME_LINKS).should be_nil
+        (assigns[:repo].commits.first.tree/Idea::FILENAME_IMAGES).should be_nil
         response.should redirect_to(idea_path(assigns[:idea]))
       end
       
@@ -72,7 +78,16 @@ describe IdeasController do
       
       it "should save links" do
         post :create, { :idea => {:name => "My RSpec Idea"}, :description => @desc, :links => ["www.runemadsen.com", "www.pol.dk"] }
-        (assigns[:repo].commits.first.tree/Idea::FILENAME_LINKS).should_not be_nil
+        links = JSON.parse((assigns[:repo].commits.first.tree/Idea::FILENAME_LINKS).data)
+        links[0].should == "www.runemadsen.com"
+        links[1].should == "www.pol.dk"
+      end
+      
+      it "should save images" do
+        post :create, { :idea => {:name => "My RSpec Idea"}, :description => @desc, :images => ["myimage.jpg", "myimage2.jpg"] }
+        links = JSON.parse((assigns[:repo].commits.first.tree/Idea::FILENAME_IMAGES).data)
+        links[0].should == "myimage.jpg"
+        links[1].should == "myimage2.jpg"
       end
         
     end
@@ -129,12 +144,6 @@ describe IdeasController do
         #(assigns[:repo].commits.first.tree/Idea::FILENAME_DESC).data.should == @desc_updated
       end
       
-    end
-    
-    after do
-      FileUtils.rm_rf 'repos/testrepo_nolinks.git'
-      FileUtils.rm_rf 'repos/testrepo_links.git'
-      FileUtils.rm_rf 'repos/testrepo_bare'
     end
     
   end
