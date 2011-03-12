@@ -5,9 +5,11 @@
 	<%= @description %> <br /><br />
 	
 	<% unless @links.nil? %>
+		<ul>
 		<% for link in @links %>
-			Link: <%= link %><br />
+			<li><%= link %></li>
 		<% end %>
+		</ul>
 	<% end %>
 	
 </div>

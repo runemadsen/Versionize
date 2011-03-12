@@ -4,8 +4,7 @@
 
 <% form_for @idea, :html => {:method => :put} do |f| %>
 
-<%= label_tag 'text', 'Describe your idea' %><br/>
-<%= text_area_tag 'text', @repo.commits.first.tree.contents.first.data %></p>
+<%= text_area_tag :description, @description, :class => 'input_box input_text' %>
 
 <% unless @links.nil? %>
 	<% for link in @links %>

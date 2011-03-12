@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
   
   has_many :ideas
   
+  def as_actor
+    "Versionize User <" + self.email + ">"
+  end
+  
 end

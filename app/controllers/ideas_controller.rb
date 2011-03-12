@@ -23,6 +23,7 @@ class IdeasController < ApplicationController
   end
   
   def create    
+    
     begin
       repo_name = Idea::REPO_PATH + (Idea.count + 1).to_s + Idea::REPO_EXT
       @repo = Repo.init_bare(repo_name)
@@ -34,8 +35,7 @@ class IdeasController < ApplicationController
         index.add(Idea::FILENAME_LINKS, params[:links].to_json)
       end
     
-      # remember to set actor user credentials in commit
-      index.commit(Idea::COMMIT_MESSAGE)
+      index.commit(Idea::COMMIT_MESSAGE, nil, Actor.new("Versionize User", @current_user.email))
     
       @idea = Idea.new(params[:idea])
       @idea.repo = repo_name
@@ -69,11 +69,11 @@ class IdeasController < ApplicationController
   end
   
   def update
-    
+        
     begin
-      idea = Idea.find(params[:id])
-      repo = Repo.new(idea.repo)
-      index = repo.index
+      @idea = Idea.find(params[:id])
+      @repo = Repo.new @idea.repo
+      index = @repo.index
       index.read_tree('master')
       index.add(Idea::FILENAME_DESC, params[:description])
       
@@ -81,11 +81,12 @@ class IdeasController < ApplicationController
         index.add(Idea::FILENAME_LINKS, params[:links].to_json)
       end
       
-      # remember to set actor user credentials in commit
-      index.commit(Idea::COMMIT_MESSAGE, [repo.commits.first])
+      index.commit(Idea::COMMIT_MESSAGE, [@repo.commits.first], Actor.new("Versionize User", @current_user.email))
+      
       flash[:notice] = "Version created!"
       redirect_to idea_url(@idea)
     rescue Exception => e 
+      puts "ERROR: " + e
       flash[:error] = "There was a problem! #{e}"
       redirect_to edit_idea(@idea)
     end
