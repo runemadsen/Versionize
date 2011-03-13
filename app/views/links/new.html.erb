@@ -3,9 +3,17 @@
 <h2>New Link</h2>
 
 <%= form_tag idea_links_path(params[:idea_id]) do %>
-	<%= text_field_tag "links[]", "http://", :class => "input_box input_link" %><br />
-	<%= submit_tag 'Add link' %>
+
+	<div id="links">
+	<%= render :partial => 'link', :locals => {:field_value => "http://"} %><br />
+	</div>
+	
+	<%= link_to_function("Add link", "add_formfield(\"#links\", \"#{escape_javascript(render :partial => "link", :locals => {:field_value => 'http://'})}\")") %><br /><br />
+	
+	<%= submit_tag 'Add link(s)' %>
 <% end %>
+
+
 
 </div>
 <div class="clear"></div>

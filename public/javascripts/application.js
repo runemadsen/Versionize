@@ -7,8 +7,8 @@
 //   $(link).closest(".fields").hide();
 // }
 
-function add_formfield(link, content) 
+function add_formfield(divname, content) 
 {
-	$('#extras').append(content);
+	$(divname).append(content);
 	return false;
 }

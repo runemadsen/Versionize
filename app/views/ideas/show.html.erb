@@ -2,24 +2,23 @@
 	
 	<h1><%= @idea.name %></h1>
 	
-	<%= @description %> <br /><br />
-	
-	<% unless @links.nil? %>
-		<ul>
-		<% for link in @links %>
-			<li><%= link %></li>
-		<% end %>
-		</ul>
+	<% for content in @repo.tree.contents %>
+		<%= content.name %><br />
 	<% end %>
+	
+	<div id="media_box">
+		<ul>
+			<li><%= link_to "Insert Link", new_idea_link_path(@idea)%></li>
+		</ul>
+		<div class="clear"></div>
+	</div>
 	
 </div>
 <div class="grid_4">
 	
-	<p><%= link_to "Create a new version / edit", edit_idea_path, :class => "link_button" %></p>
-	
 	<p>Num commits: <%= @repo.commits.count %></p>
 	
 	<p>Parents: <%= @repo.commits.first.parents.inspect %></p>
-	<p>Log: <%= @repo.log %></p>
+	<p>Log: <%#= @repo.log %></p>
 </div>
 <dic class="clear"></div>

@@ -12,8 +12,8 @@ describe LinksController do
       @idea1 = ideas(:idea_nolinks)
       @repo1 = Repo.init_bare 'repos/testrepo_nolinks.git'
       index1 = Index.new(@repo1)
-      index1.add(Idea::FILENAME_DESC, @desc)
-      index1.commit(Idea::COMMIT_MESSAGE)
+      index1.add('text_' + UUID.generate + '.txt', @desc)
+      index1.commit("Bla")
    end
    
    after do
@@ -35,8 +35,9 @@ describe LinksController do
          Idea.should_receive(:find).with("37").and_return(@idea1)
          Repo.should_receive(:new).with(@idea1.repo).and_return(@repo1)
          post :create, { :idea_id => "37", :links => ["www.runemadsen.com", "www.pol.dk"] }
-         assigns[:repo].commits.first.tree.contents[0].data.should == "www.runemadsen.com"
-         assigns[:repo].commits.first.tree.contents[1].data.should == "www.pol.dk"
+         assigns[:repo].commits.first.tree.contents[0].data.should == @desc
+         assigns[:repo].commits.first.tree.contents[1].data.should == "www.runemadsen.com"
+         assigns[:repo].commits.first.tree.contents[2].data.should == "www.pol.dk"
       end
     
    end
