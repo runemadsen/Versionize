@@ -1,0 +1,11 @@
+<div class="grid_12">
+
+<h2>New Link</h2>
+
+<%= form_tag idea_links_path(params[:idea_id]) do %>
+	<%= text_field_tag "links[]", "http://", :class => "input_box input_link" %><br />
+	<%= submit_tag 'Add link' %>
+<% end %>
+
+</div>
+<div class="clear"></div>

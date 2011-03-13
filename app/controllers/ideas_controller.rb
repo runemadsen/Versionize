@@ -28,12 +28,11 @@ class IdeasController < ApplicationController
       repo_name = Idea::REPO_PATH + (Idea.count + 1).to_s + Idea::REPO_EXT
       @repo = Repo.init_bare(repo_name)
       index = Index.new(@repo)
-      
       index.add(Idea::FILENAME_DESC, params[:description])
     
-      unless params[:links] == nil
-        index.add(Idea::FILENAME_LINKS, params[:links].to_json)
-      end
+      # unless params[:links] == nil
+        # index.add(Idea::FILENAME_LINKS, params[:links].to_json)
+      # end
     
       index.commit(Idea::COMMIT_MESSAGE, nil, Actor.new("Versionize User", @current_user.email))
     
@@ -60,11 +59,11 @@ class IdeasController < ApplicationController
     @repo = Repo.new @idea.repo
     @description = (@repo.commits.first.tree/Idea::FILENAME_DESC).data
     
-    @links = @repo.commits.first.tree/Idea::FILENAME_LINKS
+    # @links = @repo.commits.first.tree/Idea::FILENAME_LINKS
      
-    unless @links.nil?
-      @links = JSON.parse(@links.data)
-    end
+    # unless @links.nil?
+      # @links = JSON.parse(@links.data)
+    # end
      
   end
   
@@ -77,9 +76,9 @@ class IdeasController < ApplicationController
       index.read_tree('master')
       index.add(Idea::FILENAME_DESC, params[:description])
       
-      unless params[:links] == nil
-        index.add(Idea::FILENAME_LINKS, params[:links].to_json)
-      end
+      # unless params[:links] == nil
+      #         index.add(Idea::FILENAME_LINKS, params[:links].to_json)
+      #       end
       
       index.commit(Idea::COMMIT_MESSAGE, [@repo.commits.first], Actor.new("Versionize User", @current_user.email))
       

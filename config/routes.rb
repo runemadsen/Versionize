@@ -9,9 +9,7 @@ Versionize::Application.routes.draw do
   resources :invites
   
   resources :ideas do
-    collection do
-      get  :get_link
-    end
+    resources :links
   end
 
   match 'login' => "user_sessions#new",      :as => :login

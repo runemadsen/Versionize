@@ -66,8 +66,6 @@ describe IdeasController do
         assigns[:idea].should_not be_nil
         assigns[:repo].should_not be_nil
         (assigns[:repo].commits.first.tree/Idea::FILENAME_DESC).data.should == @desc
-        (assigns[:repo].commits.first.tree/Idea::FILENAME_LINKS).should be_nil
-        (assigns[:repo].commits.first.tree/Idea::FILENAME_IMAGES).should be_nil
         response.should redirect_to(idea_path(assigns[:idea]))
       end
       
@@ -76,19 +74,19 @@ describe IdeasController do
         assigns[:repo].commits.first.committer.email.should == assigns[:current_user].email
       end
       
-      it "should save links" do
-        post :create, { :idea => {:name => "My RSpec Idea"}, :description => @desc, :links => ["www.runemadsen.com", "www.pol.dk"] }
-        links = JSON.parse((assigns[:repo].commits.first.tree/Idea::FILENAME_LINKS).data)
-        links[0].should == "www.runemadsen.com"
-        links[1].should == "www.pol.dk"
-      end
+      # it "should save links" do
+      #         post :create, { :idea => {:name => "My RSpec Idea"}, :description => @desc, :links => ["www.runemadsen.com", "www.pol.dk"] }
+      #         links = JSON.parse((assigns[:repo].commits.first.tree/Idea::FILENAME_LINKS).data)
+      #         links[0].should == "www.runemadsen.com"
+      #         links[1].should == "www.pol.dk"
+      #       end
       
-      it "should save images" do
-        post :create, { :idea => {:name => "My RSpec Idea"}, :description => @desc, :images => ["myimage.jpg", "myimage2.jpg"] }
-        links = JSON.parse((assigns[:repo].commits.first.tree/Idea::FILENAME_IMAGES).data)
-        links[0].should == "myimage.jpg"
-        links[1].should == "myimage2.jpg"
-      end
+      # it "should save images" do
+      #        post :create, { :idea => {:name => "My RSpec Idea"}, :description => @desc, :images => ["myimage.jpg", "myimage2.jpg"] }
+      #        links = JSON.parse((assigns[:repo].commits.first.tree/Idea::FILENAME_IMAGES).data)
+      #        links[0].should == "myimage.jpg"
+      #        links[1].should == "myimage2.jpg"
+      #      end
         
     end
     
@@ -103,11 +101,11 @@ describe IdeasController do
         assigns[:links].should be_nil
       end
       
-      it "should show links" do
-        Idea.should_receive(:find).with("37").and_return(@idea2)
-        get :show, :id => "37"
-        assigns[:links].should be_an_instance_of Array        
-      end
+      # it "should show links" do
+      #         Idea.should_receive(:find).with("37").and_return(@idea2)
+      #         get :show, :id => "37"
+      #         assigns[:links].should be_an_instance_of Array        
+      #       end
 
     end
     
@@ -122,11 +120,11 @@ describe IdeasController do
           assigns[:description].should == @desc          
         end
         
-        it "should get links" do
-          Idea.should_receive(:find).with("37").and_return(@idea2)
-          get :edit, :id => "37"
-          assigns[:links].should be_an_instance_of Array
-        end
+        # it "should get links" do
+        #           Idea.should_receive(:find).with("37").and_return(@idea2)
+        #           get :edit, :id => "37"
+        #           assigns[:links].should be_an_instance_of Array
+        #         end
         
     end
     
