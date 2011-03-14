@@ -9,15 +9,15 @@ describe LinksController do
       UserSession.create(users(:rune))
       
       @desc = "This is my RSpec idea description"
-      @idea1 = ideas(:idea_nolinks)
-      @repo1 = Repo.init_bare 'repos/testrepo_nolinks.git'
-      index1 = Index.new(@repo1)
-      index1.add('text_' + UUID.generate + '.txt', @desc)
-      index1.commit("Bla")
+      @idea = ideas(:myidea)
+      @repo = Repo.init_bare @idea.repo
+      index = Index.new(@repo)
+      index.add('text_' + UUID.generate + '.txt', @desc)
+      index.commit("Bla")
    end
    
    after do
-      FileUtils.rm_rf 'repos/testrepo_nolinks.git'
+      FileUtils.rm_rf @idea.repo
    end
   
    describe "GET new" do
@@ -32,12 +32,13 @@ describe LinksController do
    describe "POST create" do
     
       it "should save link(s) in repository" do
-         Idea.should_receive(:find).with("37").and_return(@idea1)
-         Repo.should_receive(:new).with(@idea1.repo).and_return(@repo1)
+         Idea.should_receive(:find).with("37").and_return(@idea)
+         Repo.should_receive(:new).with(@idea.repo).and_return(@repo)
          post :create, { :idea_id => "37", :links => ["www.runemadsen.com", "www.pol.dk"] }
-         assigns[:repo].commits.first.tree.contents[0].data.should == @desc
-         assigns[:repo].commits.first.tree.contents[1].data.should == "www.runemadsen.com"
-         assigns[:repo].commits.first.tree.contents[2].data.should == "www.pol.dk"
+         assigns[:repo].tree.contents[0].data.should == "www.runemadsen.com"
+         assigns[:repo].tree.contents[1].data.should == "www.pol.dk"
+         assigns[:repo].tree.contents[2].data.should == @desc
+         response.should redirect_to(idea_path(@idea))
       end
     
    end
