@@ -2,8 +2,9 @@
 	
 	<h1><%= @idea.name %></h1>
 	
-	<% for content in @repo.tree.contents %>
-		<%= content.name %><br />
+	<% for content in @idea.current_version %>
+		<%= render content %><br />
+		<%#= content.class.name.downcase %>
 	<% end %>
 	
 	<div id="media_box">
@@ -16,9 +17,6 @@
 </div>
 <div class="grid_4">
 	
-	<p>Num commits: <%= @repo.commits.count %></p>
-	
-	<p>Parents: <%= @repo.commits.first.parents.inspect %></p>
-	<p>Log: <%#= @repo.log %></p>
+	<p>Num commits: <%= @idea.num_commits %></p>
 </div>
 <dic class="clear"></div>

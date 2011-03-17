@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
   
   def show
      @idea = Idea.find params[:id]
-     @repo = Repo.new @idea.repo
+     @idea.load_repo
   end
   
   def new

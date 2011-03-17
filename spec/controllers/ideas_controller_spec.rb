@@ -29,12 +29,10 @@ describe IdeasController do
       end
     
       describe "GET index" do
-      
          it "should get response success" do
             get :index
             response.should be_success
          end
-      
       end
     
       describe "POST create" do
@@ -58,14 +56,12 @@ describe IdeasController do
       end
     
       describe "GET show" do
-      
          it "should show basic idea details" do
             Idea.should_receive(:find).with("37").and_return(@idea)
             get :show, :id => "37"
             response.should be_success
-            assigns[:repo].should_not be_nil
+            assigns[:idea].current_version.should_not be_nil
          end
-
       end
   end
 end
