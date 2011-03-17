@@ -13,6 +13,10 @@ class Link
     end
   end
   
+  def file_extension
+     File.extname(url)
+  end
+  
   def generate_name
     'link_' + UUID.generate + '.json'
   end

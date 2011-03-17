@@ -1,1 +1,5 @@
-<%= link.url %>
+<% if link.file_extension == ".jpg" || link.file_extension == ".gif" %>
+	<%= image_tag link.url %>
+<% else %>
+	<%= link_to link.url, link.url %>
+<% end %>
