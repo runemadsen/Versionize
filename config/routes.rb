@@ -10,6 +10,7 @@ Versionize::Application.routes.draw do
   
   resources :ideas do
     resources :links
+    resources :texts
   end
 
   match 'login' => "user_sessions#new",      :as => :login
