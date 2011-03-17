@@ -21,7 +21,7 @@ describe LinksController do
  
   describe "GET new" do
     it "should show the link form" do
-      Idea.should_receive(:find).with("1").and_return(@idea)
+      Idea.should_receive(:find).with("1").and_return(@idea)  
       get :new, :idea_id => "1"
       response.should be_success
     end
@@ -32,8 +32,8 @@ describe LinksController do
       Idea.should_receive(:find).with("37").and_return(@idea)
       Repo.should_receive(:new).with(@idea.repo).and_return(@repo)
       post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com" } }
-      assigns[:repo].tree.contents[0].data.should == "{\"url\":\"www.runemadsen.com\"}"
-      assigns[:repo].tree.contents[1].data.should == @desc
+      assigns[:idea].repository.tree.contents[0].data.should == "{\"url\":\"www.runemadsen.com\"}"
+      assigns[:idea].repository.tree.contents[1].data.should == @desc
       response.should redirect_to(idea_path(@idea))
     end
   end

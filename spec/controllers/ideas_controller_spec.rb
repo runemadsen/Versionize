@@ -51,6 +51,7 @@ describe IdeasController do
       
          it "should create actor from current user" do
             post :create, { :idea => {:name => "My RSPEC Idea"}, :description => @desc}
+            puts assigns[:idea].repository
             assigns[:idea].repository.commits.first.committer.email.should == assigns[:current_user].email
          end  
       end

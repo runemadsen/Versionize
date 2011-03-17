@@ -14,13 +14,10 @@ class IdeasController < ApplicationController
   end
   
   def create    
-    
     begin
-      @idea = Idea.new params[:idea]
-      @idea.create_repo @current_user
       text = Text.new(:body => params[:description])
-      @idea.create_version(text, @current_user, "Save initial details")
-    
+      @idea = Idea.new params[:idea]
+      @idea.create_repo(text, @current_user, "Save initial details")
       @idea.save
       flash[:notice] = "Idea Saved!"
       redirect_to idea_url(@idea)

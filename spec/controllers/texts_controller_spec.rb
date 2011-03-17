@@ -36,8 +36,8 @@ describe TextsController do
          Idea.should_receive(:find).with("37").and_return(@idea)
          Repo.should_receive(:new).with(@idea.repo).and_return(@repo)
          post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
-         assigns[:repo].tree.contents[1].data.should == "{\"body\":\"This is some text\"}"
-         assigns[:repo].tree.contents[0].data.should == @desc
+         assigns[:idea].repository.tree.contents[1].data.should == "{\"body\":\"This is some text\"}"
+         assigns[:idea].repository.tree.contents[0].data.should == @desc
          response.should redirect_to(idea_path(@idea))
       end
     
