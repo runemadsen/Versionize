@@ -1,8 +1,10 @@
 class Idea < ActiveRecord::Base
 
   include Grit
-  
   belongs_to :user
+  
+  REPO_PATH = 'repos/repo'
+  REPO_EXT = '.git'
   
   def load_repo
     @repository = Repo.new self.repo
@@ -22,8 +24,5 @@ class Idea < ActiveRecord::Base
   def num_commits
     @repository.commits.count
   end
-  
-  REPO_PATH = 'repos/repo'
-  REPO_EXT = '.git'
   
 end
