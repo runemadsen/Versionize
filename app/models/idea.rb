@@ -14,9 +14,7 @@ class Idea < ActiveRecord::Base
     files = []
     @repository.tree.contents.each do |blob|
       name = blob.name.split("_")[0].capitalize
-      if(name == "Link")
       files << name.constantize.new(JSON.parse(blob.data))
-      end
     end
     files
   end

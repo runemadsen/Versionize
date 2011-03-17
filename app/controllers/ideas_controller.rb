@@ -20,7 +20,8 @@ class IdeasController < ApplicationController
       repo_name = Idea::REPO_PATH + (Idea.count + 1).to_s + Idea::REPO_EXT
       @repo = Repo.init_bare(repo_name)
       index = Index.new(@repo)
-      index.add('text_' + UUID.generate + '.txt', params[:description])
+      text = Text.new(:body => params[:description])
+      index.add(text.generate_name, text.to_json)
       index.commit("Created idea", nil, Actor.new("Versionize User", @current_user.email))
     
       @idea = Idea.new(params[:idea])
