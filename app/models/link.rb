@@ -4,8 +4,8 @@ class Link
   include ActiveModel::Serialization
   extend ActiveModel::Naming
   
-  attr_accessor :url
-  validates_presence_of :url
+  attr_accessor :url, :order
+  validates_presence_of :url, :order
   
   def initialize(attributes = {})
     attributes.each do |name, value|

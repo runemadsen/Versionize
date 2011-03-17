@@ -6,10 +6,15 @@ class Idea < ActiveRecord::Base
   REPO_PATH = 'repos/repo'
   REPO_EXT = '.git'
   
+  def next_order
+    self.repository.tree.contents.count
+  end
+  
   def create_repo(model, user, commit_msg)
     self.user = user
     self.repo = REPO_PATH + (Idea.count + 1).to_s + REPO_EXT
     @repository = Repo.init_bare(self.repo)
+    model.order = 9999999999
     index = Index.new(self.repository)
     index.add(model.generate_name, model.to_json)
     index.commit(commit_msg, nil, Actor.new("Versionize User", user.email))
@@ -32,7 +37,7 @@ class Idea < ActiveRecord::Base
       name = blob.name.split("_")[0].capitalize
       files << name.constantize.new(JSON.parse(blob.data))
     end
-    files
+    files.sort  {|x,y| y.order <=> x.order }
   end
   
   def num_commits

@@ -28,13 +28,20 @@ describe LinksController do
   end
 
   describe "POST create" do
-    it "should save link in repository" do
+    it "should save link in repository and redirect" do
       Idea.should_receive(:find).with("37").and_return(@idea)
       Repo.should_receive(:new).with(@idea.repo).and_return(@repo)
       post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com" } }
-      assigns[:idea].repository.tree.contents[0].data.should == "{\"url\":\"www.runemadsen.com\"}"
+      assigns[:idea].repository.tree.contents[0].data.should == assigns[:link].to_json
       assigns[:idea].repository.tree.contents[1].data.should == @desc
       response.should redirect_to(idea_path(@idea))
+    end
+    
+    it "should assign link order of 1" do
+      Idea.should_receive(:find).with("37").and_return(@idea)
+      Repo.should_receive(:new).with(@idea.repo).and_return(@repo)
+      post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com" } }
+      assigns[:link].order.should == 1
     end
   end
 end

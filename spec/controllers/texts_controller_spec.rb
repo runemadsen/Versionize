@@ -36,9 +36,16 @@ describe TextsController do
          Idea.should_receive(:find).with("37").and_return(@idea)
          Repo.should_receive(:new).with(@idea.repo).and_return(@repo)
          post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
-         assigns[:idea].repository.tree.contents[1].data.should == "{\"body\":\"This is some text\"}"
+         assigns[:idea].repository.tree.contents[1].data.should == assigns[:text].to_json
          assigns[:idea].repository.tree.contents[0].data.should == @desc
          response.should redirect_to(idea_path(@idea))
+      end
+      
+      it "should assign text order of 1" do
+        Idea.should_receive(:find).with("37").and_return(@idea)
+        Repo.should_receive(:new).with(@idea.repo).and_return(@repo)
+        post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
+        assigns[:text].order.should == 1
       end
     
    end

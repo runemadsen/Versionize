@@ -15,9 +15,9 @@ class IdeasController < ApplicationController
   
   def create    
     begin
-      text = Text.new(:body => params[:description])
       @idea = Idea.new params[:idea]
-      @idea.create_repo(text, @current_user, "Save initial details")
+      @text = Text.new(:body => params[:description])
+      @idea.create_repo(@text, @current_user, "Save initial details")
       @idea.save
       flash[:notice] = "Idea Saved!"
       redirect_to idea_url(@idea)

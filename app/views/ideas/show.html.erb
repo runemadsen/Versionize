@@ -2,8 +2,14 @@
 	
 	<h1><%= @idea.name %></h1>
 	
-	<% for content in @idea.current_version %>
+	<% @idea.current_version.each_with_index do |content, i| %>
+		<% if i == 0 %>
+			-----------<br />
+		<% end %>
 		<%= render content %><br />
+		<% if i == 0 %>
+			-----------<br />
+		<% end %>
 	<% end %>
 	
 	<div id="media_box">

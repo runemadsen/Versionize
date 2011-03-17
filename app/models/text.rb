@@ -4,8 +4,8 @@ class Text
   include ActiveModel::Serialization
   extend ActiveModel::Naming
   
-  attr_accessor :body
-  validates_presence_of :body
+  attr_accessor :body, :order
+  validates_presence_of :body, :order
   
   def initialize(attributes = {})
     attributes.each do |name, value|
