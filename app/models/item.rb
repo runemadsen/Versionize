@@ -5,7 +5,7 @@ class Item
   include ActiveModel::Serialization
   extend ActiveModel::Naming
   
-  attr_accessor :name
+  attr_accessor :name, :id
   
   def initialize(attributes = {})
     attributes.each do |name, value|

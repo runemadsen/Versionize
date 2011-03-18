@@ -37,6 +37,7 @@ class Idea < ActiveRecord::Base
       name = blob.name.split("_")[0].capitalize
       file = name.constantize.new(JSON.parse(blob.data))
       file.name = blob.name
+      file.id = blob.id
       files << file
     end
     files.sort  {|x,y| y.order <=> x.order }
