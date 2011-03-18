@@ -1,0 +1,13 @@
+<div class="grid_8">
+
+<% ungulate_upload_form_for(@image_upload) do %>
+  <%= label_tag :file, 'Upload File' %>
+  <%= file_field_tag :file %>
+  <%= submit_tag 'Upload' %>
+<% end %>
+
+</div>
+<div class="grid_4">
+	Help text here
+</div>
+<div class="clear"></div>

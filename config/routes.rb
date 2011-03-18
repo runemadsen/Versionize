@@ -11,6 +11,11 @@ Versionize::Application.routes.draw do
   resources :ideas do
     resources :links
     resources :texts
+    resources :images do
+      collection do
+        get 'upload_succes', :as => 'upload_success'
+      end
+    end
   end
 
   match 'login' => "user_sessions#new",      :as => :login
