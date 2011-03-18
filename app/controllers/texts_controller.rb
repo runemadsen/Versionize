@@ -9,7 +9,7 @@ class TextsController < ApplicationController
   
   def edit
     @idea = Idea.find(params[:idea_id])
-    @text = Text.new
+    @text = @idea.file(Text.new.name_from_uuid(params[:id]))
   end
 
   def create
@@ -18,6 +18,21 @@ class TextsController < ApplicationController
       @text = Text.new params[:text]
       @text.order = @idea.next_order
       @idea.create_version(@text, @current_user, "Save text")
+      flash[:notice] = "Saved Text"
+      redirect_to idea_path(@idea)
+    rescue Exception => e
+      flash[:error] = "There was a problem! #{e}"
+      redirect_to new_idea_text_path(@idea)
+    end
+  end
+  
+  def update
+    begin
+      @idea = Idea.find(params[:idea_id])
+      @text = Text.new params[:text]
+      puts @idea.current_version[0].name
+      @idea.create_version(@text, @current_user, "Updated text")
+      puts @text.name
       flash[:notice] = "Saved Text"
       redirect_to idea_path(@idea)
     rescue Exception => e

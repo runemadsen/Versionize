@@ -1,10 +1,12 @@
 <div class="grid_12">
-
-<h2>New Text</h2>
+	
+<h2>Edit Description</h2>
 
 <%= form_for [@idea, @text] do |f| %>
 
 	<%= f.text_area :body, {:class => "input_box input_link"} %>
+	<%= f.hidden_field :order %>
+	<%= f.hidden_field :name %>
 	<br /><br />
 	<%= submit_tag 'Save text' %>
 	

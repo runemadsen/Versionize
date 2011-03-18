@@ -31,20 +31,35 @@ class Idea < ActiveRecord::Base
     @repository ||= Repo.new self.repo
   end
   
+  def file(file_name)
+    blob_to_model(self.repository.tree/file_name)
+  end
+  
   def current_version 
-    files = []
-    self.repository.tree.contents.each do |blob|
-      name = blob.name.split("_")[0].capitalize
-      file = name.constantize.new(JSON.parse(blob.data))
-      file.name = blob.name
-      file.id = blob.id
-      files << file
+    
+    if @models != nil 
+      return @models 
     end
-    files.sort  {|x,y| y.order <=> x.order }
+    
+    @models = []
+    self.repository.tree.contents.each do |blob|
+      @models << blob_to_model(blob)
+    end
+    @models.sort  {|x,y| y.order <=> x.order }
   end
   
   def num_commits
     self.repository.commits.count
+  end
+  
+  private
+  
+  def blob_to_model(blob)
+    name = blob.name.split("_")[0].capitalize
+    file = name.constantize.new(JSON.parse(blob.data))
+    file.name = blob.name
+    file.id = blob.id
+    file
   end
   
 end

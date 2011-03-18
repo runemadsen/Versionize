@@ -9,7 +9,8 @@ describe TextsController do
     UserSession.create(users(:rune))    
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
-    @idea.create_repo(Text.new(:body => @desc), users(:rune), "Init commit")
+    @text = Text.new(:body => @desc)
+    @idea.create_repo(@text, users(:rune), "Init commit")
   end
 
   after do
@@ -29,7 +30,7 @@ describe TextsController do
     it "should save text in repository" do
       Idea.should_receive(:find).with("37").and_return(@idea)
       post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
-      assigns[:idea].repository.tree.contents[1].data.should == assigns[:text].to_json
+      assigns[:idea].repository.tree.contents[0].data.should == @text.to_json
       response.should redirect_to(idea_path(@idea))
     end
       
@@ -43,9 +44,23 @@ describe TextsController do
    
   describe "GET edit" do
     it "should grab the text file from the repo" do
-      Idea.should_receive(:find).with("1").and_return(@idea)
-      get :edit, :idea_id => "1"
+      Idea.should_receive(:find).with("37").and_return(@idea)
+      get :edit, :idea_id => "37", :id => @idea.current_version[0].uuid
+      assigns[:text].id.should == @idea.current_version[0].id
+      assigns[:text].name.should_not be_nil
+      assigns[:text].body.should_not be_nil
       response.should be_success
+    end
+  end
+  
+  describe "PUT update" do
+    it "should commit the updated text using same filename" do
+      Idea.should_receive(:find).with("37").and_return(@idea)
+      put :update, :idea_id => "37", :id => @idea.current_version[0].uuid, :text => { :body => @text.body, :order => @text.order, :name => @text.name}
+      assigns[:idea].repository.commits.count.should == 2
+      assigns[:idea].repository.tree.blobs.count.should == 1
+      assigns[:text].name.should == @text.name
+      response.should redirect_to(idea_path(@idea))
     end
   end
     
