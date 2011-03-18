@@ -132,7 +132,6 @@ DEPENDENCIES
   mysql2
   rails (= 3.0.3)
   rails3-generators
-  right_aws
   rspec-rails (>= 2.4)
   ungulate
   uuid

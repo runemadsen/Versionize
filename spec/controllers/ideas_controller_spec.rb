@@ -25,7 +25,6 @@ describe IdeasController do
     
       after do
          FileUtils.rm_rf 'repos/testrepo.git'
-         FileUtils.rm_rf 'repos/testrepo_bare'
       end
     
       describe "GET index" do
