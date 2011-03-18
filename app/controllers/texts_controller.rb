@@ -9,7 +9,7 @@ class TextsController < ApplicationController
   
   def edit
     @idea = Idea.find(params[:idea_id])
-    @text = @idea.file(Text.new.name_from_uuid(params[:id]))
+    @text = @idea.file(Text::name_from_uuid(params[:id]))
   end
 
   def create
@@ -29,10 +29,9 @@ class TextsController < ApplicationController
   def update
     begin
       @idea = Idea.find(params[:idea_id])
-      @text = Text.new params[:text]
-      puts @idea.current_version[0].name
+      @text = @idea.file(Text::name_from_uuid(params[:id]))
+      @text.update(params[:text])
       @idea.create_version(@text, @current_user, "Updated text")
-      puts @text.name
       flash[:notice] = "Saved Text"
       redirect_to idea_path(@idea)
     rescue Exception => e

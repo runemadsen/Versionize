@@ -45,6 +45,9 @@ class Idea < ActiveRecord::Base
     self.repository.tree.contents.each do |blob|
       @models << blob_to_model(blob)
     end
+    
+    #raise Exception, @models.inspect
+    
     @models.sort  {|x,y| y.order <=> x.order }
   end
   
@@ -56,9 +59,9 @@ class Idea < ActiveRecord::Base
   
   def blob_to_model(blob)
     name = blob.name.split("_")[0].capitalize
-    file = name.constantize.new(JSON.parse(blob.data))
-    file.name = blob.name
-    file.id = blob.id
+    file = name.constantize.new(JSON.parse(blob.data).merge({:file_name => blob.name}))
+    file.file_name = blob.name
+    file.id = file.uuid
     file
   end
   

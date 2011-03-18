@@ -47,7 +47,7 @@ describe TextsController do
       Idea.should_receive(:find).with("37").and_return(@idea)
       get :edit, :idea_id => "37", :id => @idea.current_version[0].uuid
       assigns[:text].id.should == @idea.current_version[0].id
-      assigns[:text].name.should_not be_nil
+      assigns[:text].file_name.should_not be_nil
       assigns[:text].body.should_not be_nil
       response.should be_success
     end
@@ -56,12 +56,13 @@ describe TextsController do
   describe "PUT update" do
     it "should commit the updated text using same filename" do
       Idea.should_receive(:find).with("37").and_return(@idea)
-      put :update, :idea_id => "37", :id => @idea.current_version[0].uuid, :text => { :body => @text.body, :order => @text.order, :name => @text.name}
+      put :update, :idea_id => "37", :id => @idea.current_version[0].uuid, :text => { :body => @text.body, :order => @text.order, :file_name => @text.file_name}
       assigns[:idea].repository.commits.count.should == 2
       assigns[:idea].repository.tree.blobs.count.should == 1
-      assigns[:text].name.should == @text.name
+      assigns[:text].file_name.should == @text.file_name
       response.should redirect_to(idea_path(@idea))
     end
+    
   end
     
 end

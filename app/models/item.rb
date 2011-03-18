@@ -5,11 +5,8 @@ class Item
   include ActiveModel::Serialization
   extend ActiveModel::Naming
   
-  attr_accessor :name, :id
-  
-  def name_from_uuid(uuid)
-    self.class.name.downcase + "_" + uuid + '.json'
-  end
+  attr_accessor :file_name, :id, :order
+  validates_presence_of :file_name, :id, :order
   
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -17,16 +14,30 @@ class Item
     end
   end
   
+  def update(attributes = {})
+    attributes.each do |name, value|
+      send("#{name}=", value)
+    end
+  end
+  
+  def self.name_from_uuid(uuid)
+    self.name.downcase + "_" + uuid + '.json'
+  end
+  
   def uuid
-    self.name.split("_")[1].split(".")[0]
+    @file_name.split("_")[1].split(".")[0]
   end
   
   def generate_name
-    self.name ||= self.class.name.downcase + "_" + UUID.generate + '.json'
+    @file_name ||= self.class.name.downcase + "_" + UUID.generate + '.json'
   end
   
   def persisted?
-    false
+    if id.nil?
+      false
+    else
+      true
+    end
   end
   
 end

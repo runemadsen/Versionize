@@ -5,8 +5,6 @@
 <%= form_for [@idea, @text] do |f| %>
 
 	<%= f.text_area :body, {:class => "input_box input_link"} %>
-	<%= f.hidden_field :order %>
-	<%= f.hidden_field :name %>
 	<br /><br />
 	<%= submit_tag 'Save text' %>
 	
