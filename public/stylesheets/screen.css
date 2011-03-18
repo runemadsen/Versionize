@@ -2,12 +2,6 @@ body, html {
 	height: 100%;
 }
 
-/*.container_12 {
-	background-image: url('../images/grid.jpg');
-	background-position: top;
-	background-repeat: repeat-y;
-}*/
-
 /* Fonts
 _____________________________________________ */
 
@@ -41,6 +35,20 @@ h2 {
 	font-size: 17px;
 	margin-top: 24px;
 	margin-bottom: 12px;
+}
+
+/* Idea media
+_____________________________________________ */
+
+div.idea_item {
+	border: 1px solid #dcdcdc;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+div#description 
+{
+	
 }
 
 /* Form styling
@@ -87,9 +95,7 @@ _____________________________________________ */
 
 #media_box {
 	background-color: #FFFFFF;
-	/*width: 608px;
-		padding: 6px;
-		border: 2px solid #f5f5f5;*/
+	margin-bottom: 10px;
 }
 
 #media_box ul li {
@@ -159,8 +165,6 @@ _____________________________________________ */
 	color: #ffffff;
 	margin-bottom: 12px;
 }
-
-
 
 /* Front
 _____________________________________________ */

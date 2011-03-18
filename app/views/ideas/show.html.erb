@@ -4,21 +4,19 @@
 	
 	<% @idea.current_version.each_with_index do |content, i| %>
 		<% if i == 0 %>
-			-----------<br />
-		<% end %>
-		<%= render content %><br />
-		<% if i == 0 %>
-			-----------<br />
+			<%= render :partial => "texts/description", :locals => {:text => content} %>
+			<div id="media_box">
+				<ul>
+					<li><%= link_to "Insert Link", new_idea_link_path(@idea)%></li>
+					<li><%= link_to "Insert Text", new_idea_text_path(@idea)%></li>
+					<li><%= link_to "Upload Image", new_idea_image_path(@idea)%></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		<% else %>
+			<%= render content %>
 		<% end %>
 	<% end %>
-	
-	<div id="media_box">
-		<ul>
-			<li><%= link_to "Insert Link", new_idea_link_path(@idea)%></li>
-			<li><%= link_to "Insert Text", new_idea_text_path(@idea)%></li>
-		</ul>
-		<div class="clear"></div>
-	</div>
 	
 </div>
 <div class="grid_4">
