@@ -2,45 +2,51 @@ require 'spec_helper'
 
 describe TextsController do
    
-   setup :activate_authlogic
-   fixtures :ideas, :users
+  setup :activate_authlogic
+  fixtures :ideas, :users
    
-   before do
-      UserSession.create(users(:rune))
+  before do
+    UserSession.create(users(:rune))    
+    @desc = "This is my RSpec idea description"
+    @idea = ideas(:myidea)
+    @idea.create_repo(Text.new(:body => @desc), users(:rune), "Init commit")
+  end
+
+  after do
+    FileUtils.rm_rf @idea.repo
+  end
+  
+  describe "GET new" do
+    it "should show the text form" do
+      Idea.should_receive(:find).with("1").and_return(@idea)
+      get :new, :idea_id => "1"
+      response.should be_success
+    end
+  end
+  
+  describe "POST create" do
+    
+    it "should save text in repository" do
+      Idea.should_receive(:find).with("37").and_return(@idea)
+      post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
+      assigns[:idea].repository.tree.contents[1].data.should == assigns[:text].to_json
+      response.should redirect_to(idea_path(@idea))
+    end
       
-      @desc = "This is my RSpec idea description"
-      @idea = ideas(:myidea)
-      @idea.create_repo(Text.new(:body => @desc), users(:rune), "Init commit")
-   end
+    it "should assign text order of 1" do
+      Idea.should_receive(:find).with("37").and_return(@idea)
+      post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
+      assigns[:text].order.should == 1
+    end
+    
+  end
    
-   after do
-      FileUtils.rm_rf @idea.repo
-   end
-  
-   describe "GET new" do
+  describe "GET edit" do
+    it "should grab the text file from the repo" do
+      Idea.should_receive(:find).with("1").and_return(@idea)
+      get :edit, :idea_id => "1"
+      response.should be_success
+    end
+  end
     
-      it "should show the text form" do
-        Idea.should_receive(:find).with("1").and_return(@idea)
-        get :new, :idea_id => "1"
-        response.should be_success
-      end
-    
-   end
-  
-   describe "POST create" do
-    
-      it "should save text in repository" do
-         Idea.should_receive(:find).with("37").and_return(@idea)
-         post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
-         assigns[:idea].repository.tree.contents[1].data.should == assigns[:text].to_json
-         response.should redirect_to(idea_path(@idea))
-      end
-      
-      it "should assign text order of 1" do
-        Idea.should_receive(:find).with("37").and_return(@idea)
-        post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
-        assigns[:text].order.should == 1
-      end
-    
-   end
 end

@@ -35,7 +35,9 @@ class Idea < ActiveRecord::Base
     files = []
     self.repository.tree.contents.each do |blob|
       name = blob.name.split("_")[0].capitalize
-      files << name.constantize.new(JSON.parse(blob.data))
+      file = name.constantize.new(JSON.parse(blob.data))
+      file.name = blob.name
+      files << file
     end
     files.sort  {|x,y| y.order <=> x.order }
   end

@@ -44,6 +44,7 @@ div.idea_item {
 	border: 1px solid #dcdcdc;
 	padding: 10px;
 	margin-bottom: 10px;
+	line-height: 16px;
 }
 
 div#description 

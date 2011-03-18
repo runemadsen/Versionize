@@ -6,6 +6,11 @@ class TextsController < ApplicationController
    @idea = Idea.find(params[:idea_id])
    @text = Text.new
   end
+  
+  def edit
+    @idea = Idea.find(params[:idea_id])
+    @text = Text.new
+  end
 
   def create
     begin

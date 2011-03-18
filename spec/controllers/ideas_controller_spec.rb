@@ -44,6 +44,7 @@ describe IdeasController do
             post :create, :idea => {:name => "My RSPEC Idea"}, :description => @desc
             assigns[:idea].should_not be_nil
             assigns[:idea].repository.should_not be_nil
+            assigns[:idea].repository.tree.contents.first.name.split('_')[0].should == 'text'
             assigns[:idea].repository.tree.contents.first.data.should == assigns[:text].to_json
             response.should redirect_to(idea_path(assigns[:idea]))
          end

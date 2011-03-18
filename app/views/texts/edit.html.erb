@@ -1,0 +1,14 @@
+<div class="grid_12">
+
+<h2>New Text</h2>
+
+<%= form_for [@idea, @text] do |f| %>
+
+	<%= f.text_area :body, {:class => "input_box input_link"} %>
+	<br /><br />
+	<%= submit_tag 'Save text' %>
+	
+<% end %>
+
+</div>
+<div class="clear"></div>
