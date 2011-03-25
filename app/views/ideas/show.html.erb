@@ -14,7 +14,7 @@
 				<div class="clear"></div>
 			</div>
 		<% else %>
-			<%= render content %>
+			<%= render content, :locals => {:edit => true} %>
 		<% end %>
 	<% end %>
 	
