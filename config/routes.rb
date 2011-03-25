@@ -8,16 +8,18 @@ Versionize::Application.routes.draw do
   resources :users
   resources :invites
   
-  resources :ideas do
+  resources :ideas do    
+
     resources :links
     resources :texts
     resources :images do
       collection do
         get 'upload_succes', :as => 'upload_success'
       end
-    end
+    end  
   end
 
+  match 'ideas/:id/versions/:version_id' => "ideas#show_version", :as => :show_version
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
   

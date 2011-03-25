@@ -68,5 +68,24 @@ describe IdeasController do
             assigns[:idea].current_version.should_not be_nil
          end
       end
+      
+      describe "GET show versions" do
+         
+         it "should work in order" do
+           
+           @link = Link.new(:url => "www.runemadsen.com")
+           @link.order = @idea.next_order
+           @idea.create_version(@link, users(:rune), "Save link")
+           @link.url = "www.politiken.dk"
+           @idea.create_version(@link, users(:rune), "Save link")
+           @link.url = "www.facebook.com"
+           @idea.create_version(@link, users(:rune), "Save link")
+           
+           Idea.should_receive(:find).with("37").and_return(@idea)
+           get "show_version", :id => "37", :version_id => "1"
+           assigns[:idea].version(1).should_not be_nil
+           response.should be_success
+         end
+      end
   end
 end

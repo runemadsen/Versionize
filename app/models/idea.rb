@@ -42,23 +42,29 @@ class Idea < ActiveRecord::Base
   end
   
   def current_version 
-    
     if @models != nil 
       return @models 
     end
-    
     @models = []
     self.repository.tree.contents.each do |blob|
       @models << blob_to_model(blob)
     end
-    
-    #raise Exception, @models.inspect
-    
+    @models.sort  {|x,y| y.order <=> x.order }
+  end
+  
+  def version(version)
+    if @models != nil 
+      return @models 
+    end
+    @models = []
+    self.repository.commits[num_commits-version.to_i].tree.contents.each do |blob|
+      @models << blob_to_model(blob)
+    end
     @models.sort  {|x,y| y.order <=> x.order }
   end
   
   def num_commits
-    self.repository.commits.count
+    self.repository.commit_count
   end
   
   private
