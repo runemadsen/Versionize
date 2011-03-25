@@ -4,5 +4,6 @@
 <% else %>
 	<%= link_to link.url, link.url %>
 	<%= link_to "Edit", edit_idea_link_path(@idea, link.id) %>
+	<%= link_to "Destroy", idea_link_path(@idea, link.id), :method => :delete %>
 <% end %>
 </div>
