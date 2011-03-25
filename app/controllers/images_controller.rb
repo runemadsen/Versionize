@@ -1,5 +1,7 @@
 class ImagesController < ApplicationController
   
+  before_filter :require_user
+  
   def new
     
     @idea = Idea.find params[:idea_id]
@@ -28,12 +30,28 @@ class ImagesController < ApplicationController
       @idea = Idea.find(params[:idea_id])
       @image = Image.new(:key => params[:key])
       @image.order = @idea.next_order
-      @idea.create_version(@image, current_user, "Save Image")
+      @idea.create_version(@image, @current_user, "Save Image")
       flash[:notice] = "Saved image"
       redirect_to idea_path(@idea)
     rescue Exception => e 
       flash[:error] = "There was a problem! #{e}"
       redirect_to new_idea_image_path(@idea)
+    end
+  end
+  
+  def destroy
+    
+    # REMEMBER TO REMOVE FROM AMAZON ALSO
+    
+    begin
+      @idea = Idea.find(params[:idea_id])
+      @image = @idea.file(Image::name_from_uuid(params[:id]))
+      @idea.create_version(@image, @current_user, "delete image", true)
+      flash[:notice] = "Removed Image"
+      redirect_to idea_path(@idea)
+    rescue Exception => e
+      flash[:error] = "There was a problem! #{e}"
+      redirect_to idea_path(@idea)
     end
   end
   
