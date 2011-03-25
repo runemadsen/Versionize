@@ -41,8 +41,9 @@ h2 {
 _____________________________________________ */
 
 div.idea_item {
-	border: 1px solid #dcdcdc;
-	padding: 10px;
+/*	border: 1px solid #dcdcdc;*/
+	background-color: #f4f4f4;
+	padding: 20px;
 	margin-bottom: 10px;
 	line-height: 16px;
 }
