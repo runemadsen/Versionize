@@ -27,7 +27,7 @@
 	
 	<ul>
 	<% @idea.repository.commits.each_with_index do |commit, i| %>
-		<li><%= num_commits - i %> - <%= commit.date %></li>
+		<li><%= link_to num_commits - i, show_version_path(@idea, num_commits - i) %></li>
 	<% end %>
 	</ul>
 	
