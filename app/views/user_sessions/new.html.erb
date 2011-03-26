@@ -6,7 +6,7 @@
 	<%= flash[:notice] %>
 	<%= flash[:error] %>
 	
-	<p id="front_text">We are currently open for alpha-testers only. <%= link_to 'Visit the front page', '/' %> to subscribe yourself to the mailinglist. We will email you a password as soon as we have a beta ready.</p>
+	<p id="front_text">Accounts are currently available by invite only.</p>
 	
 	<% form_for @user_session, :url => {:action => "create"} do |f| %>
 	  <%#= f.error_messages %>

@@ -7,6 +7,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :persistence_token,   :null => false
       t.string    :single_access_token, :null => false    # For API usage, does not persist
       #t.string    :perishable_token,    :null => false   # For confirm account, lost password, etc
+      
+      t.integer   :allowed_invites, :default => 10
  
       # magic fields (all optional, see Authlogic::Session::MagicColumns)
       t.integer   :login_count,         :null => false, :default => 0

@@ -4,7 +4,7 @@
 	
 	<% @idea.current_version.each_with_index do |content, i| %>
 		<% if i == 0 %>
-			<%= render :partial => "texts/description", :locals => {:text => content} %>
+			<%= render :partial => "texts/description", :locals => {:text => content, :edit => true} %>
 			<div id="media_box">
 				<ul>
 					<li><%= link_to "Insert Link", new_idea_link_path(@idea)%></li>
@@ -14,7 +14,8 @@
 				<div class="clear"></div>
 			</div>
 		<% else %>
-			<%= render content, :locals => {:edit => true} %>
+			<%= render :partial => content.class.name.pluralize + "/" + content.class.name.downcase, 
+									:locals => { content.class.name.downcase.to_sym => content, :edit => true} %>
 		<% end %>
 	<% end %>
 	

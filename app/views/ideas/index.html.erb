@@ -1,7 +1,20 @@
-<h1>Your ideas</h1>
+<div class="grid_8">
 
-<ul>
-<% for idea in @current_user.ideas %>
-	<li><%= link_to idea.name, idea_url(idea) %></li>
-<% end %>
-</ul>
+	<h1>Welcome <%= @current_user.email %></h1>
+	<p>You have <%= @current_user.ideas.count %> ideas</p>
+	
+
+	<ul>
+	<% for idea in @current_user.ideas %>
+		<li><%= link_to idea.name, idea_url(idea) %></li>
+	<% end %>
+	</ul>
+
+</div>
+<div class="grid_4">
+	
+	<%= link_to "Create a new idea", new_idea_path, :class => "link_button" %><br />
+	<%= link_to "Invites", account_invites_path(@current_user) %>
+	
+</div>
+</div class="clear"></div>

@@ -1,29 +1,3 @@
-<div class="grid_1">&nbsp;</div>
-<div class="grid_5">
-	
-	<img src="/images/logo_beta.jpg" alt="Versionize" id="front_logo">
-	
-	<%= flash[:notice] %>
-	<%= flash[:error] %>
-	
-	<p id="front_text">Versionize is a tool for ideation through iteration. You can use it as a personal tool to write down hunches, create new versions of these hunches, and keep adding content to them. It is a structured and flexible replacement to your idea book. You can also make your projects public, so everyone else can create new versions of your ideas.</p>
-	
-	<h2>Join the mailinglist</h2>
-	
-	<p id="front_join">We’ll email you a login when we’re ready for beta-testing</p>
-	
-	<%= form_tag(:controller => "invites", :action => "create") do %>
-		<%= text_field_tag 'invitemail', "Email", :class => 'front_input',
-		:onFocus => "if(this.value==this.defaultValue) this.value='';", 
-		:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
-		<%= submit_tag 'Submit', :class => 'front_input_submit' %>
-	<% end %>
-	
-	<div class="clear"></div>
+<div class="grid_12">
+	You have <%= @current_user.invites_left %> invites left
 </div>
-	
-<div class="grid_6" id="front_boxes">
-	
-</div>
-<div class="clear"></div>
-

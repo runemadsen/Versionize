@@ -4,9 +4,9 @@ Versionize::Application.routes.draw do
   get "user_sessions/new"
   
   resources :user_sessions
-  resource :account, :controller => "users"
-  resources :users
-  resources :invites
+  resource :account, :controller => "users" do
+    resources :invites
+  end
   
   resources :ideas do    
 
@@ -23,7 +23,7 @@ Versionize::Application.routes.draw do
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
   
-  root :to => 'home#index'
+  root :to => 'ideas#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

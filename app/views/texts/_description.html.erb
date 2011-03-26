@@ -1,5 +1,8 @@
 <div id="description" class="idea_item">
 	<%= text.body %>
-	<br /><br />
-	<%= link_to "Edit", edit_idea_text_path(@idea, text.id) %>
+	
+	<% if edit %>
+		<br /><br />
+		<%= link_to "Edit", edit_idea_text_path(@idea, text.id) %>
+	<% end %>
 </div>

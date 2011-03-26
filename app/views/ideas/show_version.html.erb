@@ -4,9 +4,10 @@
 	
 	<% @idea.version(@version).each_with_index do |content, i| %>
 		<% if i == 0 %>
-			<%= render :partial => "texts/description", :locals => {:text => content} %>
+			<%= render :partial => "texts/description", :locals => {:text => content, :edit => false} %>
 		<% else %>
-			<%= render content %>
+			<%= render :partial => content.class.name.pluralize + "/" + content.class.name.downcase, 
+									:locals => { content.class.name.downcase.to_sym => content, :edit => false} %>
 		<% end %>
 	<% end %>
 	
