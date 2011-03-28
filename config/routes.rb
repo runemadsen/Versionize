@@ -4,11 +4,11 @@ Versionize::Application.routes.draw do
   get "user_sessions/new"
   
   resources :user_sessions
-  resource :account, :controller => "users" do
+  resources :users do
     resources :invites
   end
   
-  resources :ideas do    
+  resources :ideas do
 
     resources :links
     resources :texts

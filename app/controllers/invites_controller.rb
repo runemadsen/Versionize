@@ -3,6 +3,7 @@ class InvitesController < ApplicationController
   before_filter :require_user
   
   def index
+    @invite = @current_user.invites.new
   end
   
   def create

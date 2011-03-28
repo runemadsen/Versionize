@@ -13,8 +13,8 @@
 </div>
 <div class="grid_4">
 	
-	<%= link_to "Create a new idea", new_idea_path, :class => "link_button" %><br />
-	<%= link_to "Invites", account_invites_path(@current_user) %>
+	<p><%= link_to "Create a new idea", new_idea_path, :class => "link_button" %></p>
+	<p>You have <%= link_to @current_user.invites_left, user_invites_path(@current_user) %> invites left</p>
 	
 </div>
 </div class="clear"></div>

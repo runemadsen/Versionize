@@ -1,3 +1,23 @@
 <div class="grid_12">
 	You have <%= @current_user.invites_left %> invites left
+	
+	
+	<h2>Invite a friend</h1>
+		
+	<p>The specified email adress will receive an email with a invite code. The email will include instructions on how to sign up for Versionize by using this code</p>
+		
+	<%= form_for [@current_user, @invite] do |f| %>
+		
+		<%= f.text_field :to_email, :value => "Recipient Email adress", :class => "input_box input_link",
+		 	:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+			:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
+			
+		<%= f.text_area :message, :value => "Message", :class => "input_box input_text",
+			 	:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+				:onBlur => "if(this.value=='') this.value=this.defaultValue;" %> <br />
+				
+		<%= submit_tag 'Send invitation' %>
+
+	<% end %>
+	
 </div>
