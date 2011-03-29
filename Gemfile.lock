@@ -129,6 +129,7 @@ DEPENDENCIES
   grit
   jquery-rails (>= 0.2.6)
   json
+  mail
   mysql2
   rails (= 3.0.3)
   rails3-generators

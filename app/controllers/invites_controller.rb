@@ -7,14 +7,20 @@ class InvitesController < ApplicationController
   end
   
   def create
+    
     begin
-      invite = Invite.new(:email => params[:invitemail])
+      invite = Invite.new(params[:invite])
+      invite.user = @current_user
+      invite.code = ActiveSupport::SecureRandom.hex(3)
+      
       invite.save
-      render 'thanks'
-    rescue ActiveRecord::RecordInvalid => e
+      InviteMailer.invite_email(invite).deliver
+      render 'confirmation'
+    rescue Exception => e 
       flash[:error] = "Something went wrong: #{e}"
-      redirect_to invites_path
+      redirect_to user_invites_path(@current_user)
     end
+    
   end
   
 end

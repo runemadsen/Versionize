@@ -3,9 +3,6 @@
 	
 	<img src="/images/logo_beta.jpg" alt="Versionize" id="front_logo">
 	
-	<%= flash[:notice] %>
-	<%= flash[:error] %>
-	
 	<p id="front_text">Accounts are currently available by invite only.</p>
 	
 	<% form_for @user_session, :url => {:action => "create"} do |f| %>
