@@ -1,20 +1,22 @@
 <div class="grid_8">
+	<h1>You have <%= pluralize(@current_user.ideas.count, 'idea') %></h1>
+</div>
+<div class="grid_4">
+	<p><%= link_to "Create a new idea", new_idea_path, :class => "box_link" %></p>
+</div>
+<div class="clear"></div>
 
-	<h1>Welcome <%= @current_user.email %></h1>
-	<p>You have <%= @current_user.ideas.count %> ideas</p>
-	
+<div class="grid_12 dotted_line_small"></div>
 
-	<ul>
+
+<div class="grid_8">
+	<ul class="idea_list">
 	<% for idea in @current_user.ideas %>
 		<li><%= link_to idea.name, idea_url(idea) %></li>
 	<% end %>
 	</ul>
-
 </div>
 <div class="grid_4">
-	
-	<p><%= link_to "Create a new idea", new_idea_path, :class => "link_button" %></p>
-	<p>You have <%= link_to @current_user.invites_left, user_invites_path(@current_user) %> invites left</p>
-	
+	<p class="tip">This is your list of ideas. Create an idea when you need a place to document a hunch, you need to collect a bunch of inspirational links or images into a central place, or as a starting point for group work. You can keep adding content to an idea, and you can always go back in history to see older versions of your idea.</p>	
 </div>
-</div class="clear"></div>
+<div class="clear"></div>

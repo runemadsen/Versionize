@@ -20,14 +20,17 @@ a {
 	color: #3f6d2c;
 }
 
-a.link_button {
+a.box_link {
 	font-size: 18px;
 	font-weight: bold;
-	
+	background-color: #d25245;
+	color: #FFF;
+	text-decoration: none;
+	padding: 10px 15px;
 }
 
 h1 {
-	font-size: 20px;
+	font-size: 40px;
 	margin-bottom: 12px;
 }
 
@@ -35,6 +38,16 @@ h2 {
 	font-size: 17px;
 	margin-top: 24px;
 	margin-bottom: 12px;
+}
+
+p.tip {
+	color: #6a7a92;
+	font-size: 13px;
+	margin: 0;
+}
+
+ul.idea_list li {
+	font-size: 24px;
 }
 
 /* Idea media
@@ -152,13 +165,6 @@ _____________________________________________ */
 _____________________________________________ */
 
 #notice {
-	padding: 10px 5px 10px 5px;
-	background-color: #3f6d2c;
-	color: #ffffff;
-	margin-bottom: 12px;
-}
-
-#notice_front {
 	padding: 20px 0px 20px 0px;
 	background-color: #3f6d2c;
 	color: #ffffff;
@@ -171,13 +177,6 @@ _____________________________________________ */
 _____________________________________________ */
 
 #error {
-	padding: 10px 5px 10px 5px;
-	background-color: #d25340;
-	color: #ffffff;
-	margin-bottom: 12px;
-}
-
-#error_front {
 	padding: 20px 0px 20px 0px;
 	background-color: #d25340;
 	color: #ffffff;
@@ -270,6 +269,23 @@ _____________________________________________ */
 	width: 72px;
 	height: 30px;
 	background: url('../images/input_login.jpg') no-repeat;
-    border: none;
+  border: none;
 	margin-left: 10px;
+}
+
+/* Dotted lines
+_____________________________________________ */
+
+.dotted_line_big {
+	height: 7px;
+	background: url('../images/dot_big.jpg');
+	background-repeat: repeat-x;
+	margin-bottom: 20px;
+}
+
+.dotted_line_small {
+	height: 5px;
+	background: url('../images/dot_small.jpg');
+	background-repeat: repeat-x;
+	margin-bottom: 20px;
 }

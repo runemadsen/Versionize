@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   
-  before_filter :require_user
+  before_filter :require_user_no_notice
   
   def index
   end
