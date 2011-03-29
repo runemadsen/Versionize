@@ -1,12 +1,16 @@
-<div class="grid_8">
+<div class="grid_12">
+	<h1>Create Idea</h1>
+</div>
+<div class="grid_12 dotted_line_small"></div>
 
+<div class="grid_8">
 <% form_for @idea, :url => {:action => "create"} do |f| %>
 
-<%= f.text_field :name, :value => "Idea name", :class => 'input_box input_name',
+<%= f.text_field :name, :value => "Name", :class => 'input_box input_name',
  	:onFocus => "if(this.value==this.defaultValue) this.value='';", 
 	:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
 
-<%= text_area_tag :description, "Idea description", :class => 'input_box input_text',
+<%= text_area_tag :description, "Short description", :class => 'input_box input_text',
  		:onFocus => "if(this.value==this.defaultValue) this.value='';", 
 		:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
 
@@ -16,6 +20,8 @@
 
 </div>
 <div class="grid_4">
-	Help text here
+	<p class="tip">
+		Every time you create a new idea, you have to give it a name and a short description. Once the idea is created you can start adding content to it, like with a normal blog. The name and description can always be edited later on.
+	</p>
 </div>
 <div class="clear"></div>

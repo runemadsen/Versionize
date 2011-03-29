@@ -41,30 +41,32 @@ class Idea < ActiveRecord::Base
     blob_to_model(self.repository.tree/file_name)
   end
   
-  def current_version 
-    if @models != nil 
-      return @models 
-    end
-    @models = []
-    self.repository.tree.contents.each do |blob|
-      @models << blob_to_model(blob)
-    end
-    @models.sort  {|x,y| y.order <=> x.order }
-  end
-  
   def version(version)
+    
+    # Caching problem: 
+    # Different versions operate on same array
+    
     if @models != nil 
       return @models 
     end
+    
     @models = []
-    self.repository.commits[num_commits-version.to_i].tree.contents.each do |blob|
-      @models << blob_to_model(blob)
+    
+    if version == 0
+      self.repository.tree.contents.each do |blob|
+        @models << blob_to_model(blob)
+      end
+    else
+      self.repository.commits[num_commits-version.to_i].tree.contents.each do |blob|
+        @models << blob_to_model(blob)
+      end
     end
+    
     @models.sort  {|x,y| y.order <=> x.order }
   end
   
   def num_commits
-    self.repository.commit_count
+    @commit_num ||= self.repository.commit_count
   end
   
   private

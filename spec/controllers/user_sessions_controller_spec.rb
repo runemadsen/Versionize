@@ -13,7 +13,7 @@ describe UserSessionsController do
 
   describe "POST 'create'" do
     it "should create user session" do
-      post :create, :user_session => { :email => "test@test.com", :password => "testpass" }
+      post :create, :user_session => { :email => "rune@runemadsen.com", :password => "Enurmadsen1" }
       user_session = UserSession.find
       user_session.should_not be_nil
       user_session.user.should == users(:rune)

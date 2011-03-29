@@ -6,7 +6,9 @@ class IdeasController < ApplicationController
   end
   
   def show
-     @idea = Idea.find params[:id]     
+     @idea = Idea.find params[:id]
+     @version = 0
+     @edit = true   
   end
   
   def show_version
@@ -14,6 +16,7 @@ class IdeasController < ApplicationController
     
     if(params[:version_id].to_i <= @idea.num_commits)
       @version = params[:version_id]
+      render :show
     else
       flash[:error] = "Can't find version number #{@version}"
       redirect_to idea_path(@idea)
