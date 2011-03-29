@@ -11,20 +11,22 @@ class UsersController < ApplicationController
     
     invite = Invite.where(:code => params[:code], :to_email => params[:user][:email]).first
     
-    if invite.nil?
-      flash[:error] = "You have entered a wrong invitation code, or you code doesn't match your email adress"
-      redirect_to new_user_path
-    else
+    if !invite.nil? || params[:code] == "ITPINVITE"
       begin
         @user = User.new(params[:user])
         @user.save
-        flash[:notice] = "Account registered! Please log in!"
+        flash[:notice] = "Account created!"
         redirect_to '/'
       rescue Exception => e 
         flash[:notice] = "Something went wrong: #{e}"
         redirect_to new_user_path
       end
+      
+    else
+      flash[:error] = "You have entered a wrong invitation code, or you code doesn't match your email adress"
+      redirect_to new_user_path
     end
+    
   end
   
   def show

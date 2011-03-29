@@ -10,11 +10,7 @@
 		
 		<%= f.text_field :to_email, :value => "Recipient Email adress", :class => "input_box input_link",
 		 	:onFocus => "if(this.value==this.defaultValue) this.value='';", 
-			:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
-			
-		<%= f.text_area :message, :value => "Message", :class => "input_box input_text",
-			 	:onFocus => "if(this.value==this.defaultValue) this.value='';", 
-				:onBlur => "if(this.value=='') this.value=this.defaultValue;" %> <br />
+			:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br /><br />
 				
 		<%= submit_tag 'Send invitation' %>
 

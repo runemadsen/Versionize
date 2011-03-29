@@ -158,6 +158,15 @@ _____________________________________________ */
 	margin-bottom: 12px;
 }
 
+#notice_front {
+	padding: 20px 0px 20px 0px;
+	background-color: #3f6d2c;
+	color: #ffffff;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+}
+
 /* Error
 _____________________________________________ */
 
@@ -166,6 +175,15 @@ _____________________________________________ */
 	background-color: #d25340;
 	color: #ffffff;
 	margin-bottom: 12px;
+}
+
+#error_front {
+	padding: 20px 0px 20px 0px;
+	background-color: #d25340;
+	color: #ffffff;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
 }
 
 /* Front

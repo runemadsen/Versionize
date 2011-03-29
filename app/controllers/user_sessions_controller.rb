@@ -14,6 +14,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = "Login successful!"
       redirect_back_or_default "/"
     else
+      flash[:error] = "Wrong email or password!"
       render :action => :new
     end
   end
