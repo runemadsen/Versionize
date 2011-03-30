@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
   end
   
   def show
-    @idea = @current_user.ideas.find params[:id]
+    @idea = @current_user.ideas.find_by_id params[:id]
      
     unless @idea.nil?
       @version = 0
@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
   
   def show_version
     
-    @idea = @current_user.ideas.find params[:id]
+    @idea = @current_user.ideas.find_by_id params[:id]
     
     unless @idea.nil?
       if(params[:version_id].to_i <= @idea.num_commits)
