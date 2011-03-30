@@ -9,7 +9,8 @@ Versionize::Application.routes.draw do
   end
   
   resources :ideas do
-
+    
+    resources :collaborations
     resources :links
     resources :texts
     resources :images do

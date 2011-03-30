@@ -63,7 +63,7 @@ describe IdeasController do
     
       describe "GET show" do
          it "should show basic idea details" do
-            assigns[:current_user].users.should_receive(:find).with("37").and_return(@idea)
+            assigns[:current_user].ideas.should_receive(:find_by_id).with("37").and_return(@idea)
             #Idea.should_receive(:find).with("37").and_return(@idea)
             get :show, :id => "37"
             response.should be_success
