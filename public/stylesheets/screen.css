@@ -70,6 +70,20 @@ div#description
 	margin-bottom: 10px;
 }
 
+div.edit_item {
+	text-align: right;
+	font-size: 12px;
+}
+
+div.edit_item a {
+	color: #909090;
+	text-decoration: none;
+}
+
+div.edit_item a.destroy {
+	color: #d25245;
+}
+
 /* Idea version boxes
 _____________________________________________ */
 
@@ -135,6 +149,46 @@ _____________________________________________ */
 	background-color: #544848;
 }
 
+/* Insert media box styling
+_____________________________________________ */
+
+#media_box {
+	background-color: #e5e5e5;
+	margin-bottom: 20px;
+}
+
+#media_box ul li {
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-right: 5px;;
+	background-color: #dedede;
+}
+
+#media_box ul li a {
+	color: #6a7a92;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#media_box ul li:hover a {
+	color: #ffffff;
+}
+
+#media_box ul li:hover {
+	background-color: #d25340;
+}
+
+#media_box ul li {
+	color: #969696;
+}
+
+#media_box ul li:first-child:hover {
+	background-color: #dedede;
+}
+
 /* Form styling
 _____________________________________________ */
 
@@ -172,37 +226,6 @@ _____________________________________________ */
 	font-size: 19px;
 	color: #323232;
 	margin-top: 12px;
-}
-
-/* Insert media box styling
-_____________________________________________ */
-
-#media_box {
-	background-color: #FFFFFF;
-	margin-bottom: 10px;
-}
-
-#media_box ul li {
-	height: 30px;
-	line-height: 30px;
-	float: left;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-right: 5px;
-	background-color: #dedede;
-}
-
-#media_box ul li a {
-	color: #1b1b1b;
-	text-decoration: none;
-}
-
-#media_box ul li:hover a {
-	color: #ffffff;
-}
-
-#media_box ul li:hover {
-	background-color: #d25340;
 }
 
 /* Header
