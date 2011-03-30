@@ -1,15 +1,15 @@
 <div class="grid_8">
+	
+<h1>Add image to idea</h1>
 
-Max upload size: 10mb!
+<p>Max upload size: 10mb! Let us know if and why you really need more</p>
 
 <% ungulate_upload_form_for(@image_upload) do %>
-  <%= label_tag :file, 'Upload File' %>
-  <%= file_field_tag :file %>
+  <%= file_field_tag :file, :class => "input_box input_link" %><br /><br />
   <%= submit_tag 'Upload' %>
 <% end %>
 
 </div>
 <div class="grid_4">
-	Help text here
 </div>
 <div class="clear"></div>

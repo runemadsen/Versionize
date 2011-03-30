@@ -63,6 +63,10 @@ div.idea_item {
 	background-position: bottom left;
 }
 
+div.item_link {
+	font-size: 22px;
+}
+
 div#description 
 {
 	font-weight: bold;

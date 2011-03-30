@@ -1,10 +1,18 @@
-<div class="idea_item">
-<% if link.file_extension == ".jpg" || link.file_extension == ".gif" %>
+<div class="idea_item item_link">
+<% if link.file_extension == ".jpg" || link.file_extension == ".gif" || link.file_extension == ".png" %>
 	<%= image_tag link.url %>
-	<%= link_to "Destroy", idea_link_path(@idea, link.id), :method => :delete %>
+	<% if edit %>
+		<div class="edit_item">
+			<%= link_to "Delete", idea_link_path(@idea, link.id), :method => :delete, :class => "destroy" %>
+		</div>
+	<% end  %>
 <% else %>
 	<%= link_to link.url, link.url %>
-	<%= link_to "Edit", edit_idea_link_path(@idea, link.id) %>
-	<%= link_to "Destroy", idea_link_path(@idea, link.id), :method => :delete %>
+	<% if edit %>
+		<div class="edit_item">
+			<%= link_to "Edit", edit_idea_link_path(@idea, link.id) %>
+			<%= link_to "Delete", idea_link_path(@idea, link.id), :method => :delete, :class => "destroy" %>
+		</div>
+	<% end %>
 <% end %>
 </div>

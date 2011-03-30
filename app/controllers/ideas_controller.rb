@@ -6,20 +6,31 @@ class IdeasController < ApplicationController
   end
   
   def show
-     @idea = Idea.find params[:id]
-     @version = 0
-     @edit = true   
+    @idea = Idea.find params[:id]
+     
+    if @idea.user == @current_user
+      @version = 0
+      @edit = true   
+    else
+      flash[:error] = "You do not have access to this idea"
+      redirect_to ideas_path
+    end
   end
   
   def show_version
     @idea = Idea.find params[:id]
     
-    if(params[:version_id].to_i <= @idea.num_commits)
-      @version = params[:version_id]
-      render :show
+    if @idea.user == @current_user
+      if(params[:version_id].to_i <= @idea.num_commits)
+        @version = params[:version_id]
+        render :show
+      else
+        flash[:error] = "Can't find version number #{@version}"
+        redirect_to idea_path(@idea)
+      end
     else
-      flash[:error] = "Can't find version number #{@version}"
-      redirect_to idea_path(@idea)
+      flash[:error] = "You do not have access to this idea"
+      redirect_to ideas_path
     end
   end
   
