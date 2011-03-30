@@ -2,21 +2,33 @@
 	<h1>Collaborators</h1>
 </div>
 <div class="grid_4">
-	<p><%= link_to "Add new collaborator", new_idea_collaboration_path(@idea), :class => "box_link" %></p>
+	
 </div>
 <div class="clear"></div>
 
 <div class="grid_12 dotted_line_small"></div>
 
 <div class="grid_8">
+	
 	<ul class="idea_list">
 		<% @users.each_with_index do |user, i| %>
 			<li><%= user.email %> <% if @collaborations[i].owner %>[owner]<% end %>
 		<% end %>
 	</ul>
+	
 </div>
 <div class="grid_4">
-	<p class="tip">This is your list of ideas. Create an idea when you need a place to document a hunch, you need to collect a bunch of inspirational links or images into a central place, or as a starting point for group work. You can keep adding content to an idea, and you can always go back in history to see older versions of your idea.</p>	
+	<%= form_for [@idea, @idea.collaborations.new] do %>
+		
+		<%= text_field_tag :email, "Email address", {
+		 	:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+			:onBlur => "if(this.value=='') this.value=this.defaultValue;"} %>
+				
+		<%= submit_tag 'Add collaborator' %>
+
+	<% end %>
+	
+	<p class="tip">Each idea can have many collaborators. Add a collaborator to give the person access to viewing, editing and updating the idea.</p>	
 </div>
 <div class="clear"></div>
 
