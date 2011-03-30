@@ -6,7 +6,6 @@
 	<p id="front_text">Accounts are currently available by invite only.</p>
 	
 	<% form_for @user_session, :url => {:action => "create"} do |f| %>
-	  <%#= f.error_messages %>
 	
 	  <%= f.text_field :email, :class => "front_input", :value => "Email", 	
 						:onFocus => "if(this.value==this.defaultValue) this.value='';", 
@@ -19,8 +18,6 @@
 		<%= f.check_box :remember_me, :class => "front_input_remember" %><%= f.label :remember_me, :class => "input_remember_label" %>
 		<%= f.submit "Login", :class => "input_submit" %>
 	<% end %>
-
-	<%#= link_to "Don't have an account? Create a user", :controller => :users, :action => :new %>
 	
 </div>
 	

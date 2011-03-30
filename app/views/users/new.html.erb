@@ -1,7 +1,36 @@
-<% form_for @user do |f| %>
+<div class="grid_1">&nbsp;</div>
+<div class="grid_5">
+	
+	<img src="/images/logo_beta.jpg" alt="Versionize" id="front_logo">
+	
+	<p id="front_text">Sign up as a new user!</p>
+	
+	<% form_for @user do |f| %>
+	
+		<%= f.text_field :email, :value => "Email", :class => "front_input",
+						:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+						:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
+	
+		<%= f.password_field :password, :value => "Password", :class => "front_input front_input_password",
+										:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+										:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
+	
+		<%= f.password_field :password_confirmation, :value => "Password", :class => "front_input front_input_password",
+														:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+														:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
 
-<%= render :partial => 'form', :locals => {:f => f} %>
+		<%= text_field_tag :code, "Invitation Code", :class => "front_input front_input_password",
+																		:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+																		:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br /><br />
 
-<p><%= submit_tag 'Save account info' %></p>
+		<%= submit_tag 'Create User' %>
 
-<% end %>
+	<% end %>
+	
+</div>
+	
+<div class="grid_6" id="front_boxes">
+	
+</div>
+<div class="clear"></div>
+
