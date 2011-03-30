@@ -51,6 +51,10 @@ ul.idea_list li {
 	margin-bottom: 15px;
 }
 
+ul.idea_list li a.collaborator {
+	color: #c5546d;
+}
+
 /* Idea media
 _____________________________________________ */
 

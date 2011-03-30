@@ -1,17 +1,18 @@
 class Idea < ActiveRecord::Base
 
   include Grit
-  belongs_to :user
+  
+  has_many :collaborations
+  has_many :users, :through => :collaborations
   
   REPO_PATH = 'repos/repo'
   REPO_EXT = '.git'
-  
+    
   def next_order
     self.repository.tree.contents.count
   end
   
   def create_repo(model, user, commit_msg)
-    self.user = user
     self.repo = REPO_PATH + (Idea.count + 1).to_s + REPO_EXT
     @repository = Repo.init_bare(self.repo)
     model.order = 9999999999

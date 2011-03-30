@@ -6,9 +6,9 @@ class IdeasController < ApplicationController
   end
   
   def show
-    @idea = Idea.find params[:id]
+    @idea = @current_user.ideas.find params[:id]
      
-    if @idea.user == @current_user
+    unless @idea.nil?
       @version = 0
       @edit = true   
     else
@@ -18,9 +18,10 @@ class IdeasController < ApplicationController
   end
   
   def show_version
-    @idea = Idea.find params[:id]
     
-    if @idea.user == @current_user
+    @idea = @current_user.ideas.find params[:id]
+    
+    unless @idea.nil?
       if(params[:version_id].to_i <= @idea.num_commits)
         @version = params[:version_id]
         render :show
@@ -44,11 +45,12 @@ class IdeasController < ApplicationController
       @text = Text.new(:body => params[:description])
       @idea.create_repo(@text, @current_user, "Save initial details")
       @idea.save
+      @collaboration = Collaboration.create! :user => @current_user, :idea => @idea, :owner => true
       flash[:notice] = "Idea Saved!"
       redirect_to idea_url(@idea)
     rescue Exception => e 
       flash[:error] = "There was a problem! #{e}"
-      redirect_to new_idea_path(@idea)
+      redirect_to new_idea_path
     end
     
   end

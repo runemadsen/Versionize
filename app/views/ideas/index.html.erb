@@ -8,11 +8,13 @@
 
 <div class="grid_12 dotted_line_small"></div>
 
-
 <div class="grid_8">
 	<ul class="idea_list">
-	<% for idea in @current_user.ideas %>
-		<li><%= link_to idea.name, idea_url(idea) %></li>
+	<% @current_user.ideas.each_with_index do |idea, i| %>
+		<li>
+			<% c = @current_user.collaborations[i].owner ? "owner" : "collaborator" %>
+			<%= link_to idea.name, idea_url(idea), :class => c %>
+		</li>
 	<% end %>
 	</ul>
 </div>

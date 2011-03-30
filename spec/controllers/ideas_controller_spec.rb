@@ -43,6 +43,7 @@ describe IdeasController do
          it "should create repo and save idea" do
             post :create, :idea => {:name => "My RSPEC Idea"}, :description => @desc
             assigns[:idea].should_not be_nil
+            assigns[:collaboration].should_not be_nil
             assigns[:idea].repository.should_not be_nil
             assigns[:idea].repository.tree.contents.first.name.split('_')[0].should == 'text'
             assigns[:idea].repository.tree.contents.first.data.should == assigns[:text].to_json
@@ -62,7 +63,8 @@ describe IdeasController do
     
       describe "GET show" do
          it "should show basic idea details" do
-            Idea.should_receive(:find).with("37").and_return(@idea)
+            assigns[:current_user].users.should_receive(:find).with("37").and_return(@idea)
+            #Idea.should_receive(:find).with("37").and_return(@idea)
             get :show, :id => "37"
             response.should be_success
             assigns[:idea].current_version.should_not be_nil

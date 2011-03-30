@@ -1,10 +1,8 @@
-<div class="grid_12">
-	You have <%= @current_user.invites_left %> invites left
-	
-	
-	<h2>Invite a friend</h1>
+<div class="grid_8">
+
+	<h1>Invite a friend</h1>
 		
-	<p>The specified email adress will receive an email with a invite code. The email will include instructions on how to sign up for Versionize by using this code</p>
+	<p>The specified email adress will receive an email with an invite code. The email will include instructions on how to sign up for Versionize by using this code</p>
 		
 	<%= form_for [@current_user, @invite] do |f| %>
 		
@@ -17,3 +15,7 @@
 	<% end %>
 	
 </div>
+<div class="grid_4">
+	
+</div>
+<div class="clear"></div>
