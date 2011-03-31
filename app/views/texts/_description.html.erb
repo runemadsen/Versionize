@@ -1,7 +1,6 @@
 <div id="description">
 	<%= h(text.body).gsub(/\n/, '<br/>') %>
-	
-	
+
 	<% if edit %>
 		<div class="edit_item">
 			<%= link_to "Edit", edit_idea_text_path(@idea, text.id) %>

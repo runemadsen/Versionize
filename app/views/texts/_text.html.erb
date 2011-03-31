@@ -1,5 +1,5 @@
 <div class="idea_item">
-	<%= text.body %>
+	<%= h(text.body).gsub(/\n/, '<br/>') %>
 	
 	<% if edit %>
 		<div class="edit_item">
