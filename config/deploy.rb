@@ -35,3 +35,14 @@ namespace :deploy do
  end
 end
 
+namespace(:customs) do
+  task :symlink, :roles => :app do
+    run <<-CMD
+       ln -nfs #{shared_path}/system/repos #{release_path}/repos
+     CMD
+  end
+end
+
+after "deploy:symlink","customs:symlink"
+#after "deploy", "deploy:cleanup"
+
