@@ -1,4 +1,11 @@
 <div class="idea_item">
-	<%= image_tag("http://versionize.s3.amazonaws.com/" + image.key) %>
-	<%= link_to "Destroy", idea_image_path(@idea, image.id), :method => :delete %>
+	<%= image_tag(image.amazon_url) %>
+	
+	<% if edit %>
+		<div class="edit_item">
+			<%= link_to "Destroy", idea_image_path(@idea, image.id), :method => :delete, :class => "destroy" %>
+		</div>
+	<% end %>
+	
+	
 </div>

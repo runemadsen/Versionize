@@ -1,3 +1,3 @@
 require 'ungulate/file_upload'
-Ungulate::FileUpload.access_key_id = 'AKIAILWXH5VEOLWRDSTQ'
-Ungulate::FileUpload.secret_access_key = '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'
+Ungulate::FileUpload.access_key_id = Rails.application.config.access_key_id
+Ungulate::FileUpload.secret_access_key = Rails.application.config.secret_access_key

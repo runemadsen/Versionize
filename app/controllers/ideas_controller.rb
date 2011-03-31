@@ -3,6 +3,8 @@ class IdeasController < ApplicationController
   before_filter :require_user_no_notice
   
   def index
+    @ideas = @current_user.published_ideas
+    #@ideas = @current_user.published_ideas
   end
   
   def show
@@ -52,7 +54,19 @@ class IdeasController < ApplicationController
       flash[:error] = "There was a problem! #{e}"
       redirect_to new_idea_path
     end
-    
+  end
+  
+  def destroy
+    begin      
+      @idea = @current_user.published_idea params[:id]
+      @idea.published = false
+      @idea.save
+      flash[:notice] = "Your idea was deleted"
+      redirect_to ideas_path
+    rescue Exception => e
+      flash[:error] = "Something went wrong: #{e}"
+      redirect_to idea_path(@idea)
+    end
   end
   
 end

@@ -43,5 +43,8 @@ module Versionize
       g.test_framework :rspec
     end
     
+    config.access_key_id = 'AKIAILWXH5VEOLWRDSTQ'
+    config.secret_access_key = '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'
+    
   end
 end

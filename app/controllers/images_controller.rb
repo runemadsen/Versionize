@@ -10,16 +10,16 @@ class ImagesController < ApplicationController
     key = "users/#{current_user.id}/images/#{Time.now.strftime('%Y%m%d%H%M%S')}"
 
     @image_upload = Ungulate::FileUpload.new(
-      :bucket_url => "http://versionize.s3.amazonaws.com/",
+      :bucket_url => "http://#{Rails.application.config.bucket}.s3.amazonaws.com/",
       :key => key,
       :policy => {
         'expiration' => expiration,
         'conditions' => [
-          {'bucket' => 'versionize'},
+          {'bucket' => Rails.application.config.bucket},
           {'key' => key},
           {'acl' => 'public-read'},
           ['content-length-range', 0, 10000000],
-          {'success_action_redirect' => "http://www.versionize.com/" + upload_success_idea_images_path}
+          {'success_action_redirect' => upload_success_idea_images_url}
         ]
       }
     )
@@ -41,9 +41,6 @@ class ImagesController < ApplicationController
   end
   
   def destroy
-    
-    # REMEMBER TO REMOVE FROM AMAZON ALSO
-    
     begin
       @idea = Idea.find(params[:idea_id])
       @image = @idea.file(Image::name_from_uuid(params[:id]))

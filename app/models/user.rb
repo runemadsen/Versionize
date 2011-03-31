@@ -6,12 +6,12 @@ class User < ActiveRecord::Base
   has_many :ideas, :through => :collaborations
   has_many :invites
   
-  def ideas_owner
-    ideas.where(:owner => true)
+  def published_ideas
+    ideas.includes([:collaborations]).where :published => true
   end
   
-  def ideas_collaborator
-    ideas.where(:owner => false)
+  def published_idea idea_id
+    ideas.includes([:collaborations]).where(:published => true, :id => idea_id).first
   end
   
   def as_actor

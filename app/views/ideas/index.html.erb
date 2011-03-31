@@ -1,5 +1,5 @@
 <div class="grid_8">
-	<h1>You have <%= pluralize(@current_user.ideas.count, 'idea') %></h1>
+	<h1>You have <%= pluralize(@ideas.count, 'idea') %></h1>
 </div>
 <div class="grid_4">
 	<p><%= link_to "Create a new idea", new_idea_path, :class => "box_link" %></p>
@@ -10,9 +10,10 @@
 
 <div class="grid_8">
 	<ul class="idea_list">
-	<% @current_user.ideas.each_with_index do |idea, i| %>
+			
+	<% @ideas.each_with_index do |idea, i| %>
 		<li>
-			<% c = @current_user.collaborations[i].owner ? "owner" : "collaborator" %>
+			<% c = idea.is_owner?(@current_user) ? "owner" : "collaborator" %>
 			<%= link_to idea.name, idea_url(idea), :class => c %>
 		</li>
 	<% end %>

@@ -8,12 +8,13 @@ class Idea < ActiveRecord::Base
   REPO_PATH = 'repos/repo'
   REPO_EXT = '.git'
   
-  def owners
-    users.where(:owner => true)
-  end
-
-  def collaborators
-    users.where(:owner => false)
+  def is_owner? user
+    self.collaborations.each do |c|
+      if user.id == c.user_id && c.owner
+        return true
+      end
+    end
+    false
   end
     
   def next_order
