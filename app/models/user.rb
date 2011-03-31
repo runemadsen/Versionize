@@ -6,6 +6,14 @@ class User < ActiveRecord::Base
   has_many :ideas, :through => :collaborations
   has_many :invites
   
+  def ideas_owner
+    ideas.where(:owner => true)
+  end
+  
+  def ideas_collaborator
+    ideas.where(:owner => false)
+  end
+  
   def as_actor
     "Versionize User <" + self.email + ">"
   end

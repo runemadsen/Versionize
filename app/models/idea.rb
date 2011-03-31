@@ -7,6 +7,14 @@ class Idea < ActiveRecord::Base
   
   REPO_PATH = 'repos/repo'
   REPO_EXT = '.git'
+  
+  def owners
+    users.where(:owner => true)
+  end
+
+  def collaborators
+    users.where(:owner => false)
+  end
     
   def next_order
     self.repository.tree.contents.count

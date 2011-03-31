@@ -1,9 +1,9 @@
-<div class="grid_10">
+<div class="grid_9">
 	<h1><%= @idea.name %></h1>
 	
 </div>
-<div class="grid_2">
-	<p>Versions: <%= @idea.num_commits %></p>
+<div class="grid_3">
+	<p id="version_text">This idea has <%= pluralize(@idea.num_commits, "version") %></p>
 </div>
 <div class="clear"></div>
 <div class="grid_12 dotted_line_small"></div>
@@ -47,7 +47,7 @@
 		<% end %>
 	<% end %>
 	
-	<p><%= link_to "Add collaborators", idea_collaborations_path(@idea) %> </p>
+	<p id="add_collaborator"><%= link_to "Edit collaborators", idea_collaborations_path(@idea) %> </p>
 	
 </div>
 <dic class="clear"></div>

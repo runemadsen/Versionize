@@ -71,6 +71,17 @@ div.item_link {
 	font-size: 22px;
 }
 
+p#version_text {
+	font-size: 18px;
+	font-weight: bold;
+	padding-top: 6px;
+	text-align: right;
+}
+
+p#add_collaborator {
+	text-align: right;
+}
+
 div#description 
 {
 	font-weight: bold;

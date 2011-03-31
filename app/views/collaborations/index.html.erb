@@ -18,6 +18,7 @@
 	
 </div>
 <div class="grid_4">
+	<p>
 	<%= form_for [@idea, @idea.collaborations.new] do %>
 		
 		<%= text_field_tag :email, "Email address", {
@@ -27,6 +28,7 @@
 		<%= submit_tag 'Add collaborator' %>
 
 	<% end %>
+	</p>
 	
 	<p class="tip">Each idea can have many collaborators. Add a collaborator to give the person access to viewing, editing and updating the idea.</p>	
 </div>
