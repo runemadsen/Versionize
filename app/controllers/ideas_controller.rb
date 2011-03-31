@@ -8,8 +8,8 @@ class IdeasController < ApplicationController
   end
   
   def show
-    @idea = @current_user.ideas.find_by_id params[:id]
-     
+    @idea = @current_user.published_idea params[:id]
+    
     unless @idea.nil?
       @version = 0
       @edit = true   
