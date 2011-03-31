@@ -32,4 +32,17 @@ class CollaborationsController < ApplicationController
     redirect_to idea_collaborations_path(params[:idea_id])
   end
   
+  def destroy
+    begin
+      idea = Idea.find params[:idea_id]
+      collaborator = idea.collaborations.find_by_id params[:id]
+      collaborator.destroy
+      flash[:notice] = "Collaborator was deleted"
+    rescue Exception => e
+      flash[:error] = "Something went wrong: #{e}"
+    end
+    
+    redirect_to idea_collaborations_path(idea)
+  end
+  
 end
