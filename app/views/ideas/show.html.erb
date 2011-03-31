@@ -27,7 +27,7 @@
 			</div>
 			<% end %>
 		<% else %>
-			<%= render :partial => content.class.name.pluralize + "/" + content.class.name.downcase, 
+			<%= render :partial => content.class.name.pluralize.downcase + "/" + content.class.name.downcase, 
 									:locals => { content.class.name.downcase.to_sym => content, :edit => @edit} %>
 		<% end %>
 	<% end %>
