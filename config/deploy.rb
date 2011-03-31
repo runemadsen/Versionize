@@ -35,6 +35,3 @@ namespace :deploy do
  end
 end
 
-# don't know if this works
-after "deploy", "deploy:cleanup"
-
