@@ -30,7 +30,7 @@ namespace :deploy do
  end
  task :symlink, :roles => :app do
    run <<-CMD
-     ln -nfs #{shared_path}/repos #{release_path}/repos
+     ln -nfs #{shared_path}/system/repos #{release_path}/repos
    CMD
  end
 end
