@@ -19,7 +19,7 @@ class ImagesController < ApplicationController
           {'key' => key},
           {'acl' => 'public-read'},
           ['content-length-range', 0, 10000000],
-          {'success_action_redirect' => 'http://localhost:3000' + upload_success_idea_images_path}
+          {'success_action_redirect' => request.host + upload_success_idea_images_path}
         ]
       }
     )
