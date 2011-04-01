@@ -404,11 +404,27 @@ _____________________________________________ */
 _____________________________________________ */
 
 #drop_box {
-	margin-top: 20px;
-	margin-bottom: 10px;
-	width: 97%;
-	height: 50px;
 	border-color: #c8c8c8;
 	border-style: dashed;
 	border-width: 2px;
+	padding: 10px;
+	margin-top: 20px;
+}
+
+#drop_box #placeholder {
+	width: 100%;
+	text-align: center;
+	color: #c8c8c8;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.drop_box_item {
+	background-color: #d25245;
+	height: 18px;
+	padding: 5px;
+	color: #FFF;
+	font-size: 13px;
+	line-height: 18px;
+	margin-bottom: 5px;
 }

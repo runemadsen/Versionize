@@ -13,8 +13,19 @@ $(document).ready(function()
 	
 	$("#drop_box").droppable({
 		drop: function(event, ui) {
-			alert(ui.draggable.attr("data-idea"));
-			alert(ui.draggable.attr("data-item"));
+			var t = ui.draggable.attr("data-item-type");
+			
+			if($(this).find('#placeholder'))
+			{
+				$(this).find('#placeholder').hide();
+			}
+			
+			//alert(ui.draggable.attr("data-idea"));
+			//alert(ui.draggable.attr("data-item"));
+			
+			$(this).append('<div class="drop_box_item">' + t + "</div>");
+			
+			// insert something into form
 		}
 	});
 });
