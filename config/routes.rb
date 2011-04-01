@@ -8,16 +8,30 @@ Versionize::Application.routes.draw do
     resources :invites
   end
   
+  # resources :ideas do
+  #     resources :collaborations
+  #     resources :links
+  #     resources :texts
+  #     resources :images do
+  #       collection do
+  #         get 'upload_succes', :as => 'upload_success'
+  #       end
+  #     end      
+  #   end
+  
   resources :ideas do
-    
     resources :collaborations
-    resources :links
-    resources :texts
-    resources :images do
-      collection do
-        get 'upload_succes', :as => 'upload_success'
+    idea_resources = lambda do
+      resources :links, :texts
+      resources :images do
+        collection do
+          get 'upload_succes', :as => 'upload_success'
+        end
       end
-    end  
+    end
+
+    resources :branches, :controller => :ideas, &idea_resources
+    idea_resources.call
   end
 
   match 'ideas/:id/versions/:version_id' => "ideas#show_version", :as => :show_version

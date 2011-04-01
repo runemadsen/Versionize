@@ -30,17 +30,21 @@ class Idea < ActiveRecord::Base
     index.commit(commit_msg, nil, Actor.new("Versionize User", user.email))
   end
   
-  def create_version(model, user, commit_msg, delete = false)
+  def create_branch(model, user, commit_msg, branch)
+    index = Index.new(self.repository)
+    index.add(model.generate_name, model.to_json)
+    index.commit(commit_msg, [self.repository.commits.first], Actor.new("Versionize User", user.email), nil, branch)
+  end
+  
+  def create_version(model, user, commit_msg, delete = false, branch = "master")
     index = Index.new(self.repository)
     index.read_tree('master')
-    
     if delete
       index.delete(model.generate_name)
     else
       index.add(model.generate_name, model.to_json)
     end
-    
-    index.commit(commit_msg, [self.repository.commits.first], Actor.new("Versionize User", user.email))
+    index.commit(commit_msg, [self.repository.commits.first], Actor.new("Versionize User", user.email), nil, branch)
   end
   
   def repository
@@ -53,7 +57,7 @@ class Idea < ActiveRecord::Base
   
   def version(version)
     
-    # Caching problem: 
+    # Problem:
     # Different versions operate on same array
     
     if @models != nil 

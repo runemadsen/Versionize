@@ -11,6 +11,18 @@
 
 <div class="grid_8">
 	
+	<%# if @idea.repository.heads.count > 1 %>
+	<div id="branch_box">
+		<ul>
+			<li>Branches:</li>
+			<% @idea.repository.heads.each do |head| %>
+				<li><%= link_to head.name, "#" %></li>
+			<% end %>
+		</ul>
+		<div class="clear"></div>
+	</div>
+	<%# end %>
+	
 	<% if @edit %>
 	<div id="media_box">
 		<ul>

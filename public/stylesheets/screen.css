@@ -170,6 +170,46 @@ _____________________________________________ */
 	background-color: #544848;
 }
 
+/* Branch box
+_____________________________________________ */
+
+#branch_box {
+	background-color: #f2f2f2;
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+
+#branch_box ul li {
+	height: 20px;
+	line-height: 20px;
+	float: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-right: 5px;
+}
+
+#branch_box ul li a {
+	color: #d25245;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#branch_box ul li:hover a {
+	color: #ffffff;
+}
+
+#branch_box ul li:hover {
+	background-color: #d25340;
+}
+
+#branch_box ul li {
+	color: #969696;
+}
+
+#branch_box ul li:first-child:hover {
+	background-color: #f2f2f2
+}
+
 /* Insert media box styling
 _____________________________________________ */
 
@@ -183,7 +223,7 @@ _____________________________________________ */
 	float: left;
 	padding-left: 10px;
 	padding-right: 10px;
-	margin-right: 5px;;
+	margin-right: 5px;
 }
 
 #media_box ul li a {
@@ -197,7 +237,7 @@ _____________________________________________ */
 }
 
 #media_box ul li:hover {
-	background-color: #d25340;
+	background-color: #6a7a92;
 }
 
 #media_box ul li {
@@ -420,7 +460,7 @@ _____________________________________________ */
 }
 
 .drop_box_item {
-	background-color: #d25245;
+	background-color: #6c6a69;
 	height: 18px;
 	padding: 5px;
 	color: #FFF;

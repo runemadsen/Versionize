@@ -4,10 +4,11 @@ class IdeasController < ApplicationController
   
   def index
     @ideas = @current_user.published_ideas
-    #@ideas = @current_user.published_ideas
   end
   
   def show
+    #raise Exception, params.inspect
+    # check for idea_id and id = branch id
     @idea = @current_user.published_idea params[:id]
     
     unless @idea.nil?
