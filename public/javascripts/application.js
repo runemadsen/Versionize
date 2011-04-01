@@ -19,6 +19,10 @@ $(document).ready(function()
 			var item_type = ui.draggable.attr("data-item-type");
 			var show_text = ui.draggable.parent().parent().text().substr(0, 30) + "...";
 			
+			if(item_type == "image") show_text = "Image";
+			
+			
+			
 			$(this).append('<div class="drop_box_item">' + show_text + "</div>");
 			
 			if($(this).find('#placeholder'))
