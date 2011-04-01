@@ -3,7 +3,7 @@
 	<%= image_tag link.url %>
 	<% if edit %>
 		<div class="edit_item">
-			<%= link_to "Delete", idea_link_path(@idea, link.id), :method => :delete, :class => "destroy" %>
+			<%= link_to "Delete", idea_link_path(@idea, link.id), :method => :delete, :confirm => "Are you sure you want to delete this image?", :class => "destroy" %>
 		</div>
 	<% end  %>
 <% else %>
@@ -11,7 +11,7 @@
 	<% if edit %>
 		<div class="edit_item">
 			<%= link_to "Edit", edit_idea_link_path(@idea, link.id) %>
-			<%= link_to "Delete", idea_link_path(@idea, link.id), :method => :delete, :class => "destroy" %>
+			<%= link_to "Delete", idea_link_path(@idea, link.id), :method => :delete, :confirm => "Are you sure you want to delete this link?", :class => "destroy" %>
 		</div>
 	<% end %>
 <% end %>

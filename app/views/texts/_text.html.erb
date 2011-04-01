@@ -4,7 +4,7 @@
 	<% if edit %>
 		<div class="edit_item">
 			<%= link_to "Edit", edit_idea_text_path(@idea, text.id) %>
-			<%= link_to "Delete", idea_text_path(@idea, text.id), :method => :delete, :class => "destroy" %>
+			<%= link_to "Delete", idea_text_path(@idea, text.id), :method => :delete, :confirm => "Are you sure you want to delete this text?", :class => "destroy" %>
 		</div>
 	<% end %>
 </div>

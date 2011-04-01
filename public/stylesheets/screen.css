@@ -59,13 +59,27 @@ ul.idea_list li a.collaborator {
 _____________________________________________ */
 
 div.idea_item {
-	padding-top: 10px;
+	padding-top: 15px;
 	padding-bottom: 10px;
-	margin-bottom: 10px;
 	line-height: 16px;
 	background: url('../images/dot_small.jpg');
 	background-repeat: repeat-x;
 	background-position: bottom left;
+}
+
+div.edit_item {
+	font-weight: normal;
+	text-align: right;
+	font-size: 12px;
+}
+
+div.edit_item a {
+	color: #909090;
+	text-decoration: none;
+}
+
+div.edit_item a.destroy {
+	color: #d25245;
 }
 
 div.item_link {
@@ -87,23 +101,9 @@ div#description
 {
 	font-weight: bold;
 	line-height: 22px;
-	margin-bottom: 10px;
 }
 
-div.edit_item {
-	font-weight: normal;
-	text-align: right;
-	font-size: 12px;
-}
 
-div.edit_item a {
-	color: #909090;
-	text-decoration: none;
-}
-
-div.edit_item a.destroy {
-	color: #d25245;
-}
 
 /* Idea version boxes
 _____________________________________________ */
@@ -175,7 +175,6 @@ _____________________________________________ */
 
 #media_box {
 	background-color: #f2f2f2;
-	margin-bottom: 10px;
 }
 
 #media_box ul li {
