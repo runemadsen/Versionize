@@ -13,17 +13,18 @@ $(document).ready(function()
 	
 	$("#drop_box").droppable({
 		drop: function(event, ui) {
-			var t = ui.draggable.attr("data-item-type");
+			
+			var idea_id = ui.draggable.attr("data-idea");
+			var item_id = ui.draggable.attr("data-item");
+			var item_type = ui.draggable.attr("data-item-type");
+			var show_text = ui.draggable.parent().parent().text().substr(0, 30) + "...";
+			
+			$(this).append('<div class="drop_box_item">' + show_text + "</div>");
 			
 			if($(this).find('#placeholder'))
 			{
 				$(this).find('#placeholder').hide();
 			}
-			
-			//alert(ui.draggable.attr("data-idea"));
-			//alert(ui.draggable.attr("data-item"));
-			
-			$(this).append('<div class="drop_box_item">' + t + "</div>");
 			
 			// insert something into form
 		}
