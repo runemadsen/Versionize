@@ -7,28 +7,10 @@ class IdeasController < ApplicationController
   end
   
   def show
-    
-    # no branch specified
-    if params[:idea_id].nil? 
-      @idea = current_user.published_idea params[:id]
-      @branch = 0
-    else # branch specified
-      @idea = current_user.published_idea params[:idea_id]
-      @branch = params[:id]
-    end
-    
+    @idea = current_user.published_idea params[:id]
     unless @idea.nil?
       @version = 0
       @edit = true
-      unless params[:version_id].nil?
-        if(params[:version_id].to_i <= @idea.num_commits)
-          @edit = false
-          @version = params[:version_id]
-        else
-          flash[:error] = "Can't find version number #{@version}"
-          redirect_to idea_path(@idea)
-        end
-      end
     else
       flash[:error] = "You do not have access to this idea"
       redirect_to ideas_path

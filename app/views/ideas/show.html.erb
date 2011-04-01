@@ -10,7 +10,8 @@
 <div class="grid_12 dotted_line_small"></div>
 
 <div class="grid_8">
-	
+
+	Current branch: <%= @branch %>
 	<%# if @idea.repository.heads.count > 1 %>
 	<div id="branch_box">
 		<ul>
@@ -56,13 +57,15 @@
 		<% if i == 0 %>
 			<%= link_to v_num, idea_path(@idea), :class => "version_box color#{v_num % 9}" %>
 		<% else %>
-			<%= link_to v_num, show_version_path(@idea, v_num), :class => "version_box color#{v_num % 9}" %>
+			<%= link_to v_num, idea_version_path(@idea, v_num), :class => "version_box color#{v_num % 9}" %>
 		<% end %>
 	<% end %>
 	
-	<!-- <div id="drop_box">
-			<div id="placeholder">Drop Idea Items Here</div>
-		</div> -->
+	<div id="drop_box">
+		<div id="placeholder">Drop Idea Items Here</div>
+	</div>
+	
+	<% form_tag %>
 	
 	<p id="add_collaborator"><%= link_to "Edit collaborators", idea_collaborations_path(@idea) %><br />
 		<%= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea?") if @idea.is_owner? @current_user %>
