@@ -5,6 +5,7 @@
 <div class="grid_3">
 	<p id="version_text">This idea has <%= pluralize(@idea.num_commits, "version") %></p>
 </div>
+
 <div class="clear"></div>
 <div class="grid_12 dotted_line_small"></div>
 
@@ -47,9 +48,15 @@
 		<% end %>
 	<% end %>
 	
+	<div id="drop_box">
+		&nbsp;
+	</div>
+	
 	<p id="add_collaborator"><%= link_to "Edit collaborators", idea_collaborations_path(@idea) %><br />
 		<%= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea?") if @idea.is_owner? @current_user %>
 	</p>
 	
 </div>
-<dic class="clear"></div>
+<div class="clear"></div>
+	
+	

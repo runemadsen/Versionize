@@ -1,14 +1,20 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-
-// function remove_fields(link) 
-// {
-//   $(link).prev("input[type=hidden]").val("1");
-//   $(link).closest(".fields").hide();
-// }
-
-function add_formfield(divname, content) 
+function add_formfield(divname, content)
 {
 	$(divname).append(content);
 	return false;
 }
+
+$(document).ready(function() 
+{
+	$(".drag_item").draggable({  
+		revert: true,
+		revertDuration: 0
+	});
+	
+	$("#drop_box").droppable({
+		drop: function(event, ui) {
+			alert(ui.draggable.attr("data-idea"));
+			alert(ui.draggable.attr("data-item"));
+		}
+	});
+});

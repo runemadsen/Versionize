@@ -399,3 +399,16 @@ _____________________________________________ */
 	background-repeat: repeat-x;
 	margin-bottom: 20px;
 }
+
+/* Drag / Drop box
+_____________________________________________ */
+
+#drop_box {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	width: 97%;
+	height: 50px;
+	border-color: #c8c8c8;
+	border-style: dashed;
+	border-width: 2px;
+}
