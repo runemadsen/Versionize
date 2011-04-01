@@ -2,6 +2,7 @@ class VersionsController < ApplicationController
   
   def show
     @idea = current_user.published_idea params[:idea_id]
+    @branch = params[:branch_id]
     unless @idea.nil?      
       if(params[:id].to_i <= @idea.num_commits)
         @edit = false

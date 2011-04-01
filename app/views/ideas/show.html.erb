@@ -51,14 +51,8 @@
 <div class="grid_3">
 
 	<% @idea.repository.commits.each_with_index do |commit, i| %>
-		<%
-			v_num = @idea.num_commits - i
-		%>
-		<% if i == 0 %>
-			<%= link_to v_num, idea_path(@idea), :class => "version_box color#{v_num % 9}" %>
-		<% else %>
-			<%= link_to v_num, idea_version_path(@idea, v_num), :class => "version_box color#{v_num % 9}" %>
-		<% end %>
+		<% v_num = @idea.num_commits - i %>
+		<%= link_to v_num, link_to_version(@idea, @branch, v_num), :class => "version_box color#{v_num % 9}" %>
 	<% end %>
 	
 	<div id="drop_box">

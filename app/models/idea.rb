@@ -79,7 +79,8 @@ class Idea < ActiveRecord::Base
     @models.sort  {|x,y| y.order <=> x.order }
   end
   
-  def num_commits
+  def num_commits(branch = "master")
+    # use branch name to get number of commits in that branch
     @commit_num ||= self.repository.commit_count
   end
   
