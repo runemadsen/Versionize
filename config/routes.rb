@@ -34,7 +34,7 @@ Versionize::Application.routes.draw do
     idea_resources.call
   end
 
-  match 'ideas/:id/versions/:version_id' => "ideas#show_version", :as => :show_version
+  match 'ideas/:id/versions/:version_id' => "ideas#show", :as => :show_version
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
   

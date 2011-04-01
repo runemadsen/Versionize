@@ -60,9 +60,9 @@
 		<% end %>
 	<% end %>
 	
-	<div id="drop_box">
-		<div id="placeholder">Drop Idea Items Here</div>
-	</div>
+	<!-- <div id="drop_box">
+			<div id="placeholder">Drop Idea Items Here</div>
+		</div> -->
 	
 	<p id="add_collaborator"><%= link_to "Edit collaborators", idea_collaborations_path(@idea) %><br />
 		<%= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea?") if @idea.is_owner? @current_user %>
