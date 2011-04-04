@@ -9,7 +9,7 @@ describe LinksController do
     UserSession.create(users(:rune))
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
-    @idea.create_repo(Text.new(:body => @desc), users(:rune), "Init commit")
+    @idea.create_repo
   end
    
   after do
@@ -28,14 +28,7 @@ describe LinksController do
     it "should save link in repository and redirect" do
       Idea.should_receive(:find).with("37").and_return(@idea)
       post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com" } }
-      assigns[:idea].repository.tree.contents.first.data.should == assigns[:link].to_json
       response.should redirect_to(idea_path(@idea))
-    end
-    
-    it "should assign link order of 1" do
-      Idea.should_receive(:find).with("37").and_return(@idea)
-      post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com" } }
-      assigns[:link].order.should == 1
     end
   end
   

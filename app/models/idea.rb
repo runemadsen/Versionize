@@ -8,6 +8,12 @@ class Idea < ActiveRecord::Base
   REPO_PATH = 'repos/repo'
   REPO_EXT = '.git'
   
+  def after_initialize
+    if self.repo.nil?
+      self.repo = REPO_PATH + (Idea.count + 1).to_s + REPO_EXT
+    end
+  end
+  
   def is_owner? user
     self.collaborations.each do |c|
       if user.id == c.user_id && c.owner
@@ -21,34 +27,27 @@ class Idea < ActiveRecord::Base
     self.repository.tree.contents.count
   end
   
-  def create_repo(model, user, commit_msg)
-    self.repo = REPO_PATH + (Idea.count + 1).to_s + REPO_EXT
+  def create_repo
     @repository = Repo.init_bare(self.repo)
-    model.order = 9999999999
-    index = Index.new(self.repository)
-    index.add(model.generate_name, model.to_json)
-    index.commit(commit_msg, nil, Actor.new("Versionize User", user.email))
-  end
-  
-  def create_branch(model, user, commit_msg, branch)
-    index = Index.new(self.repository)
-    index.add(model.generate_name, model.to_json)
-    index.commit(commit_msg, [self.repository.commits.first], Actor.new("Versionize User", user.email), nil, branch)
   end
   
   def create_version(model, user, commit_msg, delete = false, branch = "master")
     index = Index.new(self.repository)
-    index.read_tree('master')
+    index.read_tree(branch)
     if delete
       index.delete(model.generate_name)
     else
       index.add(model.generate_name, model.to_json)
     end
-    index.commit(commit_msg, [self.repository.commits.first], Actor.new("Versionize User", user.email), nil, branch)
+    index.commit(commit_msg, self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, branch)
   end
   
   def repository
     @repository ||= Repo.new self.repo
+  end
+  
+  def num_commits(branch = "master")
+    self.repository.commit_count(branch)
   end
   
   def file(file_name)
@@ -77,11 +76,6 @@ class Idea < ActiveRecord::Base
     end
     
     @models.sort  {|x,y| y.order <=> x.order }
-  end
-  
-  def num_commits(branch = "master")
-    # use branch name to get number of commits in that branch
-    @commit_num ||= self.repository.commit_count
   end
   
   private

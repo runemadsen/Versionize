@@ -17,14 +17,7 @@ describe IdeasController do
 
       before do
         UserSession.create(users(:rune))
-        @desc = "This is my RSpec idea description"
-        @desc_updated = "This is my updated RSpec description"
         @idea = ideas(:myidea)
-        @repo = Repo.init_bare @idea.repo
-      end
-    
-      after do
-         FileUtils.rm_rf 'repos/testrepo.git'
       end
     
       describe "GET index" do
@@ -36,26 +29,12 @@ describe IdeasController do
     
       describe "POST create" do
       
-         before do
-            Repo.should_receive(:init_bare).with(Idea::REPO_PATH + (Idea.count + 1).to_s + Idea::REPO_EXT).and_return(@repo)
-         end
-      
-         it "should create repo and save idea" do
-            post :create, :idea => {:name => "My RSPEC Idea"}, :description => @desc
-            assigns[:idea].repository.tree.contents.first.name.split('_')[0].should == 'text'
-            assigns[:idea].repository.tree.contents.first.data.should == assigns[:text].to_json
-            response.should redirect_to(idea_path(assigns[:idea]))
-         end
-      
-         it "should create actor from current user" do
-            post :create, { :idea => {:name => "My RSPEC Idea"}, :description => @desc}
-            assigns[:idea].repository.commits.first.committer.email.should == assigns[:current_user].email
-         end  
-         
-         it "should save order 0 in description" do
-             post :create, { :idea => {:name => "My RSPEC Idea"}, :description => @desc}
-             assigns[:text].order.should == 9999999999
-          end
+        it "should create repo and save idea" do
+          Idea.should_receive(:new).once.and_return(@idea)
+          post :create, :idea => {:name => "My RSPEC Idea"}, :description => @desc
+          response.should redirect_to(idea_path(assigns[:idea]))
+        end
+        
       end
     
       describe "GET show" do

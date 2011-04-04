@@ -9,7 +9,7 @@ describe ImagesController do
     UserSession.create(users(:rune))
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
-    @idea.create_repo(Text.new(:body => @desc), users(:rune), "Init commit")
+    @idea.create_repo
   end
 
   after do
