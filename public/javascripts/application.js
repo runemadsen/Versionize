@@ -40,4 +40,15 @@ $(document).ready(function()
 	    insert: '#countdown'
 	});
 	
+	$('.tip_field').focus(function() {
+		$(".tip_highlight").removeClass("tip_highlight");
+	  var tip_id = $(this).attr('data-tip-id');
+		var div = $("#" + tip_id);
+		div.addClass("tip_highlight");
+	});
+	
+	$('.tip_field').focusout(function() {
+		$(".tip_highlight").removeClass("tip_highlight");
+	});
+	
 });

@@ -15,7 +15,7 @@
             	var $obj = $(this);
     					var target = $(options.insert);
 
-              target.append('<span id=\"' + this.id + '_counter\">' + (options.goal - $($obj).val().length) + '</span>');
+              target.append('<span id=\"' + this.id + '_counter\">' + options.goal + '</span>');
   
               var $currentCount = $("#" + this.id + "_counter");
 

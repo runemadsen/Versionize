@@ -97,8 +97,6 @@ div#description
 	line-height: 22px;
 }
 
-
-
 /* Idea version boxes
 _____________________________________________ */
 
@@ -168,14 +166,36 @@ _____________________________________________ */
 _____________________________________________ */
 
 div.tip {
+	background-color: #f5f5f5;
 	padding: 15px;
-	color: #2f2f2f;
+	color: #c9c9c9;
 	font-size: 16px;
-	line-height: 20px;
+	line-height: 22px;
 	margin-bottom: 10px;
 }
 
-/* Colors
+div.tip_highlight {
+	color: #FFF;
+	background-color: #3e6d35;
+}
+
+/* Begin idea
+_____________________________________________ */
+
+div.tip_highlight #countdown {
+	color: #dcba3c;
+}
+
+p#save_text {
+	margin-top: 0;
+	padding: 10px;
+	font-size: 13px;
+	color: #828a97;
+	background-color: #e4ecf9;
+}
+
+
+/* Background Colors
 _____________________________________________ */
 
 .background_color1 {
@@ -212,6 +232,45 @@ _____________________________________________ */
 
 .background_color9 {
 	background-color: #544848;
+}
+
+/* Font Colors
+_____________________________________________ */
+
+.font_color1 {
+	color: #d25245;
+}
+
+.font_color2 {
+	color: #dcb954;
+}
+
+.font_color3 {
+	color: #6c6a69;
+}
+
+.font_color4 {
+	color: #6a7a92;
+}
+
+.font_color5 {
+	color: #3e6d35;
+}
+
+.font_color6 {
+	color: #3f3333;
+}
+
+.font_color7 {
+	color: #282828;
+}
+
+.font_color8 {
+	color: #c5546d;
+}
+
+.font_color9 {
+	color: #544848;
 }
 
 /* Branch box
@@ -515,8 +574,4 @@ _____________________________________________ */
 	font-size: 13px;
 	line-height: 18px;
 	margin-bottom: 5px;
-}
-
-#description_field_counter {
-	font-size: 26px;
 }
