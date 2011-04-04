@@ -14,20 +14,16 @@
 <%= text_area_tag :description, "Short abstract", :id => "description_field", :"data-tip-id" => "tip_description", :class => 'input_box input_text tip_field',
  		:onFocus => "if(this.value==this.defaultValue) this.value='';", 
 		:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
-		
-<p id="save_text">Once you've saved these basic details, you can start adding more content to your idea. We will even save versions along the way!</p>
 
-<p><%= submit_tag 'Create idea' %></p>
+<p><%= submit_tag 'Save basic details' %></p>
 
 <% end %>
 
 </div>
 <div class="grid_4">
-	<div class="tip" id="tip_name">
-		Choose a name for your idea
-	</div>
 	<div class="tip" id="tip_description">
-		Write a short text describing the idea in less than <span id="countdown"></span> characters. Don't worry, this can always be changed later. 
+		Write a short text describing the idea in less than <span id="countdown"></span> characters. Don't worry, this can always be changed later! 
 	</div>
+	<div class="tip" id="next_tip">You will add more content in the next step!</div>
 </div>
 <div class="clear"></div>
