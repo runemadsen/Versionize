@@ -61,7 +61,7 @@
 	
 	<% form_tag %>
 	
-	<p id="add_collaborator"><%= link_to "Edit collaborators", idea_collaborations_path(@idea) %><br />
+	<p id="add_collaborator"><%= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators"), idea_collaborations_path(@idea) %><br />
 		<%= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea?") if @idea.is_owner? @current_user %>
 	</p>
 	

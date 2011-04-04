@@ -33,4 +33,11 @@ $(document).ready(function()
 			// insert something into form
 		}
 	});
+	
+	// word count on description
+	$("#description_field").counter({
+	    goal: 500,
+	    insert: '#countdown'
+	});
+	
 });

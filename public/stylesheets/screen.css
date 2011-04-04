@@ -40,12 +40,6 @@ h2 {
 	margin-bottom: 12px;
 }
 
-p.tip {
-	color: #6a7a92;
-	font-size: 13px;
-	margin: 0;
-}
-
 ul.idea_list li {
 	font-size: 24px;
 	margin-bottom: 15px;
@@ -170,6 +164,56 @@ _____________________________________________ */
 	background-color: #544848;
 }
 
+/* Tip
+_____________________________________________ */
+
+div.tip {
+	padding: 15px;
+	color: #2f2f2f;
+	font-size: 16px;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+
+/* Colors
+_____________________________________________ */
+
+.background_color1 {
+	background-color: #d25245;
+}
+
+.background_color2 {
+	background-color: #dcb954;
+}
+
+.background_color3 {
+	background-color: #6c6a69;
+}
+
+.background_color4 {
+	background-color: #6a7a92;
+}
+
+.background_color5 {
+	background-color: #3e6d35;
+}
+
+.background_color6 {
+	background-color: #3f3333;
+}
+
+.background_color7 {
+	background-color: #282828;
+}
+
+.background_color8 {
+	background-color: #c5546d;
+}
+
+.background_color9 {
+	background-color: #544848;
+}
+
 /* Branch box
 _____________________________________________ */
 
@@ -276,6 +320,10 @@ _____________________________________________ */
 	font-size: 15px;
 	color: #323232;
 	margin: 12px 0px;
+}
+
+#description_field {
+	height: 120px;
 }
 
 .input_link {
@@ -467,4 +515,8 @@ _____________________________________________ */
 	font-size: 13px;
 	line-height: 18px;
 	margin-bottom: 5px;
+}
+
+#description_field_counter {
+	font-size: 26px;
 }
