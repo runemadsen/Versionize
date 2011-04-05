@@ -14,6 +14,10 @@ class Idea < ActiveRecord::Base
     end
   end
   
+  def repository
+    @repository ||= Repo.new self.repo
+  end
+  
   def is_owner? user
     self.collaborations.each do |c|
       if user.id == c.user_id && c.owner
@@ -23,8 +27,8 @@ class Idea < ActiveRecord::Base
     false
   end
     
-  def next_order
-    self.repository.tree.contents.count
+  def next_order(branch = "master")
+    self.repository.tree(branch).contents.count
   end
   
   def create_repo
@@ -42,26 +46,17 @@ class Idea < ActiveRecord::Base
     index.commit(commit_msg, self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, branch)
   end
   
-  def repository
-    @repository ||= Repo.new self.repo
-  end
-  
   def num_commits(branch = "master")
     self.repository.commit_count(branch)
   end
   
-  def file(file_name)
-    blob_to_model(self.repository.tree/file_name)
+  def file(file_name, branch = "master")
+    blob_to_model(self.repository.tree(branch)/file_name)
   end
   
   def version(version)
     
-    # Problem:
-    # Different versions operate on same array
-    
-    if @models != nil 
-      return @models 
-    end
+    return @models unless @models.nil?
     
     @models = []
     

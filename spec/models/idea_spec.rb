@@ -15,32 +15,55 @@ describe Idea do
     FileUtils.rm_rf @idea.repo
   end
   
-  it "should generate repo name on initialize" do
-    idea = Idea.new
-    idea.repo.should_not be_nil
+  describe "on instantiation" do
+    it "should generate repo name" do
+      idea = Idea.new
+      idea.repo.should_not be_nil
+    end
   end
   
-  it "should save model on master branch without branch specified" do
-    @text = Text.new :body => "This is some text", :order => 1
-    @idea.create_version(@text, users(:rune), "Save text")
-    (@idea.repository.tree/@text.generate_name).data.should == @text.to_json
-    @idea.repository.commit_count("master").should == 1
-  end  
-  
-  it "should save model on master branch with master specified" do
-    @text = Text.new :body => "This is some text", :order => 1
-    @idea.create_version(@text, users(:rune), "Save text", false, "master")
-    (@idea.repository.tree/@text.generate_name).data.should == @text.to_json
-    @idea.repository.commit_count("master").should == 1
-  end  
-  
-  it "should save model on newbranch" do
-    @text = Text.new :body => "This is some text", :order => 1
-    @idea.create_version(@text, users(:rune), "Save text", false, "newbranch")
-    (@idea.repository.tree("newbranch")/@text.generate_name).data.should == @text.to_json
-    @idea.repository.commit_count("newbranch").should == 1
-    @idea.repository.commit_count("master").should == 0
+  describe "create version" do
+    it "should save model on master branch without branch specified" do
+      @text = Text.new :body => "This is some text", :order => 1
+      @idea.create_version(@text, users(:rune), "Save text")
+      @idea.file(@text.generate_name).body.should == @text.body
+      @idea.repository.commit_count("master").should == 1
+    end  
+
+    it "should save model on master branch with master specified" do
+      @text = Text.new :body => "This is some text", :order => 1
+      @idea.create_version(@text, users(:rune), "Save text", false, "master")
+      @idea.file(@text.generate_name).body.should == @text.body
+      @idea.repository.commit_count("master").should == 1
+    end  
+
+    it "should save model on newbranch" do
+      @text = Text.new :body => "This is some text", :order => 1
+      @idea.create_version(@text, users(:rune), "Save text", false, "newbranch")
+      @idea.file(@text.generate_name, "newbranch").body.should == @text.body
+      @idea.repository.commit_count("newbranch").should == 1
+      @idea.repository.commit_count("master").should == 0
+    end
   end
   
+  describe "version" do
+    it "should return version depending on specified branch" do
+      @text = Text.new :body => "Text for master branch", :order => 1
+      @idea.create_version(@text, users(:rune), "Save text")
+      @text.body = "Text for the newbranch branch"
+      @idea.create_version(@text, users(:rune), "Save text", false, "newbranch")
+      @idea.file(@text.generate_name).body.should == "Text for master branch"
+      @idea.file(@text.generate_name, "newbranch").body.should == "Text for the newbranch branch"
+    end
+  end
+  
+  describe "next order" do
+    it "should return next order depending on branch" do
+      @text = Text.new :body => "Text for master branch", :order => 1
+      @idea.create_version(@text, users(:rune), "Save text")
+      @idea.next_order.should == 1
+      @idea.next_order("newbranch").should == 0
+    end
+  end
   
 end
