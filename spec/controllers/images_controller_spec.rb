@@ -24,14 +24,5 @@ describe ImagesController do
       response.should be_success
     end
   end
-
-  describe "POST create" do
-    it "should save image on amazon and redirect" do
-      pending("Image upload not tested")
-    end
-
-    it "should assign image order of 1" do
-      pending("Image upload not tested")
-    end
-  end
+  
 end

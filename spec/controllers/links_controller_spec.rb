@@ -32,17 +32,4 @@ describe LinksController do
     end
   end
   
-  describe "GET edit" do
-    
-    it "should grab the link from the repo" do
-      pending "Missing test"
-    end
-  end
-  
-  describe "PUT update" do
-    it "should commit the updated text using same filename" do
-      pending "Missing test"
-    end
-  end
-  
 end
