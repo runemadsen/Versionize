@@ -1,7 +1,8 @@
 class TextsController < ApplicationController
   
-  before_filter :require_user
   include ApplicationHelper
+  before_filter :require_user
+  before_filter :find_branch, :only => [:create, :update, :destroy]
 
   def new
    @idea = Idea.find(params[:idea_id])
@@ -17,40 +18,40 @@ class TextsController < ApplicationController
     begin
       @idea = Idea.find(params[:idea_id])
       @text = Text.new params[:text]
-      @text.order = @idea.next_order
-      @idea.create_version(@text, @current_user, "Save text", false, params[:branch_id].nil? ? "master" : params[:branch_id])
+      @text.order = @idea.next_order(@branch)
+      @idea.create_version(@text, @current_user, "Save text", false, @branch)
       flash[:notice] = "Saved Text"
-      redirect_to idea_branch_or_master_path(@idea, params)
+      redirect_to idea_branch_or_master_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = "There was a problem! #{e}"
-      redirect_to new_idea_branch_or_master_path(@idea, params)
+      redirect_to new_text_idea_branch_or_master_path(@idea, @branch)
     end
   end
   
   def update
     begin
       @idea = Idea.find(params[:idea_id])
-      @text = @idea.file(Text::name_from_uuid(params[:id]))
+      @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
       @text.update(params[:text])
-      @idea.create_version(@text, @current_user, "Updated text")
+      @idea.create_version(@text, @current_user, "Updated text", false, @branch)
       flash[:notice] = "Saved Text"
-      redirect_to idea_path(@idea)
+      redirect_to idea_branch_or_master_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = "There was a problem! #{e}"
-      redirect_to new_idea_text_path(@idea)
+      redirect_to edit_text_branch_or_master_path(@idea, @branch, @text)
     end
   end
   
   def destroy
     begin
       @idea = Idea.find(params[:idea_id])
-      @text = @idea.file(Text::name_from_uuid(params[:id]))
-      @idea.create_version(@text, @current_user, "delete text", true)
+      @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
+      @idea.create_version(@text, @current_user, "delete text", true, @branch)
       flash[:notice] = "Removed Text"
-      redirect_to idea_path(@idea)
+      redirect_to idea_branch_or_master_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = "There was a problem! #{e}"
-      redirect_to idea_path(@idea)
+      redirect_to idea_branch_or_master_path(@idea, @branch)
     end
   end
   

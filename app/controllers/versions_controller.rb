@@ -1,5 +1,7 @@
 class VersionsController < ApplicationController
   
+  before_filter :require_user
+  
   def show
     @idea = current_user.published_idea params[:idea_id]
     @branch = params[:branch_id]

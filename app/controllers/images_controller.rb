@@ -1,6 +1,8 @@
 class ImagesController < ApplicationController
   
+  include ApplicationHelper
   before_filter :require_user
+  before_filter :find_branch, :only => [:create, :update, :destroy]
   
   def new
     
@@ -30,27 +32,27 @@ class ImagesController < ApplicationController
     begin
       @idea = Idea.find(params[:idea_id])
       @image = Image.new(:key => params[:key])
-      @image.order = @idea.next_order
-      @idea.create_version(@image, @current_user, "Save Image")
+      @image.order = @idea.next_order(@branch)
+      @idea.create_version(@image, @current_user, "Save Image", false, @branch)
       flash[:notice] = "Saved image"
-      redirect_to idea_path(@idea)
+      redirect_to idea_branch_or_master_path(@idea)
     rescue Exception => e 
       flash[:error] = "There was a problem! #{e}"
-      redirect_to new_idea_image_path(@idea)
+      redirect_to new_image_idea_branch_or_master_path(@idea)
     end
   end
   
   def destroy
     begin
       @idea = Idea.find(params[:idea_id])
-      @image = @idea.file(Image::name_from_uuid(params[:id]))
-      @idea.create_version(@image, @current_user, "delete image", true)
+      @image = @idea.file(Image::name_from_uuid(params[:id]), @branch)
+      @idea.create_version(@image, @current_user, "delete image", true, @branch)
       flash[:notice] = "Removed Image"
-      redirect_to idea_path(@idea)
+      redirect_to idea_branch_or_master_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = "There was a problem! #{e}"
-      redirect_to idea_path(@idea)
+      redirect_to idea_branch_or_master_path(@idea, @branch)
     end
   end
-  
+
 end

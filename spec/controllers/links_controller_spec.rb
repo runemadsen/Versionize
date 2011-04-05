@@ -30,6 +30,12 @@ describe LinksController do
       post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com" } }
       response.should redirect_to(idea_path(@idea))
     end
+    
+    it "should save link in repository on newbranch and redirect" do
+      Idea.should_receive(:find).with("37").and_return(@idea)
+      post :create, { :idea_id => "37", :branch_id => "newbranch", :link => { :url => "www.runemadsen.com" } }
+      response.should redirect_to(idea_branch_path(@idea, "newbranch"))
+    end
   end
   
 end

@@ -36,38 +36,5 @@ describe IdeasController do
         end
         
       end
-    
-      describe "GET show" do
-         it "should show basic idea details" do
-            #controller.current_user.should_receive(:published_idea).with("37").and_return(@idea)
-            #assigns[:current_user].should_receive(:published_idea).with("37").and_return(@idea)
-            #get :show, :id => "37"
-            #controller.current_user.should_receive(:published_idea).with("37").at_least(:once)
-            #assigns[:current_user].should_receive(:published_idea).at_least(:once)
-            #assigns[:current_user].should_not be_nil
-            #assigns[:idea].current_version.should_not be_nil
-            #response.should be_success
-         end
-      end
-      
-      describe "GET show versions" do
-         
-        before do
-          @link = Link.new(:url => "www.runemadsen.com")
-          @link.order = @idea.next_order
-          @idea.create_version(@link, users(:rune), "Save link")
-          @link.url = "www.politiken.dk"
-          @idea.create_version(@link, users(:rune), "Save link")
-          @link.url = "www.facebook.com"
-          @idea.create_version(@link, users(:rune), "Save link")
-        end
-         
-        it "should work in order" do
-          #Idea.should_receive(:find).with("37").and_return(@idea)
-          #get "show_version", :id => "37", :version_id => "1"
-          #assigns[:idea].version(1).should_not be_nil
-          #response.should be_success
-        end
-      end
   end
 end
