@@ -55,11 +55,7 @@ _____________________________________________ */
 div.idea_item {
 	padding-bottom: 10px;
 	line-height: 16px;
-	border-bottom: 1px solid #f0f0f0;
 	margin-bottom: 15px;
-	/*background: url('../images/dot_small.jpg');
-	background-repeat: repeat-x;
-	background-position: bottom left;*/
 }
 
 div.edit_item {
