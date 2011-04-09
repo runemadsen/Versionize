@@ -6,7 +6,6 @@ function add_formfield(divname, content)
 
 $(document).ready(function() 
 {
-	// remove edit boxes
 	$('.idea_item .edit_item').hide();
 	
 	$('.idea_item').hover(function() {
@@ -14,7 +13,6 @@ $(document).ready(function()
 	}, function() {
 		$(this).find('.edit_item').hide();
 	});
-	
 	
 	$(".drag_item").draggable({  
 		revert: true,
@@ -31,16 +29,12 @@ $(document).ready(function()
 			
 			if(item_type == "image") show_text = "Image";
 			
-			
-			
 			$(this).append('<div class="drop_box_item">' + show_text + "</div>");
 			
 			if($(this).find('#placeholder'))
 			{
 				$(this).find('#placeholder').hide();
 			}
-			
-			// insert something into form
 		}
 	});
 	
