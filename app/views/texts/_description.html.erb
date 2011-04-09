@@ -1,12 +1,15 @@
 <div id="description" class="idea_item">
-
-	<%= h(text.body).gsub(/\n/, '<br/>') %>
 	
-	<% if edit %>
-		<div class="edit_item">
-			<%= image_tag "draggable.jpg", :class => "drag_item", :"data-idea" => @idea.id, :"data-item" => text.id, :"data-item-type" => "text" %>
-			<%= link_to "Edit", edit_idea_text_path(@idea, text.id) %>
-		</div>
-	<% end %>
-	
+	<div class="grid_8 alpha">
+		<%= h(text.body).gsub(/\n/, '<br/>') %>
+	</div>
+	<div class="grid_1 omega">
+		<% if edit %>
+			<div class="edit_item">
+				<%= image_tag "draggable.jpg", :class => "drag_item", :"data-idea" => @idea.id, :"data-item" => text.id, :"data-item-type" => "text" %>
+				<%= link_to "Edit", edit_idea_text_path(@idea, text.id) %>
+			</div>
+		<% end %>
+	</div>
+	<div class="clear"></div>
 </div>

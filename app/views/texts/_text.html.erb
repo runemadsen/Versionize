@@ -1,18 +1,21 @@
 <div class="idea_item">
-	<div class="idea_item_icon_container">
-		<div class="idea_item_icon background_color2">&nbsp;</div>
-	</div>
-	<div class="idea_item_main">
-	<%= h(text.body).gsub(/\n/, '<br/>') %>
-	
-	
-	<% if edit %>
-		<div class="edit_item">
-			<%= image_tag "draggable.jpg", :class => "drag_item", :"data-idea" => @idea.id, :"data-item" => text.id, :"data-item-type" => "text" %>
-			<%= link_to "Edit", edit_idea_text_path(@idea, text.id) %>
-			<%= link_to "Delete", idea_text_path(@idea, text.id), :method => :delete, :confirm => "Are you sure you want to delete this text?", :class => "destroy" %>
+	<div class="grid_8 alpha">
+		<div class="idea_item_icon_container">
+			<div class="idea_item_icon background_color2">&nbsp;</div>
 		</div>
-	<% end %>
+		<div class="idea_item_main">
+			<%= h(text.body).gsub(/\n/, '<br/>') %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="grid_1 omega">
+		<% if edit %>
+			<div class="edit_item">
+				<%= image_tag "draggable.jpg", :class => "drag_item", :"data-idea" => @idea.id, :"data-item" => text.id, :"data-item-type" => "text" %>
+				<%= link_to "Edit", edit_idea_text_path(@idea, text.id) %>
+				<%= link_to "Delete", idea_text_path(@idea, text.id), :method => :delete, :confirm => "Are you sure you want to delete this text?", :class => "destroy" %>
+			</div>
+		<% end %>
 	</div>
 	<div class="clear"></div>
 </div>
