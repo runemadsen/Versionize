@@ -11,19 +11,7 @@
 
 <div class="grid_8">
 
-	<%# if @idea.repository.heads.count > 1 %>
-	<div id="branch_box">
-		<ul>
-			<li>Branches:</li>
-			<% @idea.repository.heads.each do |head| %>
-				<li><%= link_to head.name, "#" %></li>
-			<% end %>
-		</ul>
-		<div class="clear"></div>
-	</div>
-	<%# end %>
-	
-	<% if @edit %>
+	<% if false %>
 	<div id="media_box">
 		<ul>
 			<li>Insert</li>
@@ -48,6 +36,18 @@
 </div>
 <div class="grid_1">&nbsp;</div>
 <div class="grid_3">
+	
+	<%# if @idea.repository.heads.count > 1 %>
+	<div id="branch_box">
+		<ul>
+			<li>Branches:</li>
+			<% @idea.repository.heads.each do |head| %>
+				<li><%= link_to head.name, "#" %></li>
+			<% end %>
+		</ul>
+		<div class="clear"></div>
+	</div>
+	<%# end %>
 
 	<% @idea.repository.commits.each_with_index do |commit, i| %>
 		<% v_num = @idea.num_commits - i %>

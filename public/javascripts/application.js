@@ -6,6 +6,16 @@ function add_formfield(divname, content)
 
 $(document).ready(function() 
 {
+	// remove edit boxes
+	$('.idea_item .edit_item').hide();
+	
+	$('.idea_item').hover(function() {
+		$(this).find('.edit_item').show();
+	}, function() {
+		$(this).find('.edit_item').hide();
+	});
+	
+	
 	$(".drag_item").draggable({  
 		revert: true,
 		revertDuration: 0

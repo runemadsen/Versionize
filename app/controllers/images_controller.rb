@@ -2,7 +2,7 @@ class ImagesController < ApplicationController
   
   include ApplicationHelper
   before_filter :require_user
-  before_filter :find_branch, :only => [:create, :update, :destroy]
+  before_filter :find_branch
   
   def new
     
