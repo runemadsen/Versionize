@@ -1,4 +1,8 @@
 <div class="idea_item item_link">
+	<div class="idea_item_icon_container">
+		<div class="idea_item_icon background_color1">&nbsp;</div>
+	</div>
+	<div class="idea_item_main">
 <% if link.file_extension == ".jpg" || link.file_extension == ".gif" || link.file_extension == ".png" %>
 	<%= image_tag link.url %>
 	<% if edit %>
@@ -17,4 +21,6 @@
 		</div>
 	<% end %>
 <% end %>
+	</div>
+	<div class="clear"></div>
 </div>

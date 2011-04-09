@@ -58,6 +58,21 @@ div.idea_item {
 	margin-bottom: 15px;
 }
 
+div.idea_item_icon_container {
+	float: left;
+	width: 50px;
+}
+
+div.idea_item_main {
+	float: left;
+	width: 560px;
+}
+
+div.idea_item_icon {
+	width: 20px;
+	height: 20px;
+}
+
 div.edit_item {
 	font-weight: normal;
 	text-align: right;
