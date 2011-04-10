@@ -1,5 +1,36 @@
 body, html {
 	height: 100%;
+	line-height: 20px;
+}
+
+.container_12 {
+	/*background-image: url('../images/grid.jpg');
+		background-repeat: repeat-y;*/
+}
+
+/* Header
+_____________________________________________ */
+
+#header {
+	height: 42px;
+	margin-top: 20px;
+	margin-bottom: 46px;
+}
+
+#logo {
+	float: left;
+}
+
+#contact_message {
+	color: #999999;
+	margin-left: 40px;
+	line-height: 30px;
+	height: 30px;
+	float: left;
+}
+
+#contact_message a {
+	color: #999999;
 }
 
 /* Fonts
@@ -13,7 +44,6 @@ body {
 
 p {
 	margin: 12px 0px;
-	line-height: 22px;
 }
 
 a {
@@ -31,7 +61,7 @@ a.box_link {
 
 h1 {
 	font-size: 40px;
-	margin-bottom: 12px;
+	margin-bottom: 20px;
 }
 
 h2 {
@@ -53,9 +83,7 @@ ul.idea_list li a.collaborator {
 _____________________________________________ */
 
 div.idea_item {
-	padding-bottom: 10px;
-	line-height: 16px;
-	margin-bottom: 15px;
+	margin-bottom: 30px;
 }
 
 div.idea_item_icon_container {
@@ -65,7 +93,7 @@ div.idea_item_icon_container {
 
 div.idea_item_main {
 	float: left;
-	width: 560px;
+	width: 570px;
 }
 
 div.idea_item_icon {
@@ -73,27 +101,27 @@ div.idea_item_icon {
 	height: 20px;
 }
 
-div.item_link {
-	font-size: 22px;
-}
-
-p#version_text {
-	font-size: 18px;
-	font-weight: bold;
-	padding-top: 6px;
-	text-align: right;
-}
-
-p#add_collaborator {
-	text-align: right;
-}
+/* Media: Description
+_____________________________________________ */
 
 div#description 
 {
 	font-weight: bold;
-	line-height: 22px;
-	margin-bottom: 0px;
 }
+
+/* Media: Link
+_____________________________________________ */
+
+div.item_link {
+	font-size: 22px;
+}
+
+/* Media: Image
+_____________________________________________ */
+
+.idea_item_main img {
+	width: 100%;
+} 
 
 /* Edit boxes
 _____________________________________________ */
@@ -101,14 +129,6 @@ _____________________________________________ */
 div.edit_box {
 	font-size: 14px;
 	font-weight: bold;
-}
-
-div.edit_item {
-	width: 20px;
-	height: 20px;
-	background-color: gray;
-	font-weight: normal;
-	font-size: 12px;
 }
 
 /* Sidebar
@@ -393,31 +413,6 @@ _____________________________________________ */
 	margin-top: 12px;
 }
 
-/* Header
-_____________________________________________ */
-
-#header {
-	height: 42px;
-	margin-top: 12px;
-	margin-bottom: 48px;
-}
-
-#logo {
-	float: left;
-}
-
-#contact_message {
-	color: #999999;
-	margin-left: 40px;
-	line-height: 42px;
-	height: 42px;
-	float: left;
-}
-
-#contact_message a {
-	color: #999999;
-}
-
 /* Notice
 _____________________________________________ */
 
@@ -543,7 +538,7 @@ _____________________________________________ */
 	height: 5px;
 	background: url('../images/dot_small.jpg');
 	background-repeat: repeat-x;
-	margin-bottom: 20px;
+	margin-bottom: 22px;
 }
 
 /* Drag / Drop box

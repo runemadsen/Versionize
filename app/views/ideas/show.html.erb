@@ -24,7 +24,7 @@
 		
 		<% if i == 0 %>
 			<%= render :partial => "texts/description", :locals => {:text => content, :edit => @edit} %>
-			<% if @edit %>
+			<% if false#@edit %>
 			<div id="media_box">
 				<ul>
 					<li><%= link_to "Link", new_idea_link_path(@idea)%></li>
@@ -43,13 +43,13 @@
 </div>
 <!-- <div class="grid_1">&nbsp;</div> -->
 <div class="grid_3">
-	<div id="version_box" class="sidebar_box">
-		This idea has <%= pluralize(@idea.num_commits, "version") %>
-	</div>
+	<!-- <div id="version_box" class="sidebar_box">
+			This idea has <%= pluralize(@idea.num_commits, "version") %>
+		</div> -->
 
 	<% @idea.repository.commits.each_with_index do |commit, i| %>
 		<% v_num = @idea.num_commits - i %>
-		<%= link_to v_num, link_to_version(@idea, @branch, v_num), :class => "version_box background_color#{v_num % 9}" %>
+		<%#= link_to v_num, link_to_version(@idea, @branch, v_num), :class => "version_box background_color#{v_num % 9}" %>
 	<% end %>
 	<div class="clear"></div>
 	
@@ -57,9 +57,9 @@
 			<div id="placeholder">Drop Idea Items Here</div>
 		</div> -->
 	
-	<%= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators to idea"), idea_collaborations_path(@idea), :class => "sidebar_link" %>
+	<%#= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators to idea"), idea_collaborations_path(@idea), :class => "sidebar_link" %>
 		
-		<%= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea?", :class => "sidebar_link font_color1") if @idea.is_owner? @current_user %>
+		<%#= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea?", :class => "sidebar_link font_color1") if @idea.is_owner? @current_user %>
 	
 </div>
 <div class="clear"></div>
