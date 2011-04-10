@@ -120,6 +120,15 @@ _____________________________________________ */
 	padding: 5px 10px;
 }
 
+.sidebar_link {
+	display: block;
+	background-color: #CCC;
+	color: #FFF;
+	text-decoration: none;
+	padding: 5px 10px;
+	margin-bottom: 5px;
+}
+
 #version_box {
 	margin-bottom: 10px;
 }
@@ -591,7 +600,8 @@ _____________________________________________ */
 	border-style: dashed;
 	border-width: 2px;
 	padding: 10px;
-	margin-top: 20px;
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
 
 #drop_box #placeholder {
