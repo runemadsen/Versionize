@@ -1,0 +1,17 @@
+<div class="edit_box">
+	<%= image_tag "draggable.jpg", 	:class => "drag_item", 
+																	:"data-idea" => idea_id, 
+																	:"data-item" => item_id, 
+																	:"data-item-type" => item_type %>
+	
+	<% if defined? edit_path %>							
+		<%= link_to "Edit", edit_path %>
+	<% end %>
+	
+	<% if defined? delete_path %>
+	<%= link_to "Delete", delete_path, 
+												:method => :delete, 
+												:confirm => "Are you sure you want to delete this link?", :class => "destroy" %>
+	<% end %>
+	
+</div>

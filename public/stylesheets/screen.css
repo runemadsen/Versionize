@@ -73,20 +73,6 @@ div.idea_item_icon {
 	height: 20px;
 }
 
-div.edit_item {
-	font-weight: normal;
-	font-size: 12px;
-}
-
-div.edit_item a {
-	color: #909090;
-	text-decoration: none;
-}
-
-div.edit_item a.destroy {
-	color: #d25245;
-}
-
 div.item_link {
 	font-size: 22px;
 }
@@ -106,6 +92,22 @@ div#description
 {
 	font-weight: bold;
 	line-height: 22px;
+}
+
+/* Edit boxes
+_____________________________________________ */
+
+div.edit_box {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+div.edit_item {
+	width: 20px;
+	height: 20px;
+	background-color: gray;
+	font-weight: normal;
+	font-size: 12px;
 }
 
 /* Sidebar
@@ -321,11 +323,17 @@ ul#branch_box {
 
 ul#branch_box li {
 	position: relative;
+	background-color: #f2f2f2;
+	color: #7d7d7d;
+	font-size: 14px;
+	height: 20px;
+	line-height: 20px;
+	padding: 5px 10px;
 }
 
 /* Second level */
 
-ul#branch_box li ul li {
+ul#branch_box li ul {
 	position: absolute;
 	left: 0px;
 	top: 30px;
@@ -342,9 +350,9 @@ ul#branch_box li ul li a {
 
 /* Hover */
 
-ul#branch_box li:hover {
-	color: #FFF;
+ul#branch_box:hover {
 	background-color: #d25245;
+	color: #FFF;
 	cursor: pointer;
 }
 
@@ -352,7 +360,7 @@ ul#branch_box li:hover ul {
 	display: block;
 }
 
-ul#branch_box li:hover ul li {
+ul#branch_box:hover ul li {
 	color: #FFF;
 	background-color: #d25245;
 }

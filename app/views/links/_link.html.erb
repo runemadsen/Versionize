@@ -14,11 +14,11 @@
 	</div>
 	<div class="grid_1 omega">
 		<% if edit %>
-			<div class="edit_item">
-				<%= image_tag "draggable.jpg", :class => "drag_item", :"data-idea" => @idea.id, :"data-item" => link.id, :"data-item-type" => "link" %>
-				<%= link_to "Edit", edit_idea_link_path(@idea, link.id) %>
-				<%= link_to "Delete", idea_link_path(@idea, link.id), :method => :delete, :confirm => "Are you sure you want to delete this link?", :class => "destroy" %>
-			</div>
+			<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
+																													:item_id => link.id, 
+																													:item_type => "link",
+																													:edit_path => edit_idea_link_path(@idea, link.id),
+																													:delete_path => idea_link_path(@idea, link.id)} %>
 		<% end %>
 	</div>
 	<div class="clear"></div>

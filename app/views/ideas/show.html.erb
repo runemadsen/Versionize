@@ -3,12 +3,13 @@
 	
 </div>
 <div class="grid_3">
-		<ul id="branch_box" class="sidebar_box">
+		<ul id="branch_box">
 			<li>Choose branch
 				<ul>
 				<% @idea.repository.heads.each do |head| %>
 					<li><%= link_to head.name, "#" %></li>
 				<% end %>
+				<li><%= link_to "+" %></li>
 				</ul>
 			</li>
 		</ul>
@@ -58,7 +59,7 @@
 		<div id="placeholder">Drop Idea Items Here</div>
 	</div>
 	
-	<%= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators"), idea_collaborations_path(@idea), :class => "sidebar_link background_color5" %>
+	<%= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators"), idea_collaborations_path(@idea), :class => "sidebar_link" %>
 		
 		<%= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea?", :class => "sidebar_link background_color1") if @idea.is_owner? @current_user %>
 	

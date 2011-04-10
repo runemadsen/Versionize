@@ -6,12 +6,12 @@ function add_formfield(divname, content)
 
 $(document).ready(function() 
 {
-	$('.idea_item .edit_item').hide();
+	$('.idea_item .edit_box').hide();
 	
 	$('.idea_item').hover(function() {
-		$(this).find('.edit_item').show();
+		$(this).find('.edit_box').show();
 	}, function() {
-		$(this).find('.edit_item').hide();
+		$(this).find('.edit_box').hide();
 	});
 	
 	$(".drag_item").draggable({  
