@@ -20,22 +20,21 @@
 <div class="grid_12 dotted_line_small"></div>
 <div class="grid_9">
 
-	<% if false #@edit %>
-	<div id="media_box">
-		<ul>
-			<li>Insert</li>
-			<li><%= link_to "Link", new_idea_link_path(@idea)%></li>
-			<li><%= link_to "Text", new_idea_text_path(@idea)%></li>
-			<li><%= link_to "Image", new_idea_image_path(@idea) %></li>
-		</ul>
-		<div class="clear"></div>
-	</div>
-	<% end %>
-
 	<% @idea.version(@version).each_with_index do |content, i| %>
 		
 		<% if i == 0 %>
 			<%= render :partial => "texts/description", :locals => {:text => content, :edit => @edit} %>
+			<% if @edit %>
+			<div id="media_box">
+				<ul>
+					<li>Insert</li>
+					<li><%= link_to "Link", new_idea_link_path(@idea)%></li>
+					<li><%= link_to "Text", new_idea_text_path(@idea)%></li>
+					<li><%= link_to "Image", new_idea_image_path(@idea) %></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<% end %>
 		<% else %>
 			<%= render :partial => content.class.name.pluralize.downcase + "/" + content.class.name.downcase, 
 									:locals => { content.class.name.downcase.to_sym => content, :edit => @edit} %>
