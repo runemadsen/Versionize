@@ -7,7 +7,7 @@
 			<% if link.file_extension == ".jpg" || link.file_extension == ".gif" || link.file_extension == ".png" %>
 				<%= image_tag link.url %>
 			<% else %>
-				<%= link_to link.url, link.url %>
+				<%= link_to link.url, link.url, :target => "_blank" %>
 			<% end %>
 		</div>
 		<div class="clear"></div>

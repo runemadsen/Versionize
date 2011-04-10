@@ -125,8 +125,8 @@ _____________________________________________ */
 
 .sidebar_link {
 	display: block;
-	background-color: #CCC;
-	color: #FFF;
+	background-color: #f2f2f2;
+	color: #6a7a92;
 	text-decoration: none;
 	padding: 5px 10px;
 	margin-bottom: 5px;
@@ -140,11 +140,10 @@ _____________________________________________ */
 _____________________________________________ */
 
 .version_box {
-	width: 20px;
+	padding: 0px 8px;
 	float: left;
 	margin-right: 6px;
 	display: block;
-	padding-left: 10px;
 	height: 26px;
 	background-color: #6c6a69;
 	margin-bottom: 10px;
@@ -156,31 +155,31 @@ _____________________________________________ */
 
 .color1 {
 	background-color: #d25245;
-	-webkit-transform: rotate(-2deg);
-	-moz-transform: rotate(-2deg);
+	/*-webkit-transform: rotate(-2deg);
+		-moz-transform: rotate(-2deg);*/
 }
 
 .color2 {
-	-webkit-transform: rotate(1deg);
-	-moz-transform: rotate(1deg);
+	/*-webkit-transform: rotate(1deg);
+		-moz-transform: rotate(1deg);*/
 	background-color: #dcb954;
 }
 
 .color3 {
-	-webkit-transform: rotate(-1deg);
-	-moz-transform: rotate(-1deg);
+	/*-webkit-transform: rotate(-1deg);
+		-moz-transform: rotate(-1deg);*/
 	background-color: #6c6a69;
 }
 
 .color4 {
-	-webkit-transform: rotate(1deg);
-	-moz-transform: rotate(1deg);
+	/*-webkit-transform: rotate(1deg);
+		-moz-transform: rotate(1deg);*/
 	background-color: #6a7a92;
 }
 
 .color5 {
-	-webkit-transform: rotate(-2deg);
-	-moz-transform: rotate(-2deg);
+	/*-webkit-transform: rotate(-2deg);
+		-moz-transform: rotate(-2deg);*/
 	background-color: #3e6d35;
 }
 
@@ -193,14 +192,14 @@ _____________________________________________ */
 }
 
 .color8 {
-	-webkit-transform: rotate(1deg);
-	-moz-transform: rotate(1deg);
+	/*-webkit-transform: rotate(1deg);
+		-moz-transform: rotate(1deg);*/
 	background-color: #c5546d;
 }
 
 .color9 {
-	-webkit-transform: rotate(-2deg);
-	-moz-transform: rotate(-2deg);
+	/*-webkit-transform: rotate(-2deg);
+		-moz-transform: rotate(-2deg);*/
 	background-color: #544848;
 }
 
