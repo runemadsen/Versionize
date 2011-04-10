@@ -3,12 +3,20 @@
 	
 </div>
 <div class="grid_3">
-	<p id="version_text">This idea has <%= pluralize(@idea.num_commits, "version") %></p>
+		<ul id="branch_box" class="sidebar_box">
+			<li>Choose branch
+				<ul>
+				<% @idea.repository.heads.each do |head| %>
+					<li><%= link_to head.name, "#" %></li>
+				<% end %>
+				</ul>
+			</li>
+		</ul>
+		<div class="clear"></div>
 </div>
 
 <div class="clear"></div>
 <div class="grid_12 dotted_line_small"></div>
-
 <div class="grid_9">
 
 	<% if false #@edit %>
@@ -36,23 +44,15 @@
 </div>
 <!-- <div class="grid_1">&nbsp;</div> -->
 <div class="grid_3">
-	
-	<%# if @idea.repository.heads.count > 1 %>
-	<div id="branch_box">
-		<ul>
-			<li>Branches:</li>
-			<% @idea.repository.heads.each do |head| %>
-				<li><%= link_to head.name, "#" %></li>
-			<% end %>
-		</ul>
-		<div class="clear"></div>
+	<div id="version_box" class="sidebar_box">
+		This idea has <%= pluralize(@idea.num_commits, "version") %>
 	</div>
-	<%# end %>
 
 	<% @idea.repository.commits.each_with_index do |commit, i| %>
 		<% v_num = @idea.num_commits - i %>
 		<%= link_to v_num, link_to_version(@idea, @branch, v_num), :class => "version_box color#{v_num % 9}" %>
 	<% end %>
+	<div class="clear"></div>
 	
 	<div id="drop_box">
 		<div id="placeholder">Drop Idea Items Here</div>

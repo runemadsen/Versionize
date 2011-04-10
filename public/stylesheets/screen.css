@@ -108,10 +108,29 @@ div#description
 	line-height: 22px;
 }
 
+/* Sidebar
+_____________________________________________ */
+
+.sidebar_box {
+	background-color: #f2f2f2;
+	color: #7d7d7d;
+	font-size: 14px;
+	height: 20px;
+	line-height: 20px;
+	padding: 5px 10px;
+}
+
+#version_box {
+	margin-bottom: 10px;
+}
+
 /* Idea version boxes
 _____________________________________________ */
 
 .version_box {
+	width: 20px;
+	float: left;
+	margin-right: 6px;
 	display: block;
 	padding-left: 10px;
 	height: 26px;
@@ -285,41 +304,48 @@ _____________________________________________ */
 /* Branch box
 _____________________________________________ */
 
-#branch_box {
-	background-color: #f2f2f2;
-	margin-bottom: 15px;
-	font-size: 12px;
+/* First Level */
+
+ul#branch_box {
+	margin-top: 8px;
 }
 
-#branch_box ul li {
-	height: 20px;
-	line-height: 20px;
-	float: left;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-right: 5px;
+ul#branch_box li {
+	position: relative;
 }
 
-#branch_box ul li a {
-	color: #d25245;
-	font-weight: bold;
+/* Second level */
+
+ul#branch_box li ul li {
+	position: absolute;
+	left: 0px;
+	top: 30px;
+}
+
+ul#branch_box li ul {
+	display: none;
+}
+
+ul#branch_box li ul li a {
 	text-decoration: none;
+	color: #FFF;
 }
 
-#branch_box ul li:hover a {
-	color: #ffffff;
+/* Hover */
+
+ul#branch_box li:hover {
+	color: #FFF;
+	background-color: #d25245;
+	cursor: pointer;
 }
 
-#branch_box ul li:hover {
-	background-color: #d25340;
+ul#branch_box li:hover ul {
+	display: block;
 }
 
-#branch_box ul li {
-	color: #969696;
-}
-
-#branch_box ul li:first-child:hover {
-	background-color: #f2f2f2
+ul#branch_box li:hover ul li {
+	color: #FFF;
+	background-color: #d25245;
 }
 
 /* Insert media box styling
