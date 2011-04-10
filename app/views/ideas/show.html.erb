@@ -50,7 +50,7 @@
 
 	<% @idea.repository.commits.each_with_index do |commit, i| %>
 		<% v_num = @idea.num_commits - i %>
-		<%= link_to v_num, link_to_version(@idea, @branch, v_num), :class => "version_box color#{v_num % 9}" %>
+		<%= link_to v_num, link_to_version(@idea, @branch, v_num), :class => "version_box background_color#{v_num % 9}" %>
 	<% end %>
 	<div class="clear"></div>
 	
