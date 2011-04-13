@@ -101,6 +101,24 @@ div.idea_item_icon {
 	height: 25px;
 }
 
+.idea_item_icon img {
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+#description .idea_item_icon {
+	float: left;
+	width: 15px;
+	height: 15px;
+	padding: 1px;
+	margin-right: 6px;
+}
+
+#description .idea_item_icon img {
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
 /* Media: Link
 _____________________________________________ */
 
@@ -207,12 +225,20 @@ _____________________________________________ */
 	background-color: #dcb954;
 }
 
+.background_color2_darker {
+	background-color: #b5973f;
+}
+
 .background_color3 {
 	background-color: #6c6a69;
 }
 
 .background_color4 {
 	background-color: #6a7a92;
+}
+
+.background_color4_darker {
+	background-color: #516178;
 }
 
 .background_color5 {
@@ -350,8 +376,9 @@ _____________________________________________ */
 }
 
 #media_box ul li#text {
-	-webkit-transform: rotate(-2deg);
-	-moz-transform: rotate(-2deg);
+	margin-top: 3px;
+	-webkit-transform: rotate(1deg);
+	-moz-transform: rotate(1deg);
 	background-color: #dcb954;
 }
 
@@ -362,14 +389,10 @@ _____________________________________________ */
 }
 
 #media_box ul li#link {
-	-webkit-transform: rotate(-2deg);
-	-moz-transform: rotate(-2deg);
+	margin-top: 3px;
+	-webkit-transform: rotate(1deg);
+	-moz-transform: rotate(1deg);
 	background-color: #6a7a92;
-}
-
-.idea_item_icon img {
-	margin-left: 5px;
-	margin-top: 5px;
 }
 
 /* Form styling

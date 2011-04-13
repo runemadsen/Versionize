@@ -1,9 +1,6 @@
 <div id="description" class="idea_item">
 	
 	<div class="grid_8 alpha">
-		<%= h(text.body).gsub(/\n/, '<br/>') %>
-	</div>
-	<div class="grid_1 omega">
 		<% if edit %>
 			<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
 																													:item_id => text.id, 
@@ -11,6 +8,11 @@
 																													:edit_path => edit_idea_text_path(@idea, text.id),
 																													:color => 2} %>
 		<% end %>
+		<%= h(text.body).gsub(/\n/, '<br/>') %>
+		<div class="clear"></div>
+	</div>
+	<div class="grid_1 omega">
+		
 	</div>
 	<div class="clear"></div>
 </div>
