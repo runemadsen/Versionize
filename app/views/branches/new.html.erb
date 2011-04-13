@@ -1,0 +1,24 @@
+<div class="grid_12">
+	<h1>Create new branch</h1>
+</div>
+<div class="grid_12 dotted_line_small"></div>
+
+<div class="grid_8">	
+	
+<p>No Spaces or weird symbols in the branch!</p>
+	
+<%= form_tag "/ideas/#{@idea_id}/branches" do%>
+
+<%= text_field_tag :branch_name, "Branch Name", :class => 'input_box input_name tip_field', :"data-tip-id" => "tip_name",
+ 	:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+	:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
+
+<p><%= submit_tag 'Save basic details' %></p>
+
+<% end %>
+
+</div>
+<div class="grid_4">
+	<p>A branch is bla bla bla. You can use it to bla bla bla</p>
+</div>
+<div class="clear"></div>

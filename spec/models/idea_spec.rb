@@ -46,6 +46,15 @@ describe Idea do
     end
   end
   
+  describe "create new branch" do
+    it "should create a new branch from the given old branch" do
+      @text = Text.new :body => "This is some text", :order => 1
+      @idea.create_version(@text, users(:rune), "Save text", false, "master")
+      @idea.create_branch("master", "newbranch", users(:rune))
+      @idea.repository.heads.count.should == 2
+    end  
+  end
+  
   describe "version" do
     it "should return version depending on specified branch" do
       @text = Text.new :body => "Text for master branch", :order => 1

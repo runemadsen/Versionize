@@ -154,11 +154,13 @@ _____________________________________________ */
 }
 
 .sidebar_link {
+	font-size: 13px;
 	display: block;
 	background-color: #f2f2f2;
-	color: #6a7a92;
+	color: #FFF;
 	text-decoration: none;
-	padding: 5px 10px;
+	text-align: center;
+	padding: 3px 10px;
 	margin-bottom: 5px;
 }
 
@@ -260,6 +262,9 @@ _____________________________________________ */
 .background_color9 {
 	background-color: #544848;
 }
+.background_color10 {
+	background-color: #c8c8c8;
+}
 
 /* Font Colors
 _____________________________________________ */
@@ -306,51 +311,28 @@ _____________________________________________ */
 /* First Level */
 
 ul#branch_box {
-	margin-top: 8px;
+	margin-bottom: 20px;
 }
 
 ul#branch_box li {
-	position: relative;
-	background-color: #f2f2f2;
-	color: #7d7d7d;
+	background-color: #544848;
+	color: #FFF;
 	font-size: 14px;
-	height: 20px;
-	line-height: 20px;
-	padding: 5px 10px;
+	text-align: center;
 }
 
-/* Second level */
-
-ul#branch_box li ul {
-	position: absolute;
-	left: 0px;
-	top: 30px;
-}
-
-ul#branch_box li ul {
-	display: none;
+ul#branch_box li ul li {
+	background-color: #FFF;
+	text-align: left;
+	padding-top: 8px;
+	padding-left: 10px;
 }
 
 ul#branch_box li ul li a {
 	text-decoration: none;
-	color: #FFF;
-}
-
-/* Hover */
-
-ul#branch_box:hover {
-	background-color: #d25245;
-	color: #FFF;
-	cursor: pointer;
-}
-
-ul#branch_box li:hover ul {
-	display: block;
-}
-
-ul#branch_box:hover ul li {
-	color: #FFF;
-	background-color: #d25245;
+	font-size: 15px;
+	font-weight: bold;
+	color: #544848;
 }
 
 /* Insert media box styling

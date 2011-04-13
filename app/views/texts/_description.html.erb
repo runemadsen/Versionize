@@ -5,8 +5,8 @@
 			<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
 																													:item_id => text.id, 
 																													:item_type => "text",
-																													:edit_path => edit_idea_text_path(@idea, text.id),
-																													:color => 2} %>
+																													:edit_path => edit_text_branch_or_master_path(@idea, @branch, text),
+																													:color => 10} %>
 		<% end %>
 		<%= h(text.body).gsub(/\n/, '<br/>') %>
 		<div class="clear"></div>

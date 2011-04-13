@@ -5,7 +5,7 @@
 				<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
 																														:item_id => link.id, 
 																														:item_type => "link",
-																														:edit_path => edit_idea_link_path(@idea, link.id),
+																														:edit_path => edit_link_branch_or_master_path(@idea, @branch, link),
 																														:drag => true,
 																														:color => 4} %>
 			<% end %>

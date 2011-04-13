@@ -8,7 +8,7 @@
 <% end %>
 
 <% if defined? edit_path %>																			
-	<div class="idea_item_icon background_color<%= color %>_darker">
+	<div class="idea_item_icon background_color<%= color %><% if defined? drag %>_darker<% end %>">
 		<%= link_to image_tag("edit_icon.png"), edit_path %>
 	</div>
 <% end %>
