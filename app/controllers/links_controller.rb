@@ -1,6 +1,7 @@
 class LinksController < ApplicationController
   
   include ApplicationHelper
+  include LinksHelper
   before_filter :require_user
   before_filter :find_branch
    
@@ -16,6 +17,7 @@ class LinksController < ApplicationController
   
   def create
     begin
+      raise Exception, @branch.inspect
       @idea = Idea.find(params[:idea_id])
       @link = Link.new params[:link]
       @link.order = @idea.next_order(@branch)
@@ -24,7 +26,7 @@ class LinksController < ApplicationController
       redirect_to idea_branch_or_master_path(@idea, @branch)
     rescue Exception => e 
       flash[:error] = "There was a problem! #{e}"
-      redirect_to new_link_idea_branch_or_master_path(@idea, @branch)
+      redirect_to new_link_branch_or_master_path(@idea, @branch)
     end  
   end
    

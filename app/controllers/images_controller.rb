@@ -38,7 +38,7 @@ class ImagesController < ApplicationController
       redirect_to idea_branch_or_master_path(@idea)
     rescue Exception => e 
       flash[:error] = "There was a problem! #{e}"
-      redirect_to new_image_idea_branch_or_master_path(@idea)
+      redirect_to new_image_branch_or_master_path(@idea)
     end
   end
   

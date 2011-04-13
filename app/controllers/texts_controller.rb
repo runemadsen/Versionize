@@ -24,7 +24,7 @@ class TextsController < ApplicationController
       redirect_to idea_branch_or_master_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = "There was a problem! #{e}"
-      redirect_to new_text_idea_branch_or_master_path(@idea, @branch)
+      redirect_to new_text_branch_or_master_path(@idea, @branch)
     end
   end
   
