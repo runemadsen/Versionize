@@ -55,7 +55,18 @@ describe Idea do
     end  
   end
   
-  describe "version" do
+  describe "Version" do
+    it "should return version depending on specified branch" do
+      @text = Text.new :body => "Text for master branch", :order => 1
+      @idea.create_version(@text, users(:rune), "Save text")
+      @text.body = "Text for the newbranch branch"
+      @idea.create_version(@text, users(:rune), "Save text", false, "newbranch")
+      @idea.version(0)[0].body.should == "Text for master branch"
+      @idea.version(0, "newbranch")[0].body.should == "Text for the newbranch branch"
+    end
+  end
+  
+  describe "File" do
     it "should return version depending on specified branch" do
       @text = Text.new :body => "Text for master branch", :order => 1
       @idea.create_version(@text, users(:rune), "Save text")

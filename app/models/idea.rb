@@ -60,18 +60,21 @@ class Idea < ActiveRecord::Base
     blob_to_model(self.repository.tree(branch)/file_name)
   end
   
-  def version(version)
+  def version(version, branch = "master")
     
-    return @models unless @models.nil?
+    if branch.nil?
+      branch = "master"
+    end
+    # this should really, really, really be cached
     
     @models = []
     
     if version == 0
-      self.repository.tree.contents.each do |blob|
+      self.repository.tree(branch).contents.each do |blob|
         @models << blob_to_model(blob)
       end
     else
-      self.repository.commits[num_commits-version.to_i].tree.contents.each do |blob|
+      self.repository.commits[num_commits(branch)-version.to_i].tree(branch).contents.each do |blob|
         @models << blob_to_model(blob)
       end
     end
