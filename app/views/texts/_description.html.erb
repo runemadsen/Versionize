@@ -8,7 +8,8 @@
 			<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
 																													:item_id => text.id, 
 																													:item_type => "text",
-																													:edit_path => edit_idea_text_path(@idea, text.id)} %>
+																													:edit_path => edit_idea_text_path(@idea, text.id),
+																													:color => 2} %>
 		<% end %>
 	</div>
 	<div class="clear"></div>

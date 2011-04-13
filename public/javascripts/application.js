@@ -9,7 +9,7 @@ $(document).ready(function()
 	$('.idea_item .edit_box').hide();
 	
 	$('.idea_item').hover(function() {
-		$(this).find('.edit_box').show();
+		//$(this).find('.edit_box').show();
 	}, function() {
 		$(this).find('.edit_box').hide();
 	});

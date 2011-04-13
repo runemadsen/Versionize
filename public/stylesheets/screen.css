@@ -97,16 +97,8 @@ div.idea_item_main {
 }
 
 div.idea_item_icon {
-	width: 20px;
-	height: 20px;
-}
-
-/* Media: Description
-_____________________________________________ */
-
-div#description 
-{
-	font-weight: bold;
+	width: 25px;
+	height: 25px;
 }
 
 /* Media: Link
@@ -339,35 +331,45 @@ ul#branch_box:hover ul li {
 _____________________________________________ */
 
 #media_box {
-	margin-bottom: 35px;
+	margin-bottom: 40px;
 }
 
 #media_box ul li {
-	height: 30px;
-	line-height: 30px;
 	float: left;
-	padding-left: 10px;
-	padding-right: 10px;
 	margin-right: 5px;
-	background-color: #f2f2f2;
+	width: 100px;
+	height: 29px;
+	line-height: 29px;
+	text-align: center;
 }
 
 #media_box ul li a {
-	color: #6a7a92;
+	color: #FFF;
 	font-weight: bold;
 	text-decoration: none;
 }
 
-#media_box ul li:hover a {
-	color: #ffffff;
+#media_box ul li#text {
+	-webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(-2deg);
+	background-color: #dcb954;
 }
 
-#media_box ul li:hover {
+#media_box ul li#image {
+	-webkit-transform: rotate(-1deg);
+	-moz-transform: rotate(-1deg);
+	background-color: #d25245;
+}
+
+#media_box ul li#link {
+	-webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(-2deg);
 	background-color: #6a7a92;
 }
 
-#media_box ul li {
-	color: #969696;
+.idea_item_icon img {
+	margin-left: 5px;
+	margin-top: 5px;
 }
 
 /* Form styling

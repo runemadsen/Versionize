@@ -24,12 +24,12 @@
 		
 		<% if i == 0 %>
 			<%= render :partial => "texts/description", :locals => {:text => content, :edit => @edit} %>
-			<% if false#@edit %>
+			<% if @edit %>
 			<div id="media_box">
 				<ul>
-					<li><%= link_to "Link", new_idea_link_path(@idea)%></li>
-					<li><%= link_to "Text", new_idea_text_path(@idea)%></li>
-					<li><%= link_to "Image", new_idea_image_path(@idea) %></li>
+					<li id="text"><%= link_to "Text", new_idea_text_path(@idea)%></li>
+					<li id="image"><%= link_to "Image", new_idea_image_path(@idea) %></li>
+					<li id="link"><%= link_to "Link", new_idea_link_path(@idea)%></li>
 				</ul>
 				<div class="clear"></div>
 			</div>
@@ -46,11 +46,11 @@
 	<!-- <div id="version_box" class="sidebar_box">
 			This idea has <%= pluralize(@idea.num_commits, "version") %>
 		</div> -->
-
-	<% @idea.repository.commits.each_with_index do |commit, i| %>
-		<% v_num = @idea.num_commits - i %>
+		
+	<%# @idea.num_commits.times do |i| %>
+		<%# v_num = @idea.num_commits - i %>
 		<%#= link_to v_num, link_to_version(@idea, @branch, v_num), :class => "version_box background_color#{v_num % 9}" %>
-	<% end %>
+	<%# end %>
 	<div class="clear"></div>
 	
 	<!-- <div id="drop_box">

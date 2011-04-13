@@ -1,7 +1,14 @@
 <div class="idea_item item_link">
 	<div class="grid_8 alpha">
 		<div class="idea_item_icon_container">
-			<div class="idea_item_icon background_color1">&nbsp;</div>
+			<% if edit %>
+				<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
+																														:item_id => link.id, 
+																														:item_type => "link",
+																														:edit_path => edit_idea_link_path(@idea, link.id),
+																														:drag => true,
+																														:color => 4} %>
+			<% end %>
 		</div>
 		<div class="idea_item_main">
 			<% if link.file_extension == ".jpg" || link.file_extension == ".gif" || link.file_extension == ".png" %>
@@ -13,13 +20,7 @@
 		<div class="clear"></div>
 	</div>
 	<div class="grid_1 omega">
-		<% if edit %>
-			<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
-																													:item_id => link.id, 
-																													:item_type => "link",
-																													:edit_path => edit_idea_link_path(@idea, link.id),
-																													:delete_path => idea_link_path(@idea, link.id)} %>
-		<% end %>
+		
 	</div>
 	<div class="clear"></div>
 </div>

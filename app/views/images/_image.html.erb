@@ -2,11 +2,11 @@
 	<%= image_tag(image.amazon_url) %>
 	
 	<% if edit %>
-		<div class="edit_item">
-			<%= image_tag "draggable.jpg", :class => "drag_item", :"data-idea" => @idea.id, :"data-item" => image.id, :"data-item-type" => "image" %>
-			<%= link_to "Destroy", idea_image_path(@idea, image.id), :method => :delete, :confirm => "Are you sure you want to delete this text?", :class => "destroy" %>
-		</div>
+		<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
+																												:item_id => image.id, 
+																												:item_type => "image",
+																												:drag => true,
+																												:color => 4} %>
 	<% end %>
-	
 	
 </div>

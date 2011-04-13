@@ -1,7 +1,15 @@
 <div class="idea_item">
 	<div class="grid_8 alpha">
 		<div class="idea_item_icon_container">
-			<div class="idea_item_icon background_color2">&nbsp;</div>
+			<% if edit %>
+				<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
+																														:item_id => text.id, 
+																														:item_type => "text",
+																														:edit_path => edit_idea_text_path(@idea, text.id),
+																														:drag => true,
+																														:color => 2} 
+																														%>
+			<% end %>
 		</div>
 		<div class="idea_item_main">
 			<%= h(text.body).gsub(/\n/, '<br/>') %>
@@ -9,13 +17,7 @@
 		<div class="clear"></div>
 	</div>
 	<div class="grid_1 omega">
-		<% if edit %>
-			<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
-																													:item_id => text.id, 
-																													:item_type => "text",
-																													:edit_path => edit_idea_text_path(@idea, text.id),
-																													:delete_path => idea_text_path(@idea, text.id)} %>
-		<% end %>
+		
 	</div>
 	<div class="clear"></div>
 </div>
