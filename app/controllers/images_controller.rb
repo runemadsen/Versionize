@@ -36,7 +36,7 @@ class ImagesController < ApplicationController
       @image.order = @idea.next_order(@branch)
       @idea.create_version(@image, @current_user, "Save Image", false, @branch)
       flash[:notice] = "Saved image"
-      redirect_to idea_branch_or_master_path(@idea)
+      redirect_to idea_branch_or_master_path(@idea, @branch)
     rescue Exception => e 
       flash[:error] = "There was a problem! #{e}"
       redirect_to new_image_branch_or_master_path(@idea, @branch)
