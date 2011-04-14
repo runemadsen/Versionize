@@ -8,4 +8,12 @@ module TextsHelper
     branch == "master" || branch.nil? ? edit_idea_text_path(idea, text.id) : edit_idea_branch_text_path(idea, branch, text.id)
   end
   
+  def texts_branch_or_master_path idea, branch
+    branch == "master" || branch.nil? ? idea_texts_path(idea) : idea_branch_texts_path(idea, branch)
+  end
+  
+  def text_branch_or_master_path idea, branch, text
+    branch == "master" || branch.nil? ? idea_text_path(idea, text.id) : idea_branch_text_path(idea, branch, text.id)
+  end
+
 end

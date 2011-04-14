@@ -50,8 +50,8 @@
 			This idea has <%= pluralize(@idea.num_commits, "version") %>
 	</div>
 		
-	<% @idea.num_commits.times do |i| %>
-		<% v_num = @idea.num_commits - i %>
+	<% @idea.num_commits(@branch).times do |i| %>
+		<% v_num = @idea.num_commits(@branch) - i %>
 		<%= link_to v_num, link_to_version(@idea, @branch, v_num), :class => "version_box background_color#{v_num % 9}" %>
 	<% end %>
 	<div class="clear"></div>

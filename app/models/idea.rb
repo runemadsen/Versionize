@@ -53,10 +53,16 @@ class Idea < ActiveRecord::Base
   end
   
   def num_commits(branch = "master")
+    if branch.nil?
+      branch = "master"
+    end
     self.repository.commit_count(branch)
   end
   
   def file(file_name, branch = "master")
+    if branch.nil?
+      branch = "master"
+    end
     blob_to_model(self.repository.tree(branch)/file_name)
   end
   

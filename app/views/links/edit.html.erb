@@ -2,9 +2,9 @@
 	
 <h2>Edit Link</h2>
 
-<%= form_for [@idea, @link] do |f| %>
+<%= form_tag link_branch_or_master_path(@idea, @branch, @link), :method => :put do %>
 
-	<%= f.text_area :url, {:class => "input_box input_link"} %>
+	<%= text_area_tag :url, @link.url, {:class => "input_box input_link"} %>
 	<br /><br />
 	<%= submit_tag 'Save link' %>
 	

@@ -2,9 +2,9 @@
 	
 <h1>Edit Text</h1>
 
-<%= form_for [@idea, @text] do |f| %>
+<%= form_tag text_branch_or_master_path(@idea, @branch, @text), :method => :put do %>
 
-	<%= f.text_area :body, {:class => "input_box input_text"} %>
+	<%= text_area_tag :body, @text.body, {:class => "input_box input_text"} %>
 	<br /><br />
 	<%= submit_tag 'Save text' %>
 	

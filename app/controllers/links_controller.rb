@@ -12,13 +12,13 @@ class LinksController < ApplicationController
    
   def edit
     @idea = Idea.find(params[:idea_id])
-    @link = @idea.file(Link::name_from_uuid(params[:id]))
+    @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
   end
   
   def create
     begin
       @idea = Idea.find(params[:idea_id])
-      @link = Link.new params[:link]
+      @link = Link.new(:url => params[:url])
       @link.order = @idea.next_order(@branch)
       @idea.create_version(@link, @current_user, "Save link", false, @branch)
       flash[:notice] = "Saved link"
@@ -33,13 +33,13 @@ class LinksController < ApplicationController
     begin
       @idea = Idea.find(params[:idea_id])
       @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
-      @link.update(params[:link])
+      @link.update(:url => params[:url])
       @idea.create_version(@link, @current_user, "Updated link", false, @branch)
       flash[:notice] = "Saved Link"
-      redirect_to idea_branch_or_master_path(@idea)
+      redirect_to idea_branch_or_master_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = "There was a problem! #{e}"
-      redirect_to edit_link_branch_or_master_path(@idea, @branch, @text)
+      redirect_to edit_link_branch_or_master_path(@idea, @branch, @link)
     end
   end
    

@@ -1,23 +1,24 @@
 class TextsController < ApplicationController
   
   include ApplicationHelper
+  include TextsHelper
   before_filter :require_user
   before_filter :find_branch
 
   def new
-   @idea = Idea.find(params[:idea_id])
-   @text = Text.new
+    @idea = Idea.find(params[:idea_id])
+    @text = Text.new
   end
   
   def edit
     @idea = Idea.find(params[:idea_id])
-    @text = @idea.file(Text::name_from_uuid(params[:id]))
+    @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
   end
 
   def create
     begin
       @idea = Idea.find(params[:idea_id])
-      @text = Text.new params[:text]
+      @text = Text.new(:body => params[:body])
       @text.order = @idea.next_order(@branch)
       @idea.create_version(@text, @current_user, "Save text", false, @branch)
       flash[:notice] = "Saved Text"
@@ -31,8 +32,9 @@ class TextsController < ApplicationController
   def update
     begin
       @idea = Idea.find(params[:idea_id])
+      # no need to get the file contents here, just save the new contents to git
       @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
-      @text.update(params[:text])
+      @text.update(:body => params[:body])
       @idea.create_version(@text, @current_user, "Updated text", false, @branch)
       flash[:notice] = "Saved Text"
       redirect_to idea_branch_or_master_path(@idea, @branch)
