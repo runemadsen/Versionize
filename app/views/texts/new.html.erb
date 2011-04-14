@@ -2,7 +2,7 @@
 
 <h1>Add text to idea</h1>
 
-<%= form_for [@idea, @text] do |f| %>
+<%= form_for [@idea, "branch", @text] do |f| %>
 
 	<%= f.text_area :body, {:value => 'Write your text here', :class => "input_box input_text"} %>
 	<br /><br />

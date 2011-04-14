@@ -1,6 +1,7 @@
 class ImagesController < ApplicationController
   
   include ApplicationHelper
+  include ImagesHelper
   before_filter :require_user
   before_filter :find_branch
   
@@ -21,7 +22,7 @@ class ImagesController < ApplicationController
           {'key' => key},
           {'acl' => 'public-read'},
           ['content-length-range', 0, 10000000],
-          {'success_action_redirect' => upload_success_idea_images_url}
+          {'success_action_redirect' => upload_success_branch_or_master_url(@idea, @branch)}
         ]
       }
     )

@@ -17,7 +17,6 @@ class LinksController < ApplicationController
   
   def create
     begin
-      raise Exception, @branch.inspect
       @idea = Idea.find(params[:idea_id])
       @link = Link.new params[:link]
       @link.order = @idea.next_order(@branch)

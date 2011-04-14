@@ -4,7 +4,7 @@
 
 <p>Tip: Try saving a link to an image</p>
 
-<%= form_for [@idea, @link] do |f| %>
+<%= form_for [@idea, "branch", @link] do |f| %>
 
 	<%= f.text_field :url, {:value => 'http://', :class => "input_box input_link"} %>
 	<br /><br />
