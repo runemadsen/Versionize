@@ -58,11 +58,11 @@
 	
 		<%= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators to idea"), idea_collaborations_path(@idea), :class => "sidebar_link background_color3" %>
 	
-	<!-- <div id="drop_box">
-			<div id="placeholder">Drop Idea Items Here</div>
-		</div> -->
+		<!-- <div id="drop_box">
+					<div id="placeholder">Drop Idea Items Here</div>
+				</div> -->
 		
-		<%#= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea?", :class => "sidebar_link font_color1") if @idea.is_owner? @current_user %>
+		<%= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea?", :class => "sidebar_link font_color1") if @idea.is_owner? @current_user %>
 	
 </div>
 <div class="clear"></div>

@@ -23,7 +23,7 @@ class BranchesController < ApplicationController
   
   def create
     @idea = Idea.find(params[:idea_id])
-    @branch = params[:branch_name].downcase.gsub!(" ", "")
+    @branch = params[:branch_name].downcase.gsub(" ", "")
     @idea.create_branch("master", @branch, current_user)
     redirect_to idea_branch_path(@idea, @branch)
   end
