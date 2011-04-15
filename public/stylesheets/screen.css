@@ -50,13 +50,14 @@ a {
 	color: #3f6d2c;
 }
 
-a.box_link {
+a.begin_idea {
 	font-size: 18px;
 	font-weight: bold;
 	background-color: #d25245;
 	color: #FFF;
 	text-decoration: none;
 	padding: 10px 15px;
+	margin: 0;
 }
 
 h1 {
@@ -78,6 +79,29 @@ ul.idea_list li {
 ul.idea_list li a.collaborator {
 	color: #c5546d;
 }
+
+/* New user
+_____________________________________________ */
+
+#new_user h3 {
+	margin-top: 0px;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+#new_user p {
+	font-size: 14px;
+}
+
+#new_user .tip_box {
+	margin-top: 20px;
+	color: #FFF;
+	padding: 10px;
+	width: 160px;
+	float: left;
+	margin-right: 15px;
+}
+
 
 /* Idea media
 _____________________________________________ */

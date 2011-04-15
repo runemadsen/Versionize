@@ -1,8 +1,8 @@
 <div class="grid_8">
-	<h1>You have <%= pluralize(@ideas.count, 'idea') %></h1>
+	<h1><%= @ideas.count > 0 ? "You have " + pluralize(@ideas.count, 'idea') : "Let's get started!" %></h1>
 </div>
 <div class="grid_4">
-	<p><%= link_to "Begin idea", new_idea_path, :class => "box_link" %></p>
+	<%= link_to "Begin idea", new_idea_path, :class => "begin_idea" %>
 </div>
 <div class="clear"></div>
 
@@ -10,6 +10,10 @@
 
 <div class="grid_8">
 	<ul class="idea_list">
+		
+	<% if @ideas.count == 0 %>
+		<%= render :partial => "welcome" %>
+	<% end %>
 			
 	<% @ideas.each_with_index do |idea, i| %>
 		<li>

@@ -18,7 +18,7 @@ describe ImagesController do
 
   describe "GET new" do
     it "should show the image form" do
-      Idea.should_receive(:find).with("1").and_return(@idea)  
+      User.should_receive(:published_idea).with("1").and_return(@idea)  
       get :new, :idea_id => "1"
       assigns[:image_upload].should_not be_nil
       response.should be_success
