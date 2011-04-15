@@ -1,12 +1,21 @@
-<div class="idea_item">
-	<%= image_tag(image.amazon_url) %>
-	
-	<% if edit %>
-		<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
-																												:item_id => image.id, 
-																												:item_type => "image",
-																												:drag => true,
-																												:color => 3} %>
-	<% end %>
-	
+<div class="idea_item item_image">
+	<div class="grid_8 alpha">
+		<div class="idea_item_icon_container">
+			<% if edit %>
+				<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
+																														:item_id => image.id, 
+																														:item_type => "image",
+																														:drag => true,
+																														:color => 1} %>
+			<% end %>
+		</div>
+		<div class="idea_item_main">
+			<%= image_tag(image.amazon_url) %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="grid_1 omega">
+		
+	</div>
+	<div class="clear"></div>
 </div>
