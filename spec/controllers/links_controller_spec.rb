@@ -6,9 +6,12 @@ describe LinksController do
   fixtures :ideas, :users
    
   before do
-    UserSession.create(users(:rune))
+    @user = users(:rune)
+    UserSession.create(@user)
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
+    @idea.save
+    Collaboration.create! :user => @user, :idea => @idea, :owner => true
     @idea.create_repo
   end
    
@@ -18,21 +21,18 @@ describe LinksController do
  
   describe "GET new" do
     it "should show the link form" do
-      Idea.should_receive(:find).with("1").and_return(@idea)  
-      get :new, :idea_id => "1"
+      get :new, :idea_id => @idea.id
       response.should be_success
     end
   end
 
   describe "POST create" do
     it "should save link in repository and redirect" do
-      Idea.should_receive(:find).with("37").and_return(@idea)
       post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com" } }
       response.should redirect_to(idea_path(@idea))
     end
     
     it "should save link in repository on newbranch and redirect" do
-      Idea.should_receive(:find).with("37").and_return(@idea)
       post :create, { :idea_id => "37", :branch_id => "newbranch", :link => { :url => "www.runemadsen.com" } }
       response.should redirect_to(idea_branch_path(@idea, "newbranch"))
     end

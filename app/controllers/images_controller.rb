@@ -8,7 +8,7 @@ class ImagesController < ApplicationController
   def new
     
     @idea = current_user.published_idea params[:idea_id]
-    
+  
     unless @idea.nil?
       expiration = 20.years.from_now
       key = "users/#{current_user.id}/images/#{Time.now.strftime('%Y%m%d%H%M%S')}"

@@ -6,8 +6,12 @@ describe TextsController do
   fixtures :ideas, :users
    
   before do
-    UserSession.create(users(:rune))    
+    @user = users(:rune)
+    UserSession.create(@user)
+    @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
+    @idea.save
+    Collaboration.create! :user => @user, :idea => @idea, :owner => true
     @idea.create_repo
     @text = Text.new(:body => "This is my RSpec idea description")
   end
@@ -18,8 +22,7 @@ describe TextsController do
   
   describe "GET new" do
     it "should show the text form" do
-      Idea.should_receive(:find).with("1").and_return(@idea)
-      get :new, :idea_id => "1"
+      get :new, :idea_id => @idea.id
       response.should be_success
     end
   end
@@ -27,13 +30,11 @@ describe TextsController do
   describe "POST create" do
     
     it "should save text without branch specified" do
-      Idea.should_receive(:find).with("37").and_return(@idea)
       post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
       response.should redirect_to(idea_path(@idea))
     end
     
     it "should save text with branch specified" do
-      Idea.should_receive(:find).with("37").and_return(@idea)
       post :create, { :idea_id => "37", :branch_id => "newbranch", :text => { :body => "This is some text" } }
       response.should redirect_to(idea_branch_path(@idea, "newbranch"))
     end

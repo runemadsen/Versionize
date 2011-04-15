@@ -6,9 +6,12 @@ describe ImagesController do
   fixtures :ideas, :users
 
   before do
-    UserSession.create(users(:rune))
+    @user = users(:rune)
+    UserSession.create(@user)
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
+    @idea.save
+    Collaboration.create! :user => @user, :idea => @idea, :owner => true
     @idea.create_repo
   end
 
@@ -18,8 +21,7 @@ describe ImagesController do
 
   describe "GET new" do
     it "should show the image form" do
-      User.should_receive(:published_idea).with("1").and_return(@idea)  
-      get :new, :idea_id => "1"
+      get :new, :idea_id => @idea.id
       assigns[:image_upload].should_not be_nil
       response.should be_success
     end
