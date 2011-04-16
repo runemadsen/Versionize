@@ -8,7 +8,10 @@
 	
 	<%= text_area_tag "link[notes]", @link.notes.nil? ? "Notes (optional)" : @link.notes, :class => 'input_box input_text' %><br />
 			
-	<%= submit_tag 'Save link' %>
+	<%= submit_tag 'Save link' %><br /><br />
+	
+	<%#= link_to "Destroy", , :method => :delete %>
+	<%= button_to "Delete Link", link_branch_or_master_path(@idea, @branch, @link), :confirm => "Are you sure you want to delete this link?", :method => :delete %>
 	
 <% end %>
 
