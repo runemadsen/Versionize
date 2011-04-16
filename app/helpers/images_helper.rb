@@ -11,4 +11,9 @@ module ImagesHelper
   def upload_success_branch_or_master_url idea, branch
     branch == "master" || branch.nil? ? upload_success_idea_images_url : upload_success_idea_branch_images_url
   end
+  
+  def image_branch_or_master_path idea, branch, image
+    branch == "master" || branch.nil? ? idea_image_path(idea, image.id) : idea_branch_image_path(idea, branch, image.id)
+  end
+  
 end

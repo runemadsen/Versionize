@@ -33,6 +33,17 @@ class ImagesController < ApplicationController
     end
   end
   
+  def edit
+    @idea = current_user.published_idea params[:idea_id]
+    unless @idea.nil?
+      @image = @idea.file(Image::name_from_uuid(params[:id]), @branch)
+    else
+      flash[:error] = "you do not have access to editing items in this idea"
+      redirect_to idea_branch_or_master_path(@idea, @branch)
+    end
+  end
+  
+  
   def upload_succes
     
     @idea = current_user.published_idea params[:idea_id]
@@ -50,7 +61,7 @@ class ImagesController < ApplicationController
        end
      else
        flash[:error] = "you do not have access to adding images to this idea"
-       redirect_to ideas_path
+       redirect_to idea_branch_or_master_path(@idea, @branch)
      end
   end
   
@@ -71,7 +82,7 @@ class ImagesController < ApplicationController
       end
     else
       flash[:error] = "you do not have access to adding images to this idea"
-      redirect_to ideas_path
+      redirect_to idea_branch_or_master_path(@idea, @branch)
     end
   end
 
