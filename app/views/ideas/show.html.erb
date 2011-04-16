@@ -11,7 +11,7 @@
 <div class="grid_9">
 
 	<% @idea.version(@version, @branch).each_with_index do |content, i| %>
-		
+	
 		<% if i == 0 %>
 			<%= render :partial => "texts/description", :locals => {:text => content, :edit => @edit} %>
 			<% if @edit %>
