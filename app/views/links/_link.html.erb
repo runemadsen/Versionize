@@ -13,6 +13,10 @@
 		<div class="idea_item_main">
 			<% if link.file_extension == ".jpg" || link.file_extension == ".gif" || link.file_extension == ".png" %>
 				<%= image_tag link.url %>
+			<% elsif link.vimeo?%>
+				<iframe src="http://player.vimeo.com/video/<%= link.vimeo_video_id %>?title=0&amp;byline=0&amp;portrait=0&amp;color=6a7a92" width="570" height="321" frameborder="0"></iframe>
+			<% elsif link.youtube?%>
+				<iframe title="YouTube video player" width="570" height="458" src="http://www.youtube.com/embed/<%= link.youtube_video_id %>?rel=0" frameborder="0" allowfullscreen></iframe>
 			<% else %>
 				<%= link_to link.url, link.url, :target => "_blank" %>
 			<% end %>
