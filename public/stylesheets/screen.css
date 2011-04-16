@@ -150,6 +150,11 @@ div.item_link {
 	font-size: 22px;
 }
 
+div.item_link .link_notes {
+	margin-top: 10px;
+	font-size: 15px;
+}
+
 /* Media: Image
 _____________________________________________ */
 

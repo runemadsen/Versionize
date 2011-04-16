@@ -31,7 +31,12 @@ class LinksController < ApplicationController
     
     unless @idea.nil?
       begin
-        @link = Link.new(:url => params[:url])
+        
+        if params[:link][:notes] == "Notes (optional)"
+          params[:link][:notes] = nil
+        end
+        
+        @link = Link.new(params[:link])
         @link.order = @idea.next_order(@branch)
         @idea.create_version(@link, @current_user, "Save link", false, @branch)
         flash[:notice] = "Saved link"
@@ -52,8 +57,13 @@ class LinksController < ApplicationController
     
     unless @idea.nil?
       begin
+        
+        if params[:link][:notes] == "Notes (optional)"
+          params[:link][:notes] = nil
+        end
+        
         @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
-        @link.update(:url => params[:url])
+        @link.update(params[:link])
         @idea.create_version(@link, @current_user, "Updated link", false, @branch)
         flash[:notice] = "Saved Link"
         redirect_to idea_branch_or_master_path(@idea, @branch)

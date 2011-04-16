@@ -6,8 +6,12 @@
 
 <%= form_tag links_branch_or_master_path(@idea, @branch) do %>
 
-	<%= text_field_tag :url, 'http://', {:class => "input_box input_link"} %>
-	<br /><br />
+	<%= text_field_tag "link[url]", 'http://', {:class => "input_box input_link"} %>
+	
+	<%= text_area_tag "link[notes]", "Notes (optional)", :class => 'input_box input_text',
+	 		:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+			:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
+	
 	<%= submit_tag 'Save' %>
 	
 <% end %>

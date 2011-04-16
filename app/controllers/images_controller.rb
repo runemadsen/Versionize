@@ -36,22 +36,22 @@ class ImagesController < ApplicationController
   def upload_succes
     
     @idea = current_user.published_idea params[:idea_id]
-    
+           
     unless @idea.nil?
-      begin
-        @image = Image.new(:key => params[:key])
-        @image.order = @idea.next_order(@branch)
-        @idea.create_version(@image, @current_user, "Save Image", false, @branch)
-        flash[:notice] = "Saved image"
-        redirect_to idea_branch_or_master_path(@idea, @branch)
-      rescue Exception => e 
-        flash[:error] = "There was a problem! #{e}"
-        redirect_to new_image_branch_or_master_path(@idea, @branch)
-      end
-    else
-      flash[:error] = "you do not have access to adding images to this idea"
-      redirect_to ideas_path
-    end
+       begin
+         @image = Image.new(:key => params[:key])
+         @image.order = @idea.next_order(@branch)
+         @idea.create_version(@image, @current_user, "Save Image", false, @branch)
+         flash[:notice] = "Saved image"
+         redirect_to idea_branch_or_master_path(@idea, @branch)
+       rescue Exception => e 
+         flash[:error] = "There was a problem! #{e}"
+         redirect_to new_image_branch_or_master_path(@idea, @branch)
+       end
+     else
+       flash[:error] = "you do not have access to adding images to this idea"
+       redirect_to ideas_path
+     end
   end
   
   def destroy

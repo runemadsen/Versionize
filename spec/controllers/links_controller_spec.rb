@@ -27,8 +27,16 @@ describe LinksController do
   end
 
   describe "POST create" do
+    
     it "should save link in repository and redirect" do
       post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com" } }
+      assigns[:link].url.should == "www.runemadsen.com" 
+      response.should redirect_to(idea_path(@idea))
+    end
+    
+    it "should save extra info in repository and redirect" do
+      post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com", :notes => "This is my notes" } }
+      assigns[:link].notes.should == "This is my notes" 
       response.should redirect_to(idea_path(@idea))
     end
     
@@ -36,6 +44,18 @@ describe LinksController do
       post :create, { :idea_id => "37", :branch_id => "newbranch", :link => { :url => "www.runemadsen.com" } }
       response.should redirect_to(idea_branch_path(@idea, "newbranch"))
     end
+  
+  end
+  
+  describe "PUT update" do
+
+     it "should update link in repository and redirect" do
+       put :create, { :idea_id => "37", :link => { :url => "www.runemadsen2.com", :notes => "More notes" } }
+       assigns[:link].url.should == "www.runemadsen2.com" 
+       assigns[:link].notes.should == "More notes"
+       response.should redirect_to(idea_path(@idea))
+     end
+     
   end
   
 end

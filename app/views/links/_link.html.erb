@@ -16,6 +16,11 @@
 			<% else %>
 				<%= link_to link.url, link.url, :target => "_blank" %>
 			<% end %>
+			<% unless link.notes.nil? %>
+				<div class="link_notes">
+					<%= h(link.notes).gsub(/\n/, '<br/>') %>
+				</div>
+			<% end %>
 		</div>
 		<div class="clear"></div>
 	</div>

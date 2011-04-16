@@ -4,8 +4,10 @@
 
 <%= form_tag link_branch_or_master_path(@idea, @branch, @link), :method => :put do %>
 
-	<%= text_area_tag :url, @link.url, {:class => "input_box input_link"} %>
-	<br /><br />
+	<%= text_area_tag "link[url]", @link.url, {:class => "input_box input_link"} %>
+	
+	<%= text_area_tag "link[notes]", @link.notes.nil? ? "Notes (optional)" : @link.notes, :class => 'input_box input_text' %><br />
+			
 	<%= submit_tag 'Save link' %>
 	
 <% end %>
