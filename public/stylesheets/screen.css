@@ -80,6 +80,17 @@ ul.idea_list li a.collaborator {
 	color: #c5546d;
 }
 
+.quote {
+	font-style: italic; 
+	font-size: 14px;
+	line-height: 22px;
+	color: #3e3c3c;
+}
+
+.quoter {
+	text-align: right;
+}
+
 /* New user
 _____________________________________________ */
 
@@ -172,6 +183,10 @@ div.edit_box {
 
 /* Sidebar
 _____________________________________________ */
+
+#sidebar h2 {
+	margin-top: 0;
+}
 
 .sidebar_box {
 	background-color: #f2f2f2;

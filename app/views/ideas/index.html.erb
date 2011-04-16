@@ -1,5 +1,5 @@
 <div class="grid_8">
-	<h1><%= @ideas.count > 0 ? "You have " + pluralize(@ideas.count, 'idea') : "Let's get started!" %></h1>
+	<h1>You've got lots of ideas!</h1>
 </div>
 <div class="grid_4">
 	<%= link_to "Begin idea", new_idea_path, :class => "begin_idea" %>
@@ -23,7 +23,9 @@
 	<% end %>
 	</ul>
 </div>
-<div class="grid_4">
-	<p class="tip">This is your list of ideas. Create an idea when you need a place to document a hunch, you need to collect a bunch of inspirational links or images into a central place, or as a starting point for group work. You can keep adding content to an idea, and you can always go back in history to see older versions of your idea.</p>	
+<div class="grid_4" id="sidebar">
+	<h2>What is an idea?</h2>
+	<p class="quote">"The patterns are simple, but followed together, they make for a whole that is wiser than the sum of its parts. Go for a walk; cultivate hunches; write everything down, but keep your folders messy; embrace serendipity; make generative mistakes; take on multiple hobbies; frequent coffeehouses and other liquid networks; follow the links; let others build on your ideas; borrow, recycle; reinvent. Build a tangled bank."</p>
+	<p class="quoter">- Steven Johnson</p>
 </div>
 <div class="clear"></div>
