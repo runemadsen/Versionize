@@ -17,13 +17,14 @@ class UsersController < ApplicationController
       begin
         @user = User.new(params[:user])
         @user.save
+        @user_session = UserSession.new(params[:user_session])
+        @user_session.save
         flash[:notice] = "Account created!"
         redirect_to '/'
       rescue Exception => e 
         flash[:notice] = "Something went wrong: #{e}"
         redirect_to new_user_path
       end
-      
     else
       flash[:error] = "You have entered a wrong invitation code, or you code doesn't match your email adress"
       redirect_to new_user_path

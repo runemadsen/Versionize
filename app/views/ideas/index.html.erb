@@ -14,7 +14,7 @@
 	<% if @ideas.count == 0 %>
 		<%= render :partial => "welcome" %>
 	<% elsif @ideas.count <= 3 %>
-		<p id="add_more_ideas">... but you've only added <%= @ideas.count %> of them. Click <%= link_to "Begin idea", new_idea_path, :class => "font_color1" %> to jot down your thoughts.</p>
+		<div class="message_box">... but you've only added <%= @ideas.count %> of them. Click <%= link_to "Begin idea", new_idea_path, :class => "font_color1" %> to jot down your thoughts.</div>
 	<% end %>
 			
 	<% @ideas.each_with_index do |idea, i| %>

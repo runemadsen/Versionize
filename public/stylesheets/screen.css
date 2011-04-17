@@ -113,7 +113,7 @@ _____________________________________________ */
 	margin-right: 15px;
 }
 
-p#add_more_ideas {
+div.message_box {
 	background-color: #eaeaea;
 	padding: 10px 20px;
 	margin-top: 0px;
