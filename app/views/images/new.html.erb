@@ -1,16 +1,36 @@
-<div class="grid_8">
-	
-<h1>Add image to idea</h1>
+<div class="grid_12">
+	<h1>Add image to idea</h1>
+</div>
+<div class="clear"></div>
 
-<p>Max upload size: 10mb! Let us know if and why you really need more</p>
+<div class="grid_12 dotted_line_small"></div>
+<div class="grid_9">
+	
+<h2 class="remove_margin_top">Upload file from your computer</h2>
+
+<p>Max upload size: 10mb!</p>
 
 <% ungulate_upload_form_for(@image_upload) do %>
   <%= file_field_tag :file, :class => "input_box input_link" %><br /><br />
 
-  <%= submit_tag 'Upload' %>
+  <%= submit_tag 'Upload Image' %>
 <% end %>
 
+
+<h2>Insert link to image</h2>
+
+<%= form_tag links_branch_or_master_path(@idea, @branch) do %>
+
+	<%= text_field_tag "link[url]", 'http://', {:class => "input_box input_link"} %><br /><br />
+	
+	<%= submit_tag 'Save Image Link' %>
+	
+<% end %>
+	
 </div>
-<div class="grid_4">
+<div class="grid_3">
+	
 </div>
 <div class="clear"></div>
+	
+	
