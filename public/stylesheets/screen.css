@@ -337,6 +337,7 @@ _____________________________________________ */
 	height: 29px;
 	line-height: 29px;
 	text-align: center;
+	background-color: gray;
 }
 
 #media_box ul li a {
@@ -363,6 +364,13 @@ _____________________________________________ */
 	-webkit-transform: rotate(1deg);
 	-moz-transform: rotate(1deg);
 	background-color: #6a7a92;
+}
+
+#media_box ul li#video {
+	margin-top: 3px;
+	-webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(-2deg);
+	background-color: #6c6a69;
 }
 
 /* Form styling

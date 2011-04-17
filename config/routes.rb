@@ -16,6 +16,7 @@ Versionize::Application.routes.draw do
     
     idea_resources = lambda do
       resources :versions
+      resources :videos
       resources :links  
       resources :texts
       resources :images do

@@ -1,0 +1,30 @@
+<div class="grid_12">
+	<h1>Add video to idea</h1>
+</div>
+<div class="clear"></div>
+
+<div class="grid_12 dotted_line_small"></div>
+<div class="grid_9">
+	
+	<p>Insert a link to a Vimeo or Youtube video. The video will automatically be embedded.</p>
+
+	<%= form_tag links_branch_or_master_path(@idea, @branch) do %>
+
+		<%= text_field_tag "link[url]", 'http://', {:class => "input_box input_link"} %>
+
+		<%= text_area_tag "link[notes]", "Notes (optional)", :class => 'input_box input_text',
+		 		:onFocus => "if(this.value==this.defaultValue) this.value='';", 
+				:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
+
+		<%= submit_tag 'Save Video Link' %>
+
+	<% end %>
+	
+	
+</div>
+<div class="grid_3">
+	
+</div>
+<div class="clear"></div>
+	
+	
