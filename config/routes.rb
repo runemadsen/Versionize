@@ -31,6 +31,8 @@ Versionize::Application.routes.draw do
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
   
+  match 'browse' => "browse#index"
+  
   root :to => 'ideas#index'
 
   # The priority is based upon order of creation:

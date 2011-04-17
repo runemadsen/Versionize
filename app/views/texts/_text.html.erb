@@ -1,15 +1,19 @@
 <div class="idea_item">
 	<div class="grid_8 alpha">
 		<div class="idea_item_icon_container">
-			<% if edit %>
-				<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
-																														:item_id => text.id, 
-																														:item_type => "text",
-																														:edit_path => edit_text_branch_or_master_path(@idea, @branch, text),
-																														:drag => true,
-																														:color => 2} 
-																														%>
-			<% end %>
+			<% 
+				locals = {:idea_id => @idea.id, 
+									:item_id => text.id, 
+									:item_type => "text",
+									:color => 2}
+				
+				if edit
+					locals[:edit_path] = edit_text_branch_or_master_path(@idea, @branch, text)
+					locals[:drag] = true
+				end
+			%>
+			
+			<%= render :partial => "ideas/editbox", :locals => locals %>
 		</div>
 		<div class="idea_item_main">
 			<%= h(text.body).gsub(/\n/, '<br/>') %>

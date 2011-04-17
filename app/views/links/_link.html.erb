@@ -1,14 +1,21 @@
 <div class="idea_item item_link">
 	<div class="grid_8 alpha">
 		<div class="idea_item_icon_container">
-			<% if edit %>
-				<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
-																														:item_id => link.id, 
-																														:item_type => "link",
-																														:edit_path => edit_link_branch_or_master_path(@idea, @branch, link),
-																														:drag => true,
-																														:color => 4} %>
-			<% end %>
+			
+			<% 
+				locals = {:idea_id => @idea.id, 
+									:item_id => link.id, 
+									:item_type => "link",
+									:color => 4}
+				
+				if edit
+					locals[:edit_path] = edit_link_branch_or_master_path(@idea, @branch, link)
+					locals[:drag] = true
+				end
+			%>
+			
+			<%= render :partial => "ideas/editbox", :locals => locals %>
+		
 		</div>
 		<div class="idea_item_main">
 			<% if link.file_extension == ".jpg" || link.file_extension == ".gif" || link.file_extension == ".png" %>

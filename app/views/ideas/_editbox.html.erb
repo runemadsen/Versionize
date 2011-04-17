@@ -1,11 +1,14 @@
-<% if defined? drag %>
-	<div class="idea_item_icon background_color<%= color %>">
+<% unless defined? hide_box %>
+<div class="idea_item_icon background_color<%= color %>">
+	<% if defined? drag %>
 		<%= image_tag "drag_icon.png", :class => "drag_item", 
 																	 :"data-idea" => idea_id, 
 																	 :"data-item" => item_id, 
 																	 :"data-item-type" => item_type %>
-	</div>
+	<% end %>
+</div>
 <% end %>
+
 
 <% if defined? edit_path %>																			
 	<div class="idea_item_icon background_color<%= color %><% if defined? drag %>_darker<% end %>">

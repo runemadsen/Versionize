@@ -1,13 +1,21 @@
 <div id="description" class="idea_item">
 	
 	<div class="grid_8 alpha">
-		<% if edit %>
-			<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
-																													:item_id => text.id, 
-																													:item_type => "text",
-																													:edit_path => edit_text_branch_or_master_path(@idea, @branch, text),
-																													:color => 10} %>
-		<% end %>
+		
+		<% 
+			locals = {:idea_id => @idea.id, 
+								:item_id => text.id, 
+								:item_type => "text",
+								:color => 10,
+								:hide_box => true}
+			
+			if edit
+				locals[:edit_path] = edit_text_branch_or_master_path(@idea, @branch, text)
+			end
+		%>
+		
+		<%= render :partial => "ideas/editbox", :locals => locals %>
+		
 		<%= h(text.body).gsub(/\n/, '<br/>') %>
 		<div class="clear"></div>
 	</div>
