@@ -1,7 +1,21 @@
-<% form_for @user, :url => {:action => "update"} do |f| %>
+<div class="grid_12">
+	<h1>User Account</h1>
+</div>
+<div class="clear"></div>
+
+<div class="grid_12 dotted_line_small"></div>
+<div class="grid_9">
+	
+<% form_for @user, :method => :put do |f| %>
 
 <%= render :partial => 'form', :locals => {:f => f} %>
 
 <p><%= submit_tag 'Save account info' %></p>
 
 <% end %>
+	
+</div>
+<div class="grid_3">
+	
+</div>
+<div class="clear"></div>

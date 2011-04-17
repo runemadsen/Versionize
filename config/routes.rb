@@ -32,6 +32,7 @@ Versionize::Application.routes.draw do
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
   
+  match 'account' => "users#edit"
   match 'explore' => "browse#explore"
   
   root :to => 'ideas#index'

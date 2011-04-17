@@ -5,19 +5,20 @@
 	
 	<p id="front_text">Sign up as a new user!</p>
 	
+	
 	<% form_for @user do |f| %>
 	
 		<%= f.text_field :email, :value => "Email", :class => "front_input",
 						:onFocus => "if(this.value==this.defaultValue) this.value='';", 
-						:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
+						:onBlur => "if(this.value=='') this.value=this.defaultValue;" %>
 	
-		<%= f.password_field :password, :value => "Password", :class => "front_input front_input_password",
-										:onFocus => "if(this.value==this.defaultValue) this.value='';", 
-										:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
+		<%= text_field_tag :password_dummy, "Password", :class => "front_input front_input_password"  %>
+		
+		<%= f.password_field :password, :value => "", :class => "front_input front_input_password", :style => "display: none" %>
+		
+		<%= text_field_tag :password_confirmation_dummy, "Repeat Password", :class => "front_input front_input_password"  %>
 	
-		<%= f.password_field :password_confirmation, :value => "Password", :class => "front_input front_input_password",
-														:onFocus => "if(this.value==this.defaultValue) this.value='';", 
-														:onBlur => "if(this.value=='') this.value=this.defaultValue;" %><br />
+		<%= f.password_field :password_confirmation, :value => "", :class => "front_input front_input_password", :style => "display: none" %>
 
 		<%= text_field_tag :code, "Invitation Code", :class => "front_input front_input_password",
 																		:onFocus => "if(this.value==this.defaultValue) this.value='';", 

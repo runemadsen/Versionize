@@ -3,10 +3,18 @@ class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
   
-  layout "front", :only => [:new]
+  def show
+    # Public facing user profiles
+  end
+
+  def edit
+    #  Edit logged in user
+    @user = @current_user
+  end
   
   def new
     @user = User.new
+    render :layout => "front"
   end
   
   def create
@@ -33,16 +41,8 @@ class UsersController < ApplicationController
     
   end
   
-  def show
-    @user = @current_user
-  end
-
-  def edit
-    @user = @current_user
-  end
-  
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
+    @user = @current_user
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
       redirect_to user_path(@user)

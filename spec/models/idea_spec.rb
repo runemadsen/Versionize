@@ -94,7 +94,6 @@ describe Idea do
     
     it "should be able to set to public" do
       idea = Idea.new
-      puts idea.inspect
       idea.access = Idea::PUBLIC
       idea.access.should == Idea::PUBLIC
     end

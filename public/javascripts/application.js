@@ -89,4 +89,23 @@ $(document).ready(function()
 	
 	addToggleEvent();
 	
+	/* New user
+	________________________________________________________ */
+	
+	function togglePassword(hide_object, show_object)
+	{
+		 hide_object.hide();
+		 show_object.show();
+		 show_object.focus();
+	}
+	
+	
+	$('#password_dummy').focus(function() {
+		 togglePassword($(this), $('#user_password'));
+	});
+	
+	$('#password_confirmation_dummy').focus(function() {
+		 togglePassword($(this), $('#user_password_confirmation'));
+	});
+	
 });
