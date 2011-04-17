@@ -1,9 +1,3 @@
-function add_formfield(divname, content)
-{
-	$(divname).append(content);
-	return false;
-}
-
 $(document).ready(function() 
 {
 	$('.idea_item .edit_box').hide();
@@ -54,5 +48,45 @@ $(document).ready(function()
 	$('.tip_field').focusout(function() {
 		$(".tip_highlight").removeClass("tip_highlight");
 	});
+	
+	/*	Toggle idea private / public
+	________________________________________________________ */
+	
+	function addToggleEvent()
+	{
+		$('.access_box:not(.active) > a').click(function() 
+		{
+			 sendAndToggle();	
+			 return false;
+		});
+	}
+	
+	function sendAndToggle()
+	{
+		 	var idea_id = $("#access_control").attr('data-idea-id');
+					
+			$.ajax({
+				url: "/ideas/" + idea_id + "/toggle_access",
+				type: "POST",
+			  success: function(data){
+					
+					var active = $('#access' + data);
+					active.html(active.find("a").html());
+					active.addClass("active");
+					
+					var deactive = $('#access' + (data == "0" ? "1" : "0" ));
+					deactive.removeClass("active");
+					deactive.html('<a href="#">' + deactive.html() + '</a>');
+					
+					addToggleEvent();
+					
+			  },
+				error:function (xhr, ajaxOptions, thrownError){
+					alert(thrownError);
+				}
+			});
+	}
+	
+	addToggleEvent();
 	
 });

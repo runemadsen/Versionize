@@ -86,4 +86,19 @@ describe Idea do
     end
   end
   
+  describe "public / private" do
+    it "should default to private" do
+      idea = Idea.new
+      idea.access.should == Idea::PRIVATE
+    end
+    
+    it "should be able to set to public" do
+      idea = Idea.new
+      puts idea.inspect
+      idea.access = Idea::PUBLIC
+      idea.access.should == Idea::PUBLIC
+    end
+    
+  end
+  
 end

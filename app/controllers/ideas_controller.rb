@@ -51,4 +51,19 @@ class IdeasController < ApplicationController
     end
   end
   
+  def toggle_access
+    @idea = current_user.published_idea params[:id]
+    
+    unless @idea.nil?
+      @idea.access = @idea.access == Idea::PUBLIC ? Idea::PRIVATE : Idea::PUBLIC
+      @idea.save  
+    else
+      raise Exception, "Idea does not belong to you"
+    end
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
 end

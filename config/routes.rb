@@ -10,6 +10,10 @@ Versionize::Application.routes.draw do
   
   resources :ideas do
     resources :collaborations
+    member do
+      post :toggle_access
+    end
+    
     idea_resources = lambda do
       resources :versions
       resources :links  

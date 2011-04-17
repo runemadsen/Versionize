@@ -7,11 +7,21 @@ class Idea < ActiveRecord::Base
   
   REPO_PATH = 'repos/repo'
   REPO_EXT = '.git'
+  PRIVATE = 0
+  PUBLIC = 1
   
   def after_initialize
     if self.repo.nil?
       self.repo = REPO_PATH + (Idea.count + 1).to_s + REPO_EXT
     end
+  end
+  
+  def private?
+    return access == PRIVATE
+  end
+  
+  def public?
+    return access == PUBLIC
   end
   
   def repository
