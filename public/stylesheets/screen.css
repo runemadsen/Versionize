@@ -416,6 +416,15 @@ _____________________________________________ */
 	margin-top: 12px;
 }
 
+.input_textfield {
+	width: 470px;
+	height: 32px;
+	padding-left: 12px;
+	font-size: 19px;
+	color: #323232;
+	margin-top: 12px;
+}
+
 /* Notice
 _____________________________________________ */
 

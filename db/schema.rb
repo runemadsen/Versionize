@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110416234519) do
+ActiveRecord::Schema.define(:version => 20110418213822) do
 
   create_table "collaborations", :force => true do |t|
     t.integer  "idea_id"
@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(:version => 20110416234519) do
     t.string   "last_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "website"
+    t.string   "location"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

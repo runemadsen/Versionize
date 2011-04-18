@@ -8,7 +8,27 @@
 	
 <% form_for @user, :method => :put do |f| %>
 
-<%= render :partial => 'form', :locals => {:f => f} %>
+<%= f.label :name %><br />
+<%= f.text_field :name, :class => "input_box input_textfield" %><br />
+<br />
+
+<%= f.label :email %><br />
+<%= f.text_field :email, :class => "input_box input_textfield" %><br />
+<br />
+
+<%= f.label :website %><br />
+<%= f.text_field :website, :class => "input_box input_textfield" %><br />
+<br />
+
+<%= f.label :location %><br />
+<%= f.text_field :location, :class => "input_box input_textfield" %><br />
+<br />
+
+<%= f.label :password, f.object.new_record? ? nil : "Change password" %><br />
+<%= f.password_field :password, :class => "input_box input_textfield" %><br />
+<br />
+<%= f.label :password_confirmation %><br />
+<%= f.password_field :password_confirmation, :class => "input_box input_textfield" %><br /><br />
 
 <p><%= submit_tag 'Save account info' %></p>
 

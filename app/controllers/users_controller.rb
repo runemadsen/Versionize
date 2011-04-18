@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   
   def show
     # Public facing user profiles
+    @user = User.find(params[:id])
   end
 
   def edit
@@ -42,11 +43,17 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = @current_user
-    if @user.update_attributes(params[:user])
-      flash[:notice] = "Account updated!"
-      redirect_to user_path(@user)
+    @user = User.find(params[:id])
+    if @user.id == @current_user.id
+      if @user.update_attributes(params[:user])
+        flash[:notice] = "Account updated!"
+        redirect_to user_path(@user)
+      else
+        flash[:error] = "Something went wrong"
+        render :action => :edit
+      end
     else
+      flash[:error] = "You don't have access to update this users info"
       render :action => :edit
     end
   end
