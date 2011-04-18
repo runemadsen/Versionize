@@ -7,20 +7,9 @@
 <div class="grid_9">
 
 	<% @idea.version(@version, @branch).each_with_index do |content, i| %>
-	
 		<% if i == 0 %>
 			<%= render :partial => "texts/description", :locals => {:text => content, :edit => @edit} %>
-			<% if @edit %>
-			<div id="media_box">
-				<ul>
-					<li id="text"><%= link_to "Text", new_text_branch_or_master_path(@idea, @branch)%></li>
-					<li id="image"><%= link_to "Image", new_image_branch_or_master_path(@idea, @branch) %></li>
-					<li id="link"><%= link_to "Link", new_link_branch_or_master_path(@idea, @branch)%></li>
-					<li id="video"><%= link_to "Video", new_video_branch_or_master_path(@idea, @branch)%></li>
-					<div class="clear"></div>
-				</ul>
-			</div>
-			<% end %>
+			<%= render(:partial => "mediabox", :locals => {:idea => @idea, :branch => @branch}) if @edit %>
 		<% else %>
 			<%= render :partial => content.class.name.pluralize.downcase + "/" + content.class.name.downcase, 
 									:locals => { content.class.name.downcase.to_sym => content, :edit => @edit} %>
