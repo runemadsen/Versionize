@@ -5,9 +5,12 @@
 
 <div class="grid_12 dotted_line_small"></div>
 <div class="grid_9">
-
-	<% @ideas.each do |idea| %>
-		<%= idea.inspect %><br /><br />
+	
+	<ul class="idea_list">
+	<% @ideas.each_with_index do |idea, i| %>
+		<li>
+			<%= link_to idea.name, idea_url(idea), :class => "font_color4" %>
+		</li>
 	<% end %>
 	
 </div>
