@@ -4,30 +4,30 @@
 <div class="clear"></div>
 
 <div class="grid_12 dotted_line_small"></div>
-<div class="grid_9">
+<div class="grid_7">
 	
 <% form_for @user, :method => :put do |f| %>
 
-<%= f.label :name %><br />
+<%= f.label :name, :class => "font_color1" %><br />
 <%= f.text_field :name, :class => "input_box input_textfield" %><br />
 <br />
 
-<%= f.label :email %><br />
+<%= f.label :email, :class => "font_color2" %><br />
 <%= f.text_field :email, :class => "input_box input_textfield" %><br />
 <br />
 
-<%= f.label :website %><br />
+<%= f.label :website, :class => "font_color3" %><br />
 <%= f.text_field :website, :class => "input_box input_textfield" %><br />
 <br />
 
-<%= f.label :location %><br />
+<%= f.label :location, :class => "font_color4" %><br />
 <%= f.text_field :location, :class => "input_box input_textfield" %><br />
 <br />
 
-<%= f.label :password, f.object.new_record? ? nil : "Change password" %><br />
+<%= f.label :password, f.object.new_record? ? nil : "Change password", :class => "font_color5" %><br />
 <%= f.password_field :password, :class => "input_box input_textfield" %><br />
 <br />
-<%= f.label :password_confirmation %><br />
+<%= f.label :password_confirmation, :class => "font_color8" %><br />
 <%= f.password_field :password_confirmation, :class => "input_box input_textfield" %><br /><br />
 
 <p><%= submit_tag 'Save account info' %></p>
@@ -35,7 +35,13 @@
 <% end %>
 	
 </div>
-<div class="grid_3">
+<div class="grid_5">
+	<h2 class="remove_margin_top">Profile Image</h2>
+	<%= image_tag @user.gravatar_url(:default => User::DEFAULT_PROFILE), :class => "gravatar" %>
+	<p class="small_text">
+		Change your avatar at <a href="http://www.gravatar.com" target="_blank">Gravatar.com</a>.<br />
+		Use <%= @user.email %> as your email address.
+	</p>
 	
 </div>
 <div class="clear"></div>

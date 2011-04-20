@@ -1,10 +1,15 @@
 class User < ActiveRecord::Base
   
+  include Gravtastic
+  has_gravatar
+  
   acts_as_authentic
   
   has_many :collaborations
   has_many :ideas, :through => :collaborations
   has_many :invites
+  
+  DEFAULT_PROFILE = "https://s3.amazonaws.com/versionize/default_profile.jpg"
   
   def published_ideas
     ideas.includes([:collaborations]).where :published => true

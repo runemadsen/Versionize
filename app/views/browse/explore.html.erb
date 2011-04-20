@@ -9,7 +9,12 @@
 	<ul class="idea_list">
 	<% @ideas.each_with_index do |idea, i| %>
 		<li>
-			<%= link_to idea.name, idea_url(idea), :class => "font_color4" %>
+			<%= link_to idea.name, idea_url(idea), :class => "font_color4" %><br />
+			<div class="users_list">
+			<% idea.users.each do |user| %>
+				<%= user.name %> 
+			<% end %>
+			</div>
 		</li>
 	<% end %>
 	

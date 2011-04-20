@@ -2,6 +2,18 @@ myidea:
    id: 37
    name: My fixture idea
    repo: repos/testrepo.git
+
+private_idea:
+   id: 38
+   name: My Private idea
+   repo: repos/testrepo_private.git
+   access: 0
+   
+public_idea:
+   id: 39
+   name: My Private idea
+   repo: repos/testrepo_private.git
+   access: 1
     
     
     

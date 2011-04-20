@@ -36,6 +36,15 @@ class Idea < ActiveRecord::Base
     end
     false
   end
+  
+  def is_collaborator? user
+    self.collaborations.each do |c|
+      if user.id == c.user_id
+        return true
+      end
+    end
+    false
+  end
     
   def next_order(branch = "master")
     self.repository.tree(branch).contents.count

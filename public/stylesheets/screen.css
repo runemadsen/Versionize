@@ -21,12 +21,14 @@ _____________________________________________ */
 	float: left;
 }
 
-#contact_message {
-	color: #999999;
-	margin-left: 40px;
+#footer {
+	text-align: center;
 	line-height: 30px;
-	height: 30px;
-	float: left;
+	margin-bottom: 30px;
+	margin-top: 30px;
+	background-color: #eaeaea;
+	padding: 10px 20px;
+	color: #544848;
 }
 
 #contact_message a {
@@ -581,6 +583,26 @@ _____________________________________________ */
 	font-size: 13px;
 	line-height: 18px;
 	margin-bottom: 5px;
+}
+
+
+/* Account
+_____________________________________________ */
+
+.gravatar {
+	border: 5px solid #6a7a92;
+}
+
+.small_text {
+	font-size: 14px;
+}
+
+/* Explore
+_____________________________________________ */
+
+.users_list {
+	margin-top: 5px;
+	font-size: 15px;
 }
 
 /* Helpers

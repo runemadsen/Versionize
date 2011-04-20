@@ -7,12 +7,19 @@ class IdeasController < ApplicationController
   end
   
   def show
-    @idea = current_user.published_idea params[:id]
+    @idea = Idea.where(:id => params[:id], :published => true)
     unless @idea.nil?
       @version = 0
-      @edit = true
+      if @idea.is_collaborator?(current_user)
+        @edit = true
+      elsif @idea.access == Idea::PUBLIC
+        @edit = false
+      else
+        flash[:error] = "You do not have access to this idea"
+        redirect_to ideas_path
+      end
     else
-      flash[:error] = "You do not have access to this idea"
+      flash[:error] = "Can't find idea"
       redirect_to ideas_path
     end
   end
