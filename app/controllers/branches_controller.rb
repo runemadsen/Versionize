@@ -4,17 +4,25 @@ class BranchesController < ApplicationController
   
   def show
     
-    @idea = current_user.published_idea params[:idea_id]
-    @version = 0
-    @branch = params[:id]
-    
+    @idea = Idea.where(:id => params[:idea_id], :published => true)
     unless @idea.nil?
-      @edit = true
-      render 'ideas/show'
+      @version = 0
+      @branch = params[:id]
+      if @idea.is_collaborator?(current_user)
+        @edit = true
+         render 'ideas/show'
+      elsif @idea.access == Idea::PUBLIC
+        @edit = false
+         render 'ideas/show'
+      else
+        flash[:error] = "You do not have access to this idea"
+        redirect_to ideas_path
+      end
     else
-      flash[:error] = "You do not have access to this idea"
+      flash[:error] = "Can't find idea"
       redirect_to ideas_path
     end
+    
   end
   
   def new 
