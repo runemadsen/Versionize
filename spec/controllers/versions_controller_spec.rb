@@ -59,13 +59,21 @@ describe VersionsController do
     end
     
     it "should throw error if version doesnt exist" do
-      
+      Idea.should_receive(:where).with(:id => "38", :published => true).at_least(:once).and_return(@private_idea)
+      get :show, :id => "2", :idea_id => "38"
+      response.should redirect_to(ideas_path)
     end
     
     it "should grab branch name if specified" do
+      Idea.should_receive(:where).with(:id => "38", :published => true).at_least(:once).and_return(@private_idea)
+      get :show, :id => "2", :idea_id => "38", :branch_id => "runesbranch"
+      assigns[:branch].should == "runesbranch"
     end
     
     it "should set branch to master if branch not specified" do
+      Idea.should_receive(:where).with(:id => "38", :published => true).at_least(:once).and_return(@private_idea)
+      get :show, :id => "2", :idea_id => "38"
+      assigns[:branch].should == "master"
     end
     
   end
