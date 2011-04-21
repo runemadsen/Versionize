@@ -19,6 +19,7 @@
 </div>
 <div class="grid_3">
 	
+	<% if @edit %>
 	<div id="access_control" data-idea-id="<%= @idea.id %>">
 		<div class="access_box <% if @idea.private? %>active<% end %>" id="access0">
 			<% if @idea.public? %><a href="#">Private</a><% else %>Private<% end %>
@@ -28,13 +29,16 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<% end %>
 	
 	<div id="version_box" class="sidebar_box">Branches</div>
 	<ul id="branch_box">
 		<% @idea.repository.heads.each do |head| %>
 			<li><%= link_to head.name, idea_branch_or_master_path(@idea, head.name) %></li>
 		<% end %>
+		<% if @edit %>
 		<li><%= link_to "+", new_idea_branch_path(@idea) %></li>
+		<% end %>
 	</ul>
 	<div class="clear"></div>
 	
@@ -48,7 +52,9 @@
 	<% end %>
 	<div class="clear"></div>
 	
-		<%= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators to idea"), idea_collaborations_path(@idea), :class => "sidebar_link background_color3" %>
+	<% if @edit %>
+	<%= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators to idea"), idea_collaborations_path(@idea), :class => "sidebar_link background_color3" %>
+	<% end %>
 	
 		<!-- <div id="drop_box">
 					<div id="placeholder">Drop Idea Items Here</div>

@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
   end
   
   def show
-    @idea = Idea.where(:id => params[:id], :published => true)
+    @idea = Idea.where(:id => params[:id], :published => true).first
     unless @idea.nil?
       @version = 0
       if @idea.is_collaborator?(current_user)
