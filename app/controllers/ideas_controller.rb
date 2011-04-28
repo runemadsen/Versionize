@@ -1,6 +1,8 @@
 class IdeasController < ApplicationController
   
+  include ApplicationHelper
   before_filter :require_user_no_notice
+  before_filter :find_branch
   
   def index
     @ideas = current_user.published_ideas

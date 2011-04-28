@@ -9,7 +9,7 @@
 	<% @idea.version(@version, @branch).each_with_index do |content, i| %>
 		<% if i == 0 %>
 			<%= render :partial => "texts/description", :locals => {:text => content, :edit => @edit} %>
-			<%= render(:partial => "mediabox", :locals => {:idea => @idea, :branch => @branch}) if @edit %>
+			<%= render(:partial => "ideas/mediabox", :locals => {:idea => @idea, :branch => @branch}) if @edit %>
 		<% else %>
 			<%= render :partial => content.class.name.pluralize.downcase + "/" + content.class.name.downcase, 
 									:locals => { content.class.name.downcase.to_sym => content, :edit => @edit} %>
