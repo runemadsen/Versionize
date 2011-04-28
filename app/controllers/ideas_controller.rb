@@ -34,7 +34,7 @@ class IdeasController < ApplicationController
       @text = Text.new(:body => params[:description])
       @text.order = 9999999999
       @idea.create_repo
-      @idea.create_version(@text, current_user, "Save initial details")
+      @idea.create_version(@text, current_user, "Created idea")
       @idea.save
       @collaboration = Collaboration.create! :user => current_user, :idea => @idea, :owner => true
       flash[:notice] = "Idea Saved!"

@@ -38,7 +38,7 @@ class LinksController < ApplicationController
         
         @link = Link.new(params[:link])
         @link.order = @idea.next_order(@branch)
-        @idea.create_version(@link, @current_user, "Save link", false, @branch)
+        @idea.create_version(@link, @current_user, "Added link", false, @branch)
         flash[:notice] = "Saved link"
         redirect_to idea_branch_or_master_path(@idea, @branch)
       rescue Exception => e 
@@ -83,7 +83,7 @@ class LinksController < ApplicationController
     unless @idea.nil?
       begin
         @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
-        @idea.create_version(@link, @current_user, "delete link", true, @branch)
+        @idea.create_version(@link, @current_user, "Deleted link", true, @branch)
         flash[:notice] = "Removed Link"
         redirect_to idea_branch_or_master_path(@idea, @branch)
       rescue Exception => e

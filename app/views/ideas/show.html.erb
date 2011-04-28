@@ -19,6 +19,27 @@
 </div>
 <div class="grid_3">
 	
+	<h2>Branches</h2>
+	<ul id="branch_box">
+		<% @idea.repository.heads.each do |head| %>
+			<li><%= link_to head.name, idea_branch_or_master_path(@idea, head.name) %></li>
+		<% end %>
+		<% if @edit %>
+		<li><%= link_to "+", new_idea_branch_path(@idea) %></li>
+		<% end %>
+	</ul>
+	<div class="clear"></div>
+			
+	<h2>History</h2>
+	<ul>
+	<% @idea.repository.commits(@branch).each_with_index do |commit, i| %>
+		<% v_num = @idea.num_commits(@branch) - i %>
+		<li><%= v_num %> <%= link_to commit.message, link_to_version(@idea, @branch, v_num) %></li>
+	<% end %>
+	</ul>
+	
+	<h2>Settings</h2>
+	
 	<% if @edit %>
 	<div id="access_control" data-idea-id="<%= @idea.id %>">
 		<div class="access_box <% if @idea.private? %>active<% end %>" id="access0">
@@ -30,27 +51,6 @@
 		<div class="clear"></div>
 	</div>
 	<% end %>
-	
-	<div id="version_box" class="sidebar_box">Branches</div>
-	<ul id="branch_box">
-		<% @idea.repository.heads.each do |head| %>
-			<li><%= link_to head.name, idea_branch_or_master_path(@idea, head.name) %></li>
-		<% end %>
-		<% if @edit %>
-		<li><%= link_to "+", new_idea_branch_path(@idea) %></li>
-		<% end %>
-	</ul>
-	<div class="clear"></div>
-	
-	<div id="version_box" class="sidebar_box">
-			This idea has <%= pluralize(@idea.num_commits, "version") %>
-	</div>
-		
-	<% @idea.num_commits(@branch).times do |i| %>
-		<% v_num = @idea.num_commits(@branch) - i %>
-		<%= link_to v_num, link_to_version(@idea, @branch, v_num), :class => "version_box background_color#{v_num % 9}" %>
-	<% end %>
-	<div class="clear"></div>
 	
 	<% if @edit %>
 	<%= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators to idea"), idea_collaborations_path(@idea), :class => "sidebar_link background_color3" %>

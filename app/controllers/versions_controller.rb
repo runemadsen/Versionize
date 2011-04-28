@@ -5,7 +5,7 @@ class VersionsController < ApplicationController
   before_filter :require_user
   
   def show
-    @idea = Idea.where(:id => params[:idea_id], :published => true)
+    @idea = Idea.where(:id => params[:idea_id], :published => true).first
     unless @idea.nil? || params[:id].to_i > @idea.num_commits(@branch)     
       if @idea.access == Idea::PUBLIC || @idea.is_collaborator?(current_user)
         @edit = false

@@ -1,0 +1,5 @@
+<div class="users_list">
+<% users.each_with_index do |user, i| %>
+	<%= show_private ? user.private_name : user.public_name %><% if i < (users.count - 1) %>,<% end %>
+<% end %>
+</div>

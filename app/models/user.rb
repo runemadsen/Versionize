@@ -11,6 +11,14 @@ class User < ActiveRecord::Base
   
   DEFAULT_PROFILE = "https://s3.amazonaws.com/versionize/default_profile.jpg"
   
+  def public_name
+    name || "User"
+  end
+  
+  def private_name
+    name || email
+  end
+  
   def published_ideas
     ideas.includes([:collaborations]).where :published => true
   end

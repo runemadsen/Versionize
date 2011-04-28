@@ -52,7 +52,7 @@ class ImagesController < ApplicationController
        begin
          @image = Image.new(:key => params[:key])
          @image.order = @idea.next_order(@branch)
-         @idea.create_version(@image, @current_user, "Save Image", false, @branch)
+         @idea.create_version(@image, @current_user, "Added Image", false, @branch)
          flash[:notice] = "Saved image"
          redirect_to idea_branch_or_master_path(@idea, @branch)
        rescue Exception => e 
@@ -73,7 +73,7 @@ class ImagesController < ApplicationController
       begin
         @idea = Idea.find(params[:idea_id])
         @image = @idea.file(Image::name_from_uuid(params[:id]), @branch)
-        @idea.create_version(@image, @current_user, "delete image", true, @branch)
+        @idea.create_version(@image, @current_user, "Deleted image", true, @branch)
         flash[:notice] = "Removed Image"
         redirect_to idea_branch_or_master_path(@idea, @branch)
       rescue Exception => e

@@ -21,6 +21,7 @@
 		<li>
 			<% c = idea.is_owner?(@current_user) ? "owner" : "collaborator" %>
 			<%= link_to idea.name, idea_url(idea), :class => c %>
+			<%= render :partial => "collaborations/list", :locals => { :show_private => true, :users => idea.users }%>
 		</li>
 	<% end %>
 	</ul>

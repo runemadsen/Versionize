@@ -18,7 +18,7 @@ class CollaborationsController < ApplicationController
         begin
           idea = Idea.find params[:idea_id]
           idea.collaborations.create! :user => user
-          flash[:notice] = "Yes sir, create collaboration"
+          flash[:notice] = "Collaborator succesfully added!"
         rescue Exception => e
           flash[:error] = "Something went wrong when trying to create collaboration: #{e}"
         end

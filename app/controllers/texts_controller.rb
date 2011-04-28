@@ -31,7 +31,7 @@ class TextsController < ApplicationController
       begin
         @text = Text.new(:body => params[:body])
         @text.order = @idea.next_order(@branch)
-        @idea.create_version(@text, @current_user, "Save text", false, @branch)
+        @idea.create_version(@text, @current_user, "Added text", false, @branch)
         flash[:notice] = "Saved Text"
         redirect_to idea_branch_or_master_path(@idea, @branch)
       rescue Exception => e
@@ -69,7 +69,7 @@ class TextsController < ApplicationController
     unless @idea.nil?
       begin
         @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
-        @idea.create_version(@text, @current_user, "delete text", true, @branch)
+        @idea.create_version(@text, @current_user, "Deleted text", true, @branch)
         flash[:notice] = "Removed Text"
         redirect_to idea_branch_or_master_path(@idea, @branch)
       rescue Exception => e
