@@ -47,7 +47,7 @@ class LinksController < ApplicationController
       @link.update(params[:link])
       @idea.create_version(@link, @current_user, "Updated link", false, @branch.alias)
       flash[:notice] = "Saved Link"
-      redirect_to idea_branch_or_idea_path(@idea, @branch_num)
+      redirect_to branch_or_idea_path(@idea, @branch_num)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path

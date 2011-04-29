@@ -4,7 +4,7 @@
 
 <p>Links to images or videos (Vimeo, Youtube) will automatically embed the item into the page</p>
 
-<%= form_tag links_branch_or_idea_path(@idea, @branch) do %>
+<%= form_tag idea_branch_links_path(@idea, @branch_num) do %>
 
 	<%= text_field_tag "link[url]", 'http://', {:class => "input_box input_link"} %>
 	
