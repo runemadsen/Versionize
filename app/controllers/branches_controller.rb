@@ -6,21 +6,24 @@ class BranchesController < ApplicationController
   def show
     begin
       find_idea_and_branch_by_id
-       @version = 0
-       if @idea.is_collaborator?(current_user)
-         @edit = true
-          render 'ideas/show'
-       elsif @idea.access == Idea::PUBLIC
-         @edit = false
-          render 'ideas/show'
-       else
-         flash[:error] = "You do not have access to this idea"
-         redirect_to ideas_path
-       end
+      @version = 0
+      @tree = @idea.version(@version, @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
     end
+    
+    if @idea.is_collaborator?(current_user)
+      @edit = true
+      render 'ideas/show'
+    elsif @idea.access == Idea::PUBLIC
+      @edit = false
+      render 'ideas/show'
+    else
+      flash[:error] = "You do not have access to this idea"
+      redirect_to ideas_path
+    end
+     
   end
   
   def new 

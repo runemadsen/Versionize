@@ -16,7 +16,7 @@ class LinksController < ApplicationController
   def edit
     begin
       find_idea_and_branch_by_params
-      @link = @idea.file(Link::name_from_uuid(params[:id]), @branch.alias)
+      @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -28,8 +28,8 @@ class LinksController < ApplicationController
       find_idea_and_branch_by_params
       params[:link][:notes] = params[:link][:notes] == "Notes (optional)" ? nil : params[:link][:notes]
       @link = Link.new(params[:link])
-      @link.order = @idea.next_order(@branch.alias)
-      @idea.create_version(@link, @current_user, "Added link", false, @branch.alias)
+      @link.order = @idea.next_order(@branch)
+      @idea.create_version(@link, @current_user, "Added link", @branch)
       flash[:notice] = "Saved link"
       redirect_to branch_or_idea_path(@idea, @branch_num)
     rescue Exception => e
@@ -44,7 +44,7 @@ class LinksController < ApplicationController
       params[:link][:notes] = params[:link][:notes] == "Notes (optional)" ? nil : params[:link][:notes]
       @link = @idea.file(Link::name_from_uuid(params[:id]), @branch.alias)
       @link.update(params[:link])
-      @idea.create_version(@link, @current_user, "Updated link", false, @branch.alias)
+      @idea.create_version(@link, @current_user, "Updated link", @branch)
       flash[:notice] = "Saved Link"
       redirect_to branch_or_idea_path(@idea, @branch_num)
     rescue Exception => e
@@ -57,7 +57,7 @@ class LinksController < ApplicationController
     begin
       find_idea_and_branch_by_params
       @link = @idea.file(Link::name_from_uuid(params[:id]), @branch.alias)
-      @idea.create_version(@link, @current_user, "Deleted link", true, @branch.alias)
+      @idea.create_version(@link, @current_user, "Deleted link", @branch, true)
       flash[:notice] = "Deleted Link"
       redirect_to branch_or_idea_path(@idea, @branch_num)
     rescue Exception => e

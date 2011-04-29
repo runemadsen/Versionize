@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20110429003003) do
     t.string   "name"
     t.string   "alias"
     t.integer  "idea_id"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

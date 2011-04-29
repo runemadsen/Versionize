@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       begin
         @user = User.create(params[:user])
         if @user.id.nil?
-          raise Exception, "Your passwords doesn't match"
+          raise Exception, "Your passwords doesn't match or user already created"
         end
         UserSession.create(:email => @user.email, :password => @user.password, :remember_me => true)
         flash[:notice] = "Account created!"

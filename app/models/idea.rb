@@ -47,8 +47,8 @@ class Idea < ActiveRecord::Base
     false
   end
     
-  def next_order(branch = "master")
-    self.repository.tree(branch).contents.count
+  def next_order(branch)
+    self.repository.tree(branch.alias).contents.count
   end
   
   def create_repo user
@@ -57,53 +57,46 @@ class Idea < ActiveRecord::Base
     branches.create(:name => "Original", :alias => "master")
   end
   
-  def create_version(model, user, commit_msg, delete = false, branch = "master")
+  def create_version(model, user, commit_msg, branch, delete = false)
     index = Index.new(self.repository)
-    index.read_tree(branch)
+    index.read_tree(branch.alias)
     if delete
       index.delete(model.generate_name)
     else
       index.add(model.generate_name, model.to_json)
     end
-    index.commit(commit_msg, self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, branch)
+    index.commit(commit_msg, self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, branch.alias)
   end
   
   def create_branch(oldbranch, newbranch, user)
-    branch = branches.create(:name => newbranch, :alias => newbranch)
+    master = branches.where(:alias => oldbranch).first
+    branch = branches.create(:name => newbranch, :alias => newbranch, :parent_id => master.id)
     index = Index.new(self.repository)
     index.read_tree(oldbranch)
     index.commit("Created branch: " + branch.name, self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, branch.alias)
   end
   
-  def num_commits(branch = "master")
-    if branch.nil?
-      branch = "master"
-    end
-    self.repository.commit_count(branch)
+  def commits(branch)
+    branch.parent.nil? ? repository.commits(branch.alias) : repository.commits_between(branch.parent.alias, branch.alias)
   end
   
-  def file(file_name, branch = "master")
-    if branch.nil?
-      branch = "master"
-    end
-    blob_to_model(self.repository.tree(branch)/file_name)
+  def num_commits(branch)
+    branch.parent.nil? ? repository.commit_count(branch) : repository.commits_between(branch.parent.alias, branch.alias).count
   end
   
-  def version(version, branch = "master")
-    
-    if branch.nil?
-      branch = "master"
-    end
-    # this should really, really, really be cached
-    
+  def file(file_name, branch)
+    blob_to_model(self.repository.tree(branch.alias)/file_name)
+  end
+  
+  def version(version, branch)
     @models = []
     
     if version == 0
-      self.repository.tree(branch).contents.each do |blob|
+      self.repository.tree(branch.alias).contents.each do |blob|
         @models << blob_to_model(blob)
       end
     else
-      self.repository.commits[num_commits(branch)-version.to_i].tree(branch).contents.each do |blob|
+      self.repository.commits[num_commits(branch)-version.to_i].tree(branch.alias).contents.each do |blob|
         @models << blob_to_model(blob)
       end
     end

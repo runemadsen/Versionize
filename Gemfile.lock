@@ -29,6 +29,7 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
+    acts_as_tree (0.1.1)
     arel (2.0.9)
     authlogic (2.1.6)
       activesupport
@@ -124,6 +125,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_tree
   authlogic
   autotest
   capistrano

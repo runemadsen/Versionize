@@ -32,6 +32,14 @@ class Item
     @file_name ||= self.class.name.downcase + "_" + UUID.generate + '.json'
   end
   
+  def partial_name
+    self.class.name.pluralize.downcase + "/" + self.class.name.downcase
+  end
+  
+  def symbol_name
+   self.class.name.downcase.to_sym
+  end
+  
   def persisted?
     if id.nil?
       false
