@@ -11,6 +11,9 @@ describe ImagesController do
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
     @idea.create_repo(@user)
+    @image = Image.new(:key => "users/1/images/20100809")
+    @image.order = @idea.next_order
+    @idea.create_version(@image, @user, "Added Image")
     @idea.create_branch("master", "newbranch", @user)
     @idea.save
   end
@@ -41,6 +44,16 @@ describe ImagesController do
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
       response.should redirect_to(idea_branch_path(@idea, 2))
+    end
+  end
+  
+  describe "GET edit" do
+    it "should show the edit form for specified branch" do
+      get :edit, :idea_id => @idea.id, :branch_id => 1, :id => @image.uuid
+      assigns[:idea].should_not be_nil
+      assigns[:branch].should_not be_nil
+      assigns[:image].should_not be_nil
+      response.should be_success
     end
   end
   
