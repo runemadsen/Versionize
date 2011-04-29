@@ -8,8 +8,10 @@ class IdeasController < ApplicationController
   
   def show
     @idea = Idea.find_by_id_and_published(params[:id], true)
-    @branch = @idea.branches.first
+    
     unless @idea.nil?
+      @branch = @idea.branches.first
+      @branch_num = 1
       @version = 0
       if @idea.is_collaborator?(current_user)
         @edit = true
@@ -32,11 +34,12 @@ class IdeasController < ApplicationController
   def create    
     begin
       @idea = Idea.new params[:idea]
+      @idea.save
       @text = Text.new(:body => params[:description])
       @text.order = 9999999999
       @idea.create_repo(current_user)
       @idea.create_version(@text, current_user, "Created idea")
-      @idea.save
+      
       flash[:notice] = "Idea Saved!"
       redirect_to idea_url(@idea)
     rescue Exception => e 

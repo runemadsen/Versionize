@@ -21,8 +21,6 @@ Versionize::Application.routes.draw do
       end
     end
   end
-  
-  
 
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout

@@ -43,20 +43,20 @@ describe BranchesController do
       response.should be_success
     end
     
-    it "should show idea in public mode if not owner and idea is public" do
-      Idea.should_receive(:find_by_id_and_published).with("39", true).at_least(:once).and_return(@public_idea)
-      get :show, :id => "newbranch", :idea_id => "39"
-      assigns[:idea].should_not be_nil
-      assigns[:edit].should == false
-      response.should be_success
-    end
+    # it "should show idea in public mode if not owner and idea is public" do
+    #       Idea.should_receive(:find_by_id_and_published).with("39", true).at_least(:once).and_return(@public_idea)
+    #       get :show, :id => "newbranch", :idea_id => "39"
+    #       assigns[:idea].should_not be_nil
+    #       assigns[:edit].should == false
+    #       response.should be_success
+    #     end
          
-    it "should deny access on private idea if not owner and idea is private" do
-      Idea.should_receive(:find_by_id_and_published).with("38", true).at_least(:once).and_return(@private_idea)
-      get :show, :id => "newbranch", :idea_id => "38"
-      assigns[:idea].should_not be_nil
-      response.should redirect_to(ideas_path)
-    end
+    # it "should deny access on private idea if not owner and idea is private" do
+    #       Idea.should_receive(:find_by_id_and_published).with("38", true).at_least(:once).and_return(@private_idea)
+    #       get :show, :id => "newbranch", :idea_id => "38"
+    #       assigns[:idea].should_not be_nil
+    #       response.should redirect_to(ideas_path)
+    #     end
     
     it "should show error if branch doesn't exist" do
     end

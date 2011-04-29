@@ -8,7 +8,7 @@
 									:color => 2}
 				
 				if edit
-					locals[:edit_path] = edit_text_branch_or_master_path(@idea, @branch, text)
+					locals[:edit_path] = edit_idea_branch_text_path(@idea, @branch_num, text)
 					locals[:drag] = true
 				end
 			%>

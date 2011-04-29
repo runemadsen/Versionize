@@ -16,9 +16,5 @@ module IdeasHelper
       end
     end
   end
-  
-  def branch_or_idea_path idea, branch
-      branch == "master" ? idea_path(idea) : idea_branch_path(idea, branch)
-    end
 
 end
