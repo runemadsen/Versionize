@@ -1,14 +1,11 @@
 class ImagesController < ApplicationController
   
-  
-  include ImagesHelper
-  before_filter :require_user
   include ApplicationHelper
-  before_filter :find_idea_and_branch
+  before_filter :require_user
   
   def new
-    
-    unless @idea.nil?
+    begin
+      find_idea_and_branch_by_params
       expiration = 20.years.from_now
       key = "users/#{current_user.id}/images/#{Time.now.strftime('%Y%m%d%H%M%S')}"
 
@@ -22,46 +19,38 @@ class ImagesController < ApplicationController
             {'key' => key},
             {'acl' => 'public-read'},
             ['content-length-range', 0, 10000000],
-            {'success_action_redirect' => upload_success_branch_or_master_url(@idea, @branch)}
+            {'success_action_redirect' => upload_success_idea_branch_images_url(@idea, @branch_num)}
           ]
         }
       )
-    else
-      flash[:error] = "you do not have access to adding images to this idea"
+    rescue Exception => e
+      flash[:error] = e.message
       redirect_to ideas_path
     end
   end
   
   def edit
-    @idea = current_user.published_idea params[:idea_id]
-    unless @idea.nil?
-      @image = @idea.file(Image::name_from_uuid(params[:id]), @branch)
-    else
-      flash[:error] = "you do not have access to editing items in this idea"
-      redirect_to idea_branch_or_idea_path(@idea, @branch)
+    begin
+      find_idea_and_branch_by_params
+      @image = @idea.file(Image::name_from_uuid(params[:id]), @branch.alias)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to ideas_path
     end
   end
   
-  
   def upload_succes
-    
-    @idea = current_user.published_idea params[:idea_id]
-           
-    unless @idea.nil?
-       begin
-         @image = Image.new(:key => params[:key])
-         @image.order = @idea.next_order(@branch)
-         @idea.create_version(@image, @current_user, "Added Image", false, @branch)
-         flash[:notice] = "Saved image"
-         redirect_to idea_branch_or_idea_path(@idea, @branch)
-       rescue Exception => e 
-         flash[:error] = "There was a problem! #{e}"
-         redirect_to new_image_branch_or_idea_path(@idea, @branch)
-       end
-     else
-       flash[:error] = "you do not have access to adding images to this idea"
-       redirect_to idea_branch_or_idea_path(@idea, @branch)
-     end
+    begin
+      find_idea_and_branch_by_params
+      @image = Image.new(:key => params[:key])
+      @image.order = @idea.next_order(@branch.alias)
+      @idea.create_version(@image, @current_user, "Added Image", false, @branch.alias)
+      flash[:notice] = "Saved image"
+      redirect_to branch_or_idea_path(@idea, @branch_num)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to ideas_path
+    end       
   end
   
   def destroy
