@@ -11,8 +11,7 @@ describe LinksController do
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
     @idea.save
-    Collaboration.create! :user => @user, :idea => @idea, :owner => true
-    @idea.create_repo
+    @idea.create_repo(@user)
   end
    
   after do
@@ -28,8 +27,14 @@ describe LinksController do
 
   describe "POST create" do
     
-    it "should save link in repository and redirect" do
+    it "should save link without branch specified" do
       post :create, { :idea_id => "37", :link => { :url => "www.runemadsen.com" } }
+      assigns[:link].url.should == "www.runemadsen.com" 
+      response.should redirect_to(idea_path(@idea))
+    end
+    
+    it "should save link with branch specified" do
+      post :create, { :branch_id => "37", :link => { :url => "www.runemadsen.com" } }
       assigns[:link].url.should == "www.runemadsen.com" 
       response.should redirect_to(idea_path(@idea))
     end

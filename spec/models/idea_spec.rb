@@ -8,7 +8,8 @@ describe Idea do
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
     @text = Text.new(:body => @desc)
-    @idea.create_repo
+    @user = users(:rune)
+    @idea.create_repo(@user)
   end
 
   after do

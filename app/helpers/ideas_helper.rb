@@ -6,7 +6,7 @@ module IdeasHelper
       if version_num == idea.num_commits(branch)
         idea_path(idea)
       else
-        idea_version_path(idea, version_num)
+        idea_branch_version_path(idea, 1, version_num)
       end
     else
       if version_num == idea.num_commits(branch)
@@ -16,5 +16,9 @@ module IdeasHelper
       end
     end
   end
+  
+  def branch_or_idea_path idea, branch
+      branch == "master" ? idea_path(idea) : idea_branch_path(idea, branch)
+    end
 
 end

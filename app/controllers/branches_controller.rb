@@ -4,7 +4,7 @@ class BranchesController < ApplicationController
   
   def show
     
-    @idea = Idea.where(:id => params[:idea_id], :published => true).first
+    @idea = Idea.find_by_id_and_published(params[:idea_id], true)
     unless @idea.nil?
       @version = 0
       @branch = params[:id]

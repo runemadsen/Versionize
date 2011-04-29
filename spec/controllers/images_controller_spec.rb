@@ -10,9 +10,8 @@ describe ImagesController do
     UserSession.create(@user)
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
+    @idea.create_repo(@user)
     @idea.save
-    Collaboration.create! :user => @user, :idea => @idea, :owner => true
-    @idea.create_repo
   end
 
   after do
@@ -22,6 +21,16 @@ describe ImagesController do
   describe "GET new" do
     it "should show the image form" do
       get :new, :idea_id => @idea.id
+      assigns[:idea].should_not be_nil
+      assigns[:branch].should_not be_nil
+      assigns[:image_upload].should_not be_nil
+      response.should be_success
+    end
+    
+    it "should show the image form on branch" do
+      get :new, :branch_id => @idea.id
+      assigns[:idea].should_not be_nil
+      assigns[:branch].should_not be_nil
       assigns[:image_upload].should_not be_nil
       response.should be_success
     end

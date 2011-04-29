@@ -1,15 +1,14 @@
 class IdeasController < ApplicationController
   
-  include ApplicationHelper
   before_filter :require_user_no_notice
-  before_filter :find_branch
   
   def index
     @ideas = current_user.published_ideas
   end
   
   def show
-    @idea = Idea.where(:id => params[:id], :published => true).first
+    @idea = Idea.find_by_id_and_published(params[:id], true)
+    @branch = @idea.branches.first
     unless @idea.nil?
       @version = 0
       if @idea.is_collaborator?(current_user)
@@ -35,10 +34,9 @@ class IdeasController < ApplicationController
       @idea = Idea.new params[:idea]
       @text = Text.new(:body => params[:description])
       @text.order = 9999999999
-      @idea.create_repo
+      @idea.create_repo(current_user)
       @idea.create_version(@text, current_user, "Created idea")
       @idea.save
-      @collaboration = Collaboration.create! :user => current_user, :idea => @idea, :owner => true
       flash[:notice] = "Idea Saved!"
       redirect_to idea_url(@idea)
     rescue Exception => e 

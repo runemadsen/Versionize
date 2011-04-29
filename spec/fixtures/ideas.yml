@@ -12,7 +12,7 @@ private_idea:
 public_idea:
    id: 39
    name: My Private idea
-   repo: repos/testrepo_private.git
+   repo: repos/testrepo_public.git
    access: 1
     
     

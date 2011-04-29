@@ -1,10 +1,10 @@
 class VideosController < ApplicationController
   
-  include ApplicationHelper
   before_filter :require_user
-  before_filter :find_branch
   
   def new
+    @idea = current_user.published_idea params[:idea_id]
+    @branch = params[:branch_id].nil? ? @idea.branches.first : @idea.branches.find(params[:branch_id])
   end
   
 end

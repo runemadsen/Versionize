@@ -11,8 +11,7 @@ describe TextsController do
     @desc = "This is my RSpec idea description"
     @idea = ideas(:myidea)
     @idea.save
-    Collaboration.create! :user => @user, :idea => @idea, :owner => true
-    @idea.create_repo
+    @idea.create_repo(@user)
     @text = Text.new(:body => "This is my RSpec idea description")
   end
 
@@ -31,12 +30,14 @@ describe TextsController do
     
     it "should save text without branch specified" do
       post :create, { :idea_id => "37", :text => { :body => "This is some text" } }
+      assigns[:idea].should_not be_nil
+      assigns[:branch].should_not be_nil
       response.should redirect_to(idea_path(@idea))
     end
     
     it "should save text with branch specified" do
-      post :create, { :idea_id => "37", :branch_id => "newbranch", :text => { :body => "This is some text" } }
-      response.should redirect_to(idea_branch_path(@idea, "newbranch"))
+      post :create, { :idea_id => "37", :branch_id => "2", :text => { :body => "This is some text" } }
+      response.should redirect_to(branch_path("2"))
     end
        
   end

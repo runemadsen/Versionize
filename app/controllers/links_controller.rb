@@ -3,10 +3,9 @@ class LinksController < ApplicationController
   include ApplicationHelper
   include LinksHelper
   before_filter :require_user
-  before_filter :find_branch
+  before_filter :find_idea_and_branch
    
   def new
-    @idea = current_user.published_idea params[:idea_id]
     unless @idea.nil?
       @link = Link.new
     else
@@ -16,7 +15,6 @@ class LinksController < ApplicationController
   end
    
   def edit
-    @idea = current_user.published_idea params[:idea_id]
     unless @idea.nil?
       @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
     else
@@ -26,8 +24,6 @@ class LinksController < ApplicationController
   end
   
   def create
-    
-    @idea = current_user.published_idea params[:idea_id]
     
     unless @idea.nil?
       begin
@@ -40,10 +36,10 @@ class LinksController < ApplicationController
         @link.order = @idea.next_order(@branch)
         @idea.create_version(@link, @current_user, "Added link", false, @branch)
         flash[:notice] = "Saved link"
-        redirect_to idea_branch_or_master_path(@idea, @branch)
+        redirect_to idea_branch_or_idea_path(@idea, @branch)
       rescue Exception => e 
         flash[:error] = "There was a problem! #{e}"
-        redirect_to new_link_branch_or_master_path(@idea, @branch)
+        redirect_to new_link_branch_or_idea_path(@idea, @branch)
       end
     else
       flash[:error] = "you do not have access to creating items in this idea"
@@ -52,9 +48,6 @@ class LinksController < ApplicationController
   end
    
   def update
-    
-    @idea = current_user.published_idea params[:idea_id]
-    
     unless @idea.nil?
       begin
         
@@ -66,10 +59,10 @@ class LinksController < ApplicationController
         @link.update(params[:link])
         @idea.create_version(@link, @current_user, "Updated link", false, @branch)
         flash[:notice] = "Saved Link"
-        redirect_to idea_branch_or_master_path(@idea, @branch)
+        redirect_to idea_branch_or_idea_path(@idea, @branch)
       rescue Exception => e
         flash[:error] = "There was a problem! #{e}"
-        redirect_to edit_link_branch_or_master_path(@idea, @branch, @link)
+        redirect_to edit_link_branch_or_idea_path(@idea, @branch, @link)
       end
     else
       flash[:error] = "you do not have access to editing items in this idea"
@@ -78,17 +71,15 @@ class LinksController < ApplicationController
   end
    
   def destroy
-    @idea = current_user.published_idea params[:idea_id]
-    
     unless @idea.nil?
       begin
         @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
         @idea.create_version(@link, @current_user, "Deleted link", true, @branch)
         flash[:notice] = "Removed Link"
-        redirect_to idea_branch_or_master_path(@idea, @branch)
+        redirect_to idea_branch_or_idea_path(@idea, @branch)
       rescue Exception => e
         flash[:error] = "There was a problem! #{e}"
-        redirect_to idea_branch_or_master_path(@idea, @branch)
+        redirect_to idea_branch_or_idea_path(@idea, @branch)
       end
     else
       flash[:error] = "you do not have access to deleting items in this idea"

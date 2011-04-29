@@ -2,6 +2,7 @@ class Idea < ActiveRecord::Base
 
   include Grit
   
+  has_many :branches
   has_many :collaborations
   has_many :users, :through => :collaborations
   
@@ -50,8 +51,10 @@ class Idea < ActiveRecord::Base
     self.repository.tree(branch).contents.count
   end
   
-  def create_repo
+  def create_repo user
     @repository = Repo.init_bare(self.repo)
+    collaborations.create(:user => user, :owner => true)
+    branches.create(:name => "Original", :alias => "master")
   end
   
   def create_version(model, user, commit_msg, delete = false, branch = "master")
@@ -69,6 +72,7 @@ class Idea < ActiveRecord::Base
     index = Index.new(self.repository)
     index.read_tree(oldbranch)
     index.commit("Created branch", self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, newbranch)
+    branches.create(:name => newbranch, :alias => newbranch.gsub(" ", "").downcase)
   end
   
   def num_commits(branch = "master")

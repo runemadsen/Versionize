@@ -8,7 +8,7 @@
 	
 	<p>Insert a link to a Vimeo or Youtube video. The video will automatically be embedded.</p>
 
-	<%= form_tag links_branch_or_master_path(@idea, @branch) do %>
+	<%= form_tag links_branch_or_idea_path(@idea, @branch) do %>
 
 		<%= text_field_tag "link[url]", 'http://', {:class => "input_box input_link"} %>
 

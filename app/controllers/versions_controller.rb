@@ -1,11 +1,10 @@
 class VersionsController < ApplicationController
   
-  include ApplicationHelper
-  before_filter :find_branch
   before_filter :require_user
   
   def show
-    @idea = Idea.where(:id => params[:idea_id], :published => true).first
+    @idea = Idea.find_by_id_and_published(params[:idea_id], true)
+  
     unless @idea.nil? || params[:id].to_i > @idea.num_commits(@branch)     
       if @idea.access == Idea::PUBLIC || @idea.is_collaborator?(current_user)
         @edit = false

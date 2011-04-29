@@ -10,24 +10,19 @@ Versionize::Application.routes.draw do
   
   resources :ideas do
     resources :collaborations
-    member do
-      post :toggle_access
-    end
-    
-    idea_resources = lambda do
+    post :toggle_access, :on => :member
+    resources :branches do
       resources :versions
       resources :videos
       resources :links  
       resources :texts
       resources :images do
-        collection do
-          get 'upload_succes', :as => 'upload_success'
-        end
+        get 'upload_succes', :as => 'upload_success', :on => :collection
       end
     end
-    resources :branches, &idea_resources
-    idea_resources.call
   end
+  
+  
 
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout

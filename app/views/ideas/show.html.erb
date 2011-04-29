@@ -6,7 +6,7 @@
 <div class="grid_12 dotted_line_small"></div>
 <div class="grid_9">
 
-	<% @idea.version(@version, @branch).each_with_index do |content, i| %>
+	<% @idea.version(@version, @branch.alias).each_with_index do |content, i| %>
 		<% if i == 0 %>
 			<%= render :partial => "texts/description", :locals => {:text => content, :edit => @edit} %>
 			<%= render(:partial => "ideas/mediabox", :locals => {:idea => @idea, :branch => @branch}) if @edit %>
@@ -21,11 +21,11 @@
 	
 	<h2>Branches</h2>
 	<ul id="branch_box">
-		<% @idea.repository.heads.each do |head| %>
-			<% if head.name == @branch %>
-				<li><strong><%= link_to head.name, idea_branch_or_master_path(@idea, head.name) %></strong></li>
+		<% @idea.branches.each do |branch| %>
+			<% if @branch.alias == branch.alias %>
+				<li><strong><%= link_to branch.name, branch_or_idea_path(@idea, branch) %></strong></li>
 			<% else %>
-				<li><%= link_to head.name, idea_branch_or_master_path(@idea, head.name) %></li>
+				<li><%= link_to branch.name, branch_or_idea_path(@idea, branch) %></li>
 			<% end %>
 		<% end %>
 		<% if @edit %>
@@ -35,9 +35,9 @@
 			
 	<h2>History</h2>
 	<ul>
-	<% @idea.repository.commits(@branch).each_with_index do |commit, i| %>
+	<% @idea.repository.commits(@branch.alias).each_with_index do |commit, i| %>
 		<% v_num = @idea.num_commits(@branch) - i %>
-		<li><%= v_num %> <%= link_to commit.message, link_to_version(@idea, @branch, v_num) %></li>
+		<li><%= v_num %> <%= link_to commit.message, link_to_version(@idea, @branch.alias, v_num) %></li>
 	<% end %>
 	</ul>
 	

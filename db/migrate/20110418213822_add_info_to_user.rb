@@ -6,8 +6,8 @@ class AddInfoToUser < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :ideas, :name
-    remove_column :ideas, :website
-    remove_column :ideas, :location
+    remove_column :users, :name
+    remove_column :users, :website
+    remove_column :users, :location
   end
 end
