@@ -1,10 +1,16 @@
 class VideosController < ApplicationController
   
+  include ApplicationHelper
   before_filter :require_user
   
   def new
-    @idea = current_user.published_idea params[:idea_id]
-    @branch = params[:branch_id].nil? ? @idea.branches.first : @idea.branches.find(params[:branch_id])
+    begin
+      find_idea_and_branch_by_params
+      @link = Link.new
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to ideas_path
+    end
   end
   
 end
