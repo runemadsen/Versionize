@@ -54,23 +54,15 @@ class ImagesController < ApplicationController
   end
   
   def destroy
-    
-    @idea = current_user.published_idea params[:idea_id]
-    
-    unless @idea.nil?
-      begin
-        @idea = Idea.find(params[:idea_id])
-        @image = @idea.file(Image::name_from_uuid(params[:id]), @branch)
-        @idea.create_version(@image, @current_user, "Deleted image", true, @branch)
-        flash[:notice] = "Removed Image"
-        redirect_to idea_branch_or_idea_path(@idea, @branch)
-      rescue Exception => e
-        flash[:error] = "There was a problem! #{e}"
-        redirect_to idea_branch_or_idea_path(@idea, @branch)
-      end
-    else
-      flash[:error] = "you do not have access to adding images to this idea"
-      redirect_to idea_branch_or_idea_path(@idea, @branch)
+    begin
+      find_idea_and_branch_by_params
+      @image = @idea.file(Image::name_from_uuid(params[:id]), @branch.alias)
+      @idea.create_version(@image, @current_user, "Deleted image", true, @branch.alias)
+      flash[:notice] = "Removed Image"
+      redirect_to branch_or_idea_path(@idea, @branch_num)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to ideas_path
     end
   end
 

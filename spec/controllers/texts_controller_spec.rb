@@ -48,5 +48,15 @@ describe TextsController do
       response.should be_success
     end
   end
+  
+  describe "DELETE destroy" do
+    it "should delete image for specified branch" do
+      delete :destroy, :idea_id => @idea.id, :branch_id => 1, :id => @text.uuid
+      assigns[:idea].should_not be_nil
+      assigns[:branch].should_not be_nil
+      assigns[:text].should_not be_nil
+      response.should redirect_to(idea_path(@idea))
+    end
+  end
     
 end
