@@ -12,6 +12,9 @@ describe LinksController do
     @idea = ideas(:myidea)
     @idea.save
     @idea.create_repo(@user)
+    @link = Link.new(:url => "www.runemadsen.com")
+    @link.order = @idea.next_order
+    @idea.create_version(@link, @user, "Added link")
     @idea.create_branch("master", "newbranch", @user)
   end
    
@@ -31,7 +34,6 @@ describe LinksController do
   end
 
   describe "POST create" do
-    
     it "should save link in master and redirect to idea" do
       post :create, { :idea_id => "37", :branch_id => 1, :link => { :url => "www.runemadsen.com", :notes => "This is my notes" } }
       assigns[:link].url.should == "www.runemadsen.com"
@@ -43,6 +45,25 @@ describe LinksController do
       post :create, { :idea_id => "37", :branch_id => 2, :link => { :url => "www.runemadsen.com" } }
       response.should redirect_to(idea_branch_path(@idea, 2))
     end
+  end
   
+  describe "GET edit" do
+    it "should show the edit form for specified branch" do
+      get :edit, :idea_id => @idea.id, :branch_id => 1, :id => @link.uuid
+      assigns[:idea].should_not be_nil
+      assigns[:branch].should_not be_nil
+      assigns[:link].should_not be_nil
+      response.should be_success
+    end
+  end
+  
+  describe "DELETE destroy" do
+    it "should delete image for specified branch" do
+      delete :destroy, :idea_id => @idea.id, :branch_id => 1, :id => @link.uuid
+      assigns[:idea].should_not be_nil
+      assigns[:branch].should_not be_nil
+      assigns[:link].should_not be_nil
+      response.should redirect_to(idea_path(@idea))
+    end
   end
 end
