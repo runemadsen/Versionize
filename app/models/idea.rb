@@ -69,10 +69,10 @@ class Idea < ActiveRecord::Base
   end
   
   def create_branch(oldbranch, newbranch, user)
+    branch = branches.create(:name => newbranch, :alias => newbranch)
     index = Index.new(self.repository)
     index.read_tree(oldbranch)
-    index.commit("Created branch", self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, newbranch)
-    branches.create(:name => newbranch, :alias => newbranch.gsub(" ", "").downcase)
+    index.commit("Created branch: " + branch.name, self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, branch.alias)
   end
   
   def num_commits(branch = "master")

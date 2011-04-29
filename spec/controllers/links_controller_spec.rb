@@ -28,7 +28,6 @@ describe LinksController do
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
       assigns[:branch_num].should_not be_nil
-      assigns[:link].should_not be_nil
       response.should be_success
     end
   end

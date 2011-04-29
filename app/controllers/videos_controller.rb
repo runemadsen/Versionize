@@ -6,7 +6,6 @@ class VideosController < ApplicationController
   def new
     begin
       find_idea_and_branch_by_params
-      @link = Link.new
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path

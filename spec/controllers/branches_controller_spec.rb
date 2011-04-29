@@ -35,12 +35,17 @@ describe BranchesController do
   
   describe "GET show" do
      
-    it "should show idea in edit mode if owner" do
-      Idea.should_receive(:find_by_id_and_published).with("37", true).at_least(:once).and_return(@idea)
-      get :show, :id => "newbranch", :idea_id => "37"
+    it "should set basic params" do
+      get :show, :id => 2, :idea_id => "37"
       assigns[:idea].should_not be_nil
-      assigns[:edit].should == true
+      assigns[:branch].should_not be_nil
+      assigns[:branch_num].should == 2
       response.should be_success
+    end
+
+    it "should show idea in edit mode if owner" do
+      get :show, :id => 2, :idea_id => "37"
+      assigns[:edit].should == true
     end
     
     # it "should show idea in public mode if not owner and idea is public" do

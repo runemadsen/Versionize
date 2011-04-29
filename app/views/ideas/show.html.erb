@@ -21,22 +21,22 @@
 	
 	<h2>Branches</h2>
 	<ul id="branch_box">
-		<% @idea.branches.each do |branch| %>
+		<% @idea.branches.each_with_index do |branch, i| %>
 			<% if @branch.alias == branch.alias %>
-				<li><strong><%= link_to branch.name, branch_or_idea_path(@idea, branch) %></strong></li>
+				<li><strong><%= link_to branch.name, branch_or_idea_path(@idea, i + 1) %></strong></li>
 			<% else %>
-				<li><%= link_to branch.name, branch_or_idea_path(@idea, branch) %></li>
+				<li><%= link_to branch.name, branch_or_idea_path(@idea, i + 1) %></li>
 			<% end %>
 		<% end %>
 		<% if @edit %>
-		<li><%= link_to "+ Create branch from this branch", new_idea_branch_path(@idea) %></li>
+		<li><%= link_to "+ Create new branch", new_idea_branch_path(@idea) %></li>
 		<% end %>
 	</ul>
 			
 	<h2>History</h2>
 	<ul>
 	<% @idea.repository.commits(@branch.alias).each_with_index do |commit, i| %>
-		<% v_num = @idea.num_commits(@branch) - i %>
+		<% v_num = @idea.num_commits(@branch.alias) - i %>
 		<li><%= v_num %> <%= link_to commit.message, link_to_version(@idea, @branch.alias, v_num) %></li>
 	<% end %>
 	</ul>

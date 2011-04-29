@@ -7,7 +7,6 @@ class TextsController < ApplicationController
   def new
     begin
       find_idea_and_branch_by_params
-      @text = Text.new
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path

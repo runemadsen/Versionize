@@ -35,46 +35,34 @@ describe VersionsController do
   
   describe "GET show" do
      
-    # it "should show idea in public mode if owner (can't edit older versions)" do
-    #       Idea.should_receive(:find_by_id_and_published).with("37", true).at_least(:once).and_return(@idea)
-    #       get :show, :id => "1", :idea_id => "37"
-    #       assigns[:idea].should_not be_nil
-    #       assigns[:edit].should == false
-    #       response.should be_success
-    #     end
-    #     
-    #     it "should show idea in public mode if not owner and idea is public" do
-    #       Idea.should_receive(:find_by_id_and_published).with("39", true).at_least(:once).and_return(@public_idea)
-    #       get :show, :id => "1", :idea_id => "39"
-    #       assigns[:idea].should_not be_nil
-    #       assigns[:edit].should == false
-    #       response.should be_success
-    #     end
-    #          
-    #     it "should deny access on private idea if not owner and idea is private" do
-    #       Idea.should_receive(:find_by_id_and_published).with("38", true).at_least(:once).and_return(@private_idea)
-    #       get :show, :id => "1", :idea_id => "38"
+   it "should show idea in public mode if owner (can't edit older versions)" do
+     get :show, :id => 1, :idea_id => "37", :branch_id => 1
+     assigns[:idea].should_not be_nil
+     assigns[:branch].should_not be_nil
+     assigns[:branch_num].should == 1
+     assigns[:edit].should == false
+     response.should be_success
+   end
+  
+   it "should show idea in public mode if not owner and idea is public" do
+     get :show, :id => 1, :idea_id => "39", :branch_id => 1
+     assigns[:idea].should_not be_nil
+     assigns[:edit].should == false
+     response.should be_success
+   end
+    
+    # it "should deny access on private idea if not owner and idea is private" do
+    #       get :show, :id => 1, :idea_id => "38", :branch_id => 1
     #       assigns[:idea].should_not be_nil
     #       response.should redirect_to(ideas_path)
     #     end
     #     
-    #     it "should throw error if version doesnt exist" do
-    #       Idea.should_receive(:find_by_id_and_published).with("38", true).at_least(:once).and_return(@private_idea)
-    #       get :show, :id => "2", :idea_id => "38"
-    #       response.should redirect_to(ideas_path)
-    #     end
-    #     
-    #     it "should grab branch name if specified" do
-    #       Idea.should_receive(:find_by_id_and_published).with("38", true).at_least(:once).and_return(@private_idea)
-    #       get :show, :id => "2", :idea_id => "38", :branch_id => "runesbranch"
-    #       assigns[:branch].should == "runesbranch"
-    #     end
-    #     
-    #     it "should set branch to master if branch not specified" do
-    #       Idea.should_receive(:find_by_id_and_published).with("38", true).at_least(:once).and_return(@private_idea)
-    #       get :show, :id => "2", :idea_id => "38"
-    #       assigns[:branch].should == "master"
-    #     end
+    
+    it "should throw error if version doesnt exist" do
+      get :show, :id => 2, :idea_id => "38", :branch_id => 1
+      flash[:error].should_not be_nil
+      response.should redirect_to(ideas_path)
+    end
     
   end
 
