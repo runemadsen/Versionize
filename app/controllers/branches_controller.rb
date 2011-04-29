@@ -9,8 +9,10 @@ class BranchesController < ApplicationController
       @version = 0
       @tree = @idea.version(@version, @branch)
     rescue Exception => e
+      puts e
       flash[:error] = e.message
       redirect_to ideas_path
+      return
     end
     
     if @idea.is_collaborator?(current_user)

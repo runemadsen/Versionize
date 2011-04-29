@@ -54,7 +54,7 @@ class TextsController < ApplicationController
   def destroy
     begin
       find_idea_and_branch_by_params
-      @text = @idea.file(Text::name_from_uuid(params[:id]), @branch.alias)
+      @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
       @idea.create_version(@text, @current_user, "Deleted text", @branch, true)
       flash[:notice] = "Deleted Text"
       redirect_to branch_or_idea_path(@idea, @branch_num)

@@ -14,7 +14,7 @@ describe TextsController do
     @idea.create_repo(@user)
     @text = Text.new(:body => "This is my text")
     @text.order = @idea.next_order
-    @idea.create_version(@text, @user, "Added text")
+    @idea.create_version(@text, @user, "Added text", @idea.branches.first)
   end
 
   after do

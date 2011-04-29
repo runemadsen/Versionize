@@ -10,6 +10,7 @@ describe Idea do
     @text = Text.new(:body => @desc)
     @user = users(:rune)
     @idea.create_repo(@user)
+    @idea.create_branch("master", "newbranch", users(:rune))
   end
 
   after do
@@ -33,15 +34,15 @@ describe Idea do
 
     it "should save model on master branch with master specified" do
       @text = Text.new :body => "This is some text", :order => 1
-      @idea.create_version(@text, users(:rune), "Save text", false, "master")
+      @idea.create_version(@text, users(:rune), "Save text")
       @idea.file(@text.generate_name).body.should == @text.body
       @idea.repository.commit_count("master").should == 1
     end  
 
     it "should save model on newbranch" do
       @text = Text.new :body => "This is some text", :order => 1
-      @idea.create_version(@text, users(:rune), "Save text", false, "newbranch")
-      @idea.file(@text.generate_name, "newbranch").body.should == @text.body
+      @idea.create_version(@text, users(:rune), "Save text", @idea.branches[1])
+      @idea.file(@text.generate_name, @idea.branches[1]).body.should == @text.body
       @idea.repository.commit_count("newbranch").should == 1
       @idea.repository.commit_count("master").should == 0
     end
@@ -50,7 +51,7 @@ describe Idea do
   describe "create new branch" do
     it "should create a new branch from the given old branch" do
       @text = Text.new :body => "This is some text", :order => 1
-      @idea.create_version(@text, users(:rune), "Save text", false, "master")
+      @idea.create_version(@text, users(:rune), "Save text")
       @idea.create_branch("master", "newbranch", users(:rune))
       @idea.repository.heads.count.should == 2
     end  
@@ -61,9 +62,9 @@ describe Idea do
       @text = Text.new :body => "Text for master branch", :order => 1
       @idea.create_version(@text, users(:rune), "Save text")
       @text.body = "Text for the newbranch branch"
-      @idea.create_version(@text, users(:rune), "Save text", false, "newbranch")
+      @idea.create_version(@text, users(:rune), "Save text", @idea.branches[1])
       @idea.version(0)[0].body.should == "Text for master branch"
-      @idea.version(0, "newbranch")[0].body.should == "Text for the newbranch branch"
+      @idea.version(0, @idea.branches[1])[0].body.should == "Text for the newbranch branch"
     end
   end
   
@@ -72,9 +73,9 @@ describe Idea do
       @text = Text.new :body => "Text for master branch", :order => 1
       @idea.create_version(@text, users(:rune), "Save text")
       @text.body = "Text for the newbranch branch"
-      @idea.create_version(@text, users(:rune), "Save text", false, "newbranch")
+      @idea.create_version(@text, users(:rune), "Save text", @idea.branches[1])
       @idea.file(@text.generate_name).body.should == "Text for master branch"
-      @idea.file(@text.generate_name, "newbranch").body.should == "Text for the newbranch branch"
+      @idea.file(@text.generate_name, @idea.branches[1]).body.should == "Text for the newbranch branch"
     end
   end
   
@@ -83,7 +84,7 @@ describe Idea do
       @text = Text.new :body => "Text for master branch", :order => 1
       @idea.create_version(@text, users(:rune), "Save text")
       @idea.next_order.should == 1
-      @idea.next_order("newbranch").should == 0
+      @idea.next_order(@idea.branches[1]).should == 0
     end
   end
   

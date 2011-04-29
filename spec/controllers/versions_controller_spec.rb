@@ -19,9 +19,9 @@ describe VersionsController do
     @private_idea.create_repo(@user)
     @public_idea.create_repo(@user)
     @text = Text.new :body => "Text for master branch", :order => 1
-    @idea.create_version(@text, users(:rune), "Save text")
-    @private_idea.create_version(@text, users(:rune), "Save text")
-    @public_idea.create_version(@text, users(:rune), "Save text")
+    @idea.create_version(@text, users(:rune), "Save text", @idea.branches.first)
+    @private_idea.create_version(@text, users(:rune), "Save text", @private_idea.branches.first)
+    @public_idea.create_version(@text, users(:rune), "Save text", @public_idea.branches.first)
   end
   
   after do

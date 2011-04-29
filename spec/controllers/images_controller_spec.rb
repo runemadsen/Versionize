@@ -13,7 +13,7 @@ describe ImagesController do
     @idea.create_repo(@user)
     @image = Image.new(:key => "users/1/images/20100809")
     @image.order = @idea.next_order
-    @idea.create_version(@image, @user, "Added Image")
+    @idea.create_version(@image, @user, "Added Image", @idea.branches.first)
     @idea.create_branch("master", "newbranch", @user)
     @idea.save
   end

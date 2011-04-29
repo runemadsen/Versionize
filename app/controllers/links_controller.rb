@@ -42,7 +42,7 @@ class LinksController < ApplicationController
     begin
       find_idea_and_branch_by_params
       params[:link][:notes] = params[:link][:notes] == "Notes (optional)" ? nil : params[:link][:notes]
-      @link = @idea.file(Link::name_from_uuid(params[:id]), @branch.alias)
+      @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
       @link.update(params[:link])
       @idea.create_version(@link, @current_user, "Updated link", @branch)
       flash[:notice] = "Saved Link"
@@ -56,7 +56,7 @@ class LinksController < ApplicationController
   def destroy
     begin
       find_idea_and_branch_by_params
-      @link = @idea.file(Link::name_from_uuid(params[:id]), @branch.alias)
+      @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
       @idea.create_version(@link, @current_user, "Deleted link", @branch, true)
       flash[:notice] = "Deleted Link"
       redirect_to branch_or_idea_path(@idea, @branch_num)

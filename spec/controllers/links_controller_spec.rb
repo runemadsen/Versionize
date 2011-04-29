@@ -14,7 +14,7 @@ describe LinksController do
     @idea.create_repo(@user)
     @link = Link.new(:url => "www.runemadsen.com")
     @link.order = @idea.next_order
-    @idea.create_version(@link, @user, "Added link")
+    @idea.create_version(@link, @user, "Added link", @idea.branches.first)
     @idea.create_branch("master", "newbranch", @user)
   end
    

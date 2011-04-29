@@ -47,7 +47,8 @@ class Idea < ActiveRecord::Base
     false
   end
     
-  def next_order(branch)
+  def next_order(branch = nil)
+    branch = branch.nil? ? branches.first : branch
     self.repository.tree(branch.alias).contents.count
   end
   
@@ -57,7 +58,8 @@ class Idea < ActiveRecord::Base
     branches.create(:name => "Original", :alias => "master")
   end
   
-  def create_version(model, user, commit_msg, branch, delete = false)
+  def create_version(model, user, commit_msg, branch = nil, delete = false)
+    branch = branch.nil? ? branches.first : branch  
     index = Index.new(self.repository)
     index.read_tree(branch.alias)
     if delete
@@ -84,11 +86,13 @@ class Idea < ActiveRecord::Base
     branch.parent.nil? ? repository.commit_count(branch) : repository.commits_between(branch.parent.alias, branch.alias).count
   end
   
-  def file(file_name, branch)
+  def file(file_name, branch = nil)
+    branch = branch.nil? ? branches.first : branch 
     blob_to_model(self.repository.tree(branch.alias)/file_name)
   end
   
-  def version(version, branch)
+  def version(version, branch = nil)
+    branch = branch.nil? ? branches.first : branch 
     @models = []
     
     if version == 0

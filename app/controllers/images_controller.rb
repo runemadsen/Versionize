@@ -56,7 +56,7 @@ class ImagesController < ApplicationController
   def destroy
     begin
       find_idea_and_branch_by_params
-      @image = @idea.file(Image::name_from_uuid(params[:id]), @branch.alias)
+      @image = @idea.file(Image::name_from_uuid(params[:id]), @branch)
       @idea.create_version(@image, @current_user, "Deleted image", @branch, true)
       flash[:notice] = "Removed Image"
       redirect_to branch_or_idea_path(@idea, @branch_num)

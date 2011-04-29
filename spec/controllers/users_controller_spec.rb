@@ -13,7 +13,7 @@ describe UsersController do
     
     it "should throw error when password dont match" do
       post :create, {:user => { :email => "test@test.dk", :password => "test", :password_confirmation => "test1" }, :code => "ITPINVITE"}
-      flash[:error].should == "Your passwords doesn't match"
+      flash[:error].should == "Your passwords doesn't match or user already created"
       response.should redirect_to(new_user_path)
     end
     
