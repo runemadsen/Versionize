@@ -22,13 +22,16 @@
 	<h2>Branches</h2>
 	<ul id="branch_box">
 		<% @idea.repository.heads.each do |head| %>
-			<li><%= link_to head.name, idea_branch_or_master_path(@idea, head.name) %></li>
+			<% if head.name == @branch %>
+				<li><strong><%= link_to head.name, idea_branch_or_master_path(@idea, head.name) %></strong></li>
+			<% else %>
+				<li><%= link_to head.name, idea_branch_or_master_path(@idea, head.name) %></li>
+			<% end %>
 		<% end %>
 		<% if @edit %>
-		<li><%= link_to "+", new_idea_branch_path(@idea) %></li>
+		<li><%= link_to "+ Create branch from this branch", new_idea_branch_path(@idea) %></li>
 		<% end %>
 	</ul>
-	<div class="clear"></div>
 			
 	<h2>History</h2>
 	<ul>
