@@ -7,7 +7,7 @@ class BranchesController < ApplicationController
     begin
       find_idea_and_branch_by_id
       @version = 0
-      @tree = @idea.version(@version, @branch)
+      @tree = @idea.files(@branch.alias)
     rescue Exception => e
       puts e
       flash[:error] = e.message
@@ -35,7 +35,7 @@ class BranchesController < ApplicationController
   def create
     @idea = Idea.find(params[:idea_id])
     @idea.create_branch("master", params[:branch_name], current_user)
-    redirect_to idea_branch_path(@idea, @idea.branches.count)
+    redirect_to idea_branch_path(@idea, @idea.branches.last.alias)
   end
   
 end

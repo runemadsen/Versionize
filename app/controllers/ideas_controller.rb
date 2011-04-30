@@ -12,7 +12,7 @@ class IdeasController < ApplicationController
     unless @idea.nil?
       @branch = @idea.branches.first
       @version = 0
-      @tree = @idea.version(@version, @branch)
+      @tree = @idea.files("master")
       if @idea.is_collaborator?(current_user)
         @edit = true
       elsif @idea.access == Idea::PUBLIC

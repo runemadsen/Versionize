@@ -66,5 +66,13 @@ describe BranchesController do
     end
     
   end
+  
+  describe "POST create" do
+    it "should create branch and redirect to branch" do
+      post :create, :idea_id => "37", :branch_name => "My New Branch"
+      assigns[:idea].should_not be_nil
+      response.should redirect_to(idea_branch_path("37", "my-new-branch"))
+    end
+  end
 
 end

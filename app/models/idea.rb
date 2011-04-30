@@ -72,18 +72,14 @@ class Idea < ActiveRecord::Base
   
   def create_branch(oldbranch, newbranch, user)
     master = branches.where(:alias => oldbranch).first
-    branch = branches.create(:name => newbranch, :alias => newbranch, :parent_id => master.id)
+    branch = branches.create(:name => newbranch, :alias => Branch.clean_alias(newbranch), :parent_id => master.id)
     index = Index.new(self.repository)
     index.read_tree(oldbranch)
     index.commit("Created branch: " + branch.name, self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, branch.alias)
   end
   
   def commits(branch)
-    branch.parent.nil? ? repository.commits(branch.alias) : repository.commits_between(branch.parent.alias, branch.alias)
-  end
-  
-  def num_commits(branch)
-    branch.parent.nil? ? repository.commit_count(branch) : repository.commits_between(branch.parent.alias, branch.alias).count
+    branch.parent.nil? ? repository.commits(branch.alias) : repository.commits_between(branch.parent.alias, branch.alias) # this is reverse
   end
   
   def file(file_name, branch = nil)
@@ -91,20 +87,11 @@ class Idea < ActiveRecord::Base
     blob_to_model(self.repository.tree(branch.alias)/file_name)
   end
   
-  def version(version, branch = nil)
-    branch = branch.nil? ? branches.first : branch 
+  def files(treeish)
     @models = []
-    
-    if version == 0
-      self.repository.tree(branch.alias).contents.each do |blob|
-        @models << blob_to_model(blob)
-      end
-    else
-      self.repository.commits[num_commits(branch)-version.to_i].tree(branch.alias).contents.each do |blob|
-        @models << blob_to_model(blob)
-      end
+    repository.tree(treeish).contents.each do |blob|
+      @models << blob_to_model(blob)
     end
-    
     @models.sort  {|x,y| y.order <=> x.order }
   end
   

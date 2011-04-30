@@ -7,8 +7,7 @@ class VersionsController < ApplicationController
   def show
     begin
       find_idea_and_branch_by_params
-      find_version_by_params
-      @tree = @idea.version(@version, @branch)
+      @tree = @idea.files(params[:id])
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
