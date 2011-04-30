@@ -10,7 +10,7 @@
 								:hide_box => true}
 			
 			if edit
-				locals[:edit_path] = edit_idea_branch_text_path(@idea, @branch_num, text)
+				locals[:edit_path] = edit_idea_branch_text_path(@idea, @branch.alias, text)
 			end
 		%>
 		

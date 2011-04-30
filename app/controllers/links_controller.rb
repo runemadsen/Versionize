@@ -31,7 +31,7 @@ class LinksController < ApplicationController
       @link.order = @idea.next_order(@branch)
       @idea.create_version(@link, @current_user, "Added link", @branch)
       flash[:notice] = "Saved link"
-      redirect_to branch_or_idea_path(@idea, @branch_num)
+      redirect_to branch_or_idea_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -46,7 +46,7 @@ class LinksController < ApplicationController
       @link.update(params[:link])
       @idea.create_version(@link, @current_user, "Updated link", @branch)
       flash[:notice] = "Saved Link"
-      redirect_to branch_or_idea_path(@idea, @branch_num)
+      redirect_to branch_or_idea_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -59,7 +59,7 @@ class LinksController < ApplicationController
       @link = @idea.file(Link::name_from_uuid(params[:id]), @branch)
       @idea.create_version(@link, @current_user, "Deleted link", @branch, true)
       flash[:notice] = "Deleted Link"
-      redirect_to branch_or_idea_path(@idea, @branch_num)
+      redirect_to branch_or_idea_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path

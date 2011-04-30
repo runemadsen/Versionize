@@ -20,10 +20,9 @@ describe VideosController do
  
   describe "GET new" do
     it "should show the video form" do
-      get :new, :idea_id => @idea.id, :branch_id => 1
+      get :new, :idea_id => @idea.id, :branch_id => "master"
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
-      assigns[:branch_num].should_not be_nil
       response.should be_success
     end
   end

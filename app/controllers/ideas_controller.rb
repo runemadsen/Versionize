@@ -11,7 +11,6 @@ class IdeasController < ApplicationController
     
     unless @idea.nil?
       @branch = @idea.branches.first
-      @branch_num = 1
       @version = 0
       @tree = @idea.version(@version, @branch)
       if @idea.is_collaborator?(current_user)

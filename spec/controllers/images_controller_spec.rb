@@ -24,7 +24,7 @@ describe ImagesController do
 
   describe "GET new" do
     it "should show the image form for specified branch" do
-      get :new, :idea_id => @idea.id, :branch_id => 1
+      get :new, :idea_id => @idea.id, :branch_id => "master"
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
       assigns[:image_upload].should_not be_nil
@@ -34,22 +34,22 @@ describe ImagesController do
   
   describe "Upload success" do
     it "should save key and redirect to idea path" do
-      get :upload_succes, :idea_id => @idea.id, :branch_id => 1, :key => "users/1/images/20100908"
+      get :upload_succes, :idea_id => @idea.id, :branch_id => "master", :key => "users/1/images/20100908"
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
       response.should redirect_to(idea_path(@idea))
     end
     it "should save key and redirect to branch path" do
-      get :upload_succes, :idea_id => @idea.id, :branch_id => 2, :key => "users/1/images/20100908"
+      get :upload_succes, :idea_id => @idea.id, :branch_id => "newbranch", :key => "users/1/images/20100908"
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
-      response.should redirect_to(idea_branch_path(@idea, 2))
+      response.should redirect_to(idea_branch_path(@idea, "newbranch"))
     end
   end
   
   describe "GET edit" do
     it "should show the edit form for specified branch" do
-      get :edit, :idea_id => @idea.id, :branch_id => 1, :id => @image.uuid
+      get :edit, :idea_id => @idea.id, :branch_id => "master", :id => @image.uuid
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
       assigns[:image].should_not be_nil
@@ -59,7 +59,7 @@ describe ImagesController do
   
   describe "DELETE destroy" do
     it "should delete image for specified branch" do
-      delete :destroy, :idea_id => @idea.id, :branch_id => 1, :id => @image.uuid
+      delete :destroy, :idea_id => @idea.id, :branch_id => "master", :id => @image.uuid
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
       assigns[:image].should_not be_nil

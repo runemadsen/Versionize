@@ -36,15 +36,14 @@ describe BranchesController do
   describe "GET show" do
      
     it "should set basic params" do
-      get :show, :id => 1, :idea_id => "37"
+      get :show, :id => "master", :idea_id => "37"
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
-      assigns[:branch_num].should == 1
       response.should be_success
     end
 
     it "should show idea in edit mode if owner" do
-      get :show, :id => 1, :idea_id => "37"
+      get :show, :id => "master", :idea_id => "37"
       assigns[:edit].should == true
     end
     

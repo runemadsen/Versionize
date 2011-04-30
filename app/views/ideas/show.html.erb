@@ -9,7 +9,7 @@
 	<% @tree.each_with_index do |file, i | %>
 		<% if i == 0 %>
 			<%= render :partial => "texts/description", :locals => {:text => file, :edit => @edit} %>
-			<%= render(:partial => "ideas/mediabox", :locals => {:idea => @idea, :branch_num => @branch_num}) if @edit %>
+			<%= render(:partial => "ideas/mediabox", :locals => {:idea => @idea, :branch => @branch}) if @edit %>
 		<% else %>
 			<%= render :partial => file.partial_name, :locals => { file.symbol_name => file, :edit => @edit} %>
 		<% end %>
@@ -20,11 +20,11 @@
 	
 	<h2>Branches</h2>
 	<ul id="branch_box">
-		<% @idea.branches.each_with_index do |branch, i| %>
+		<% @idea.branches.each do |branch, i| %>
 			<% if @branch.id == branch.id %>
-				<li><strong><%= link_to branch.name, branch_or_idea_path(@idea, i + 1) %></strong></li>
+				<li><strong><%= link_to branch.name, branch_or_idea_path(@idea, branch) %></strong></li>
 			<% else %>
-				<li><%= link_to branch.name, branch_or_idea_path(@idea, i + 1) %></li>
+				<li><%= link_to branch.name, branch_or_idea_path(@idea, branch) %></li>
 			<% end %>
 		<% end %>
 		<% if @edit %>
@@ -37,7 +37,7 @@
 	<% commits = @idea.commits(@branch) %>
 	<% commits.each_with_index do |commit, i| %>
 		<% v_num = commits.count - i %>
-		<li><%= v_num %> <%= link_to commit.message, v_num == commits.count ? idea_path(@idea) : idea_branch_version_path(@idea, @branch_num, v_num) %></li>
+		<li><%= v_num %> <%= link_to commit.message, v_num == commits.count ? idea_path(@idea) : idea_branch_version_path(@idea, @branch.alias, v_num) %></li>
 	<% end %>
 	<% unless @branch.parent.nil? %>
 		This branch came from <%= @branch.parent.name %>

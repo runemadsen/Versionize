@@ -19,11 +19,12 @@ class ImagesController < ApplicationController
             {'key' => key},
             {'acl' => 'public-read'},
             ['content-length-range', 0, 10000000],
-            {'success_action_redirect' => upload_success_idea_branch_images_url(@idea, @branch_num)}
+            {'success_action_redirect' => upload_success_idea_branch_images_url(@idea, @branch.alias)}
           ]
         }
       )
     rescue Exception => e
+      puts e
       flash[:error] = e.message
       redirect_to ideas_path
     end
@@ -46,7 +47,7 @@ class ImagesController < ApplicationController
       @image.order = @idea.next_order(@branch)
       @idea.create_version(@image, @current_user, "Added Image", @branch)
       flash[:notice] = "Saved image"
-      redirect_to branch_or_idea_path(@idea, @branch_num)
+      redirect_to branch_or_idea_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -59,7 +60,7 @@ class ImagesController < ApplicationController
       @image = @idea.file(Image::name_from_uuid(params[:id]), @branch)
       @idea.create_version(@image, @current_user, "Deleted image", @branch, true)
       flash[:notice] = "Removed Image"
-      redirect_to branch_or_idea_path(@idea, @branch_num)
+      redirect_to branch_or_idea_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path

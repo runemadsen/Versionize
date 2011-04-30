@@ -30,7 +30,7 @@ class TextsController < ApplicationController
       @text.order = @idea.next_order(@branch)
       @idea.create_version(@text, @current_user, "Added text", @branch)
       flash[:notice] = "Saved Text"
-      redirect_to branch_or_idea_path(@idea, @branch_num)
+      redirect_to branch_or_idea_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -44,7 +44,7 @@ class TextsController < ApplicationController
       @text.update(:body => params[:body])
       @idea.create_version(@text, @current_user, "Updated text", @branch)
       flash[:notice] = "Saved Text"
-      redirect_to branch_or_idea_path(@idea, @branch_num)
+      redirect_to branch_or_idea_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -57,7 +57,7 @@ class TextsController < ApplicationController
       @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
       @idea.create_version(@text, @current_user, "Deleted text", @branch, true)
       flash[:notice] = "Deleted Text"
-      redirect_to branch_or_idea_path(@idea, @branch_num)
+      redirect_to branch_or_idea_path(@idea, @branch)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path

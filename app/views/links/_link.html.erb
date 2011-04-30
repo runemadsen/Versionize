@@ -9,7 +9,7 @@
 									:color => 4}
 				
 				if edit
-					locals[:edit_path] = edit_idea_branch_link_path(@idea, @branch_num, link)
+					locals[:edit_path] = edit_idea_branch_link_path(@idea, @branch.alias, link)
 					locals[:drag] = true
 				end
 			%>
