@@ -39,6 +39,7 @@ describe BranchesController do
       get :show, :id => "master", :idea_id => "37"
       assigns[:idea].should_not be_nil
       assigns[:branch].should_not be_nil
+      assigns[:tree].should_not be_nil
       response.should be_success
     end
 

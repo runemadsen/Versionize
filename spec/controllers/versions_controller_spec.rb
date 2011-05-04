@@ -36,16 +36,18 @@ describe VersionsController do
   describe "GET show" do
      
    it "should show idea in public mode if owner (can't edit older versions)" do
-     get :show, :id => 1, :idea_id => "37", :branch_id => "master"
+     get :show, :id => @idea.repository.commit("master").sha, :idea_id => "37", :branch_id => "master"
      assigns[:idea].should_not be_nil
      assigns[:branch].should_not be_nil
      assigns[:edit].should == false
+     assigns[:tree].should_not be_nil
      response.should be_success
    end
   
    it "should show idea in public mode if not owner and idea is public" do
-     get :show, :id => 1, :idea_id => "39", :branch_id => "master"
+     get :show, :id => @idea.repository.commit("master").sha, :idea_id => "39", :branch_id => "master"
      assigns[:idea].should_not be_nil
+     assigns[:tree].should_not be_nil
      assigns[:edit].should == false
      response.should be_success
    end

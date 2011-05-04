@@ -218,8 +218,39 @@ _____________________________________________ */
 	margin-bottom: 5px;
 }
 
-#version_box {
-	margin-bottom: 10px;
+/* Versions
+_____________________________________________ */
+
+ul#versions {
+	color: #FFF;
+	font-size: 15px;
+}
+
+ul#versions li {
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+ul#versions li a#new_version {
+	font-size: 12px;
+}
+
+/* History
+_____________________________________________ */
+
+ul#history span.history_date {
+	color: #FFF;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-size: 13px;
+}
+
+ul#history li {
+	margin-bottom: 5px;
 }
 
 /* Public / Private
@@ -256,23 +287,6 @@ _____________________________________________ */
 #access_control .access_box.active,
 #access_control .access_box.active a {
 	color: #FFF;
-}
-
-/* Idea version boxes
-_____________________________________________ */
-
-.version_box {
-	padding: 0px 9px;
-	float: left;
-	margin-right: 5px;
-	display: block;
-	height: 26px;
-	background-color: #6c6a69;
-	margin-bottom: 10px;
-	color: #FFF;
-	font-weight: bold;
-	line-height: 26px;
-	text-decoration: none;
 }
 
 /* Tip

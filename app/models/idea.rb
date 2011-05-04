@@ -67,7 +67,7 @@ class Idea < ActiveRecord::Base
     else
       index.add(model.generate_name, model.to_json)
     end
-    index.commit(commit_msg, self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, branch.alias)
+    index.commit(commit_msg, self.repository.commit_count > 0 ? [self.repository.commit(branch.alias)] : nil, Actor.new("Versionize User", user.email), nil, branch.alias)
   end
   
   def create_branch(oldbranch, newbranch, user)
@@ -75,11 +75,11 @@ class Idea < ActiveRecord::Base
     branch = branches.create(:name => newbranch, :alias => Branch.clean_alias(newbranch), :parent_id => master.id)
     index = Index.new(self.repository)
     index.read_tree(oldbranch)
-    index.commit("Created branch: " + branch.name, self.repository.commit_count > 0 ? [self.repository.commits.first] : nil, Actor.new("Versionize User", user.email), nil, branch.alias)
+    index.commit("Created branch: " + branch.name, [self.repository.commit(oldbranch)], Actor.new("Versionize User", user.email), nil, branch.alias)
   end
   
   def commits(branch)
-    branch.parent.nil? ? repository.commits(branch.alias) : repository.commits_between(branch.parent.alias, branch.alias) # this is reverse
+    branch.parent.nil? ? repository.commits(branch.alias) : repository.commits_between(branch.parent.alias, branch.alias).reverse # is this reverse?
   end
   
   def file(file_name, branch = nil)

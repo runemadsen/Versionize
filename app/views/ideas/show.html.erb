@@ -18,25 +18,25 @@
 </div>
 <div class="grid_3">
 	
-	<h2>Branches</h2>
-	<ul id="branch_box">
-		<% @idea.branches.each do |branch, i| %>
+	<h2>Versions</h2>
+	<ul id="versions">
+		<% @idea.branches.each_with_index do |branch, i| %>
 			<% if @branch.id == branch.id %>
-				<li><strong><%= link_to branch.name, branch_or_idea_path(@idea, branch) %></strong></li>
+				<li><strong><%= link_to branch.name, branch_or_idea_path(@idea, branch), :class => "font_color5" %></strong></li>
 			<% else %>
-				<li><%= link_to branch.name, branch_or_idea_path(@idea, branch) %></li>
+				<li><%= link_to branch.name, branch_or_idea_path(@idea, branch), :class => "font_color3" %></li>
 			<% end %>
 		<% end %>
 		<% if @edit %>
-		<li><%= link_to "+ Create new branch", new_idea_branch_path(@idea) %></li>
+		<li><%= link_to "+ Create new version", new_idea_branch_path(@idea), :id => "new_version" %></li>
 		<% end %>
 	</ul>
 			
 	<h2>History</h2>
-	<ul>
+	<ul id="history">
 	<% @idea.commits(@branch).each_with_index do |commit, i| %>
-	
-		<li><%= commit.date.strftime("%m/%d/%Y") %> - <%= link_to commit.message, i == 0 ? idea_path(@idea) : idea_branch_version_path(@idea, @branch.alias, commit.sha) %></li>
+		<% c = (i % 9) + 1 %>
+		<li><span class="history_date background_color<%= c %>"><%= commit.date.strftime("%m/%d/%Y") %></span> <%= link_to commit.message, i == 0 ? idea_path(@idea) : idea_branch_version_path(@idea, @branch.alias, commit.sha), :class => "font_color#{c}" %></li>
 	<% end %>
 	<% unless @branch.parent.nil? %>
 		This branch came from <%= @branch.parent.name %>

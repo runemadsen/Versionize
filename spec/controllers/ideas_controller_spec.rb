@@ -52,6 +52,7 @@ describe IdeasController do
           get :show, :id => "37"
           assigns[:idea].should_not be_nil
           assigns[:edit].should == true
+          assigns[:tree].should_not be_nil
           response.should be_success
         end
         

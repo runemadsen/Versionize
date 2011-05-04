@@ -57,14 +57,14 @@ describe Idea do
     end  
   end
   
-  describe "Version" do
-    it "should return version depending on specified branch" do
+  describe "Files" do
+    it "should return files depending on specified treeish" do
       @text = Text.new :body => "Text for master branch", :order => 1
       @idea.create_version(@text, users(:rune), "Save text")
       @text.body = "Text for the newbranch branch"
       @idea.create_version(@text, users(:rune), "Save text", @idea.branches[1])
-      @idea.version(0)[0].body.should == "Text for master branch"
-      @idea.version(0, @idea.branches[1])[0].body.should == "Text for the newbranch branch"
+      @idea.files("master")[0].body.should == "Text for master branch"
+      @idea.files("newbranch")[0].body.should == "Text for the newbranch branch"
     end
   end
   
