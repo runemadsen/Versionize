@@ -36,7 +36,7 @@
 	<ul id="history">
 	<% @idea.commits(@branch).each_with_index do |commit, i| %>
 		<% c = (i % 9) + 1 %>
-		<li><span class="history_date background_color<%= c %>"><%= commit.date.strftime("%m/%d/%Y") %></span> <%= link_to commit.message, i == 0 ? branch_or_idea_path(@idea, @branch) : idea_branch_version_path(@idea, @branch.alias, commit.sha), :class => "font_color#{c}" %></li>
+		<li><span class="history_date background_color<%= c %>"><%= commit.date.strftime("%m/%d/%Y") %></span> <%= link_to commit.message, i == 0 ? branch_or_idea_path(@idea, @branch) : idea_branch_history_path(@idea, @branch.alias, commit.sha), :class => "font_color#{c}" %></li>
 	<% end %>
 	<% unless @branch.parent.nil? %>
 		This branch came from <%= @branch.parent.name %>

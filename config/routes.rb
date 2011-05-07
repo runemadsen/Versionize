@@ -12,7 +12,7 @@ Versionize::Application.routes.draw do
     resources :collaborations
     post :toggle_access, :on => :member
     resources :branches do
-      resources :versions
+      resources :history
       resources :videos
       resources :links  
       resources :texts
