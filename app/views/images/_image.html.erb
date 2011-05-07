@@ -5,7 +5,7 @@
 				<%= render :partial => "ideas/editbox", :locals => {:idea_id => @idea.id, 
 																														:item_id => image.id, 
 																														:item_type => "image",
-																														:edit_path => edit_idea_branch_image_path(@idea, @branch.alias, image),
+																														:edit_path => edit_idea_version_image_path(@idea, @version.alias, image),
 																														:drag => true,
 																														:color => 1} %>
 			<% end %>

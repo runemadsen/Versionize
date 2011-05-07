@@ -10,8 +10,8 @@ class IdeasController < ApplicationController
     @idea = Idea.find_by_id_and_published(params[:id], true)
     
     unless @idea.nil?
-      @branch = @idea.branches.first
-      @version = 0
+      @version = @idea.versions.first
+      @history = 0
       @tree = @idea.files("master")
       if @idea.is_collaborator?(current_user)
         @edit = true
@@ -38,7 +38,7 @@ class IdeasController < ApplicationController
       @text = Text.new(:body => params[:description])
       @text.order = 9999999999
       @idea.create_repo(current_user)
-      @idea.create_version(@text, current_user, "Created idea")
+      @idea.create_history(@text, current_user, "Created idea")
       
       flash[:notice] = "Idea Saved!"
       redirect_to idea_url(@idea)

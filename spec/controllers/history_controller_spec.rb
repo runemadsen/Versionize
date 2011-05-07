@@ -18,10 +18,10 @@ describe HistoryController do
     @idea.create_repo(@user)
     @private_idea.create_repo(@user)
     @public_idea.create_repo(@user)
-    @text = Text.new :body => "Text for master branch", :order => 1
-    @idea.create_version(@text, users(:rune), "Save text", @idea.branches.first)
-    @private_idea.create_version(@text, users(:rune), "Save text", @private_idea.branches.first)
-    @public_idea.create_version(@text, users(:rune), "Save text", @public_idea.branches.first)
+    @text = Text.new :body => "Text for master version", :order => 1
+    @idea.create_history(@text, users(:rune), "Save text", @idea.versions.first)
+    @private_idea.create_history(@text, users(:rune), "Save text", @private_idea.versions.first)
+    @public_idea.create_history(@text, users(:rune), "Save text", @public_idea.versions.first)
   end
   
   after do
@@ -36,16 +36,16 @@ describe HistoryController do
   describe "GET show" do
      
    it "should show idea in public mode if owner (can't edit older versions)" do
-     get :show, :id => @idea.repository.commit("master").sha, :idea_id => "37", :branch_id => "master"
+     get :show, :id => @idea.repository.commit("master").sha, :idea_id => "37", :version_id => "master"
      assigns[:idea].should_not be_nil
-     assigns[:branch].should_not be_nil
+     assigns[:version].should_not be_nil
      assigns[:edit].should == false
      assigns[:tree].should_not be_nil
      response.should be_success
    end
   
    it "should show idea in public mode if not owner and idea is public" do
-     get :show, :id => @idea.repository.commit("master").sha, :idea_id => "39", :branch_id => "master"
+     get :show, :id => @idea.repository.commit("master").sha, :idea_id => "39", :version_id => "master"
      assigns[:idea].should_not be_nil
      assigns[:tree].should_not be_nil
      assigns[:edit].should == false
@@ -53,14 +53,14 @@ describe HistoryController do
    end
     
     # it "should deny access on private idea if not owner and idea is private" do
-    #       get :show, :id => 1, :idea_id => "38", :branch_id => 1
+    #       get :show, :id => 1, :idea_id => "38", :version_id => 1
     #       assigns[:idea].should_not be_nil
     #       response.should redirect_to(ideas_path)
     #     end
     #     
     
     it "should throw error if version doesnt exist" do
-      get :show, :id => 2, :idea_id => "38", :branch_id => "master"
+      get :show, :id => 2, :idea_id => "38", :version_id => "master"
       flash[:error].should_not be_nil
       response.should redirect_to(ideas_path)
     end

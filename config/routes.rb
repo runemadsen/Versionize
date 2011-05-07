@@ -11,7 +11,7 @@ Versionize::Application.routes.draw do
   resources :ideas do
     resources :collaborations
     post :toggle_access, :on => :member
-    resources :branches do
+    resources :versions do
       resources :history
       resources :videos
       resources :links  

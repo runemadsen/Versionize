@@ -2,7 +2,7 @@
 
 <h1>Add text to idea</h1>
 
-<%= form_tag idea_branch_texts_path(@idea, @branch.alias) do %>
+<%= form_tag idea_version_texts_path(@idea, @version.alias) do %>
 
 	<%= text_area_tag :body, 'Write your text here', {:class => "input_box input_text"} %>
 	<br /><br />

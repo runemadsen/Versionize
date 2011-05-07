@@ -6,7 +6,7 @@ class TextsController < ApplicationController
 
   def new
     begin
-      find_idea_and_branch_by_params
+      find_idea_and_version_by_params
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -15,8 +15,8 @@ class TextsController < ApplicationController
   
   def edit
     begin
-      find_idea_and_branch_by_params
-      @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
+      find_idea_and_version_by_params
+      @text = @idea.file(Text::name_from_uuid(params[:id]), @version)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -25,12 +25,12 @@ class TextsController < ApplicationController
 
   def create
     begin
-      find_idea_and_branch_by_params
+      find_idea_and_version_by_params
       @text = Text.new(:body => params[:body])
-      @text.order = @idea.next_order(@branch)
-      @idea.create_version(@text, @current_user, "Added text", @branch)
+      @text.order = @idea.next_order(@version)
+      @idea.create_history(@text, @current_user, "Added text", @version)
       flash[:notice] = "Saved Text"
-      redirect_to branch_or_idea_path(@idea, @branch)
+      redirect_to version_or_idea_path(@idea, @version)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -39,12 +39,12 @@ class TextsController < ApplicationController
   
   def update
     begin
-      find_idea_and_branch_by_params
-      @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
+      find_idea_and_version_by_params
+      @text = @idea.file(Text::name_from_uuid(params[:id]), @version)
       @text.update(:body => params[:body])
-      @idea.create_version(@text, @current_user, "Updated text", @branch)
+      @idea.create_history(@text, @current_user, "Updated text", @version)
       flash[:notice] = "Saved Text"
-      redirect_to branch_or_idea_path(@idea, @branch)
+      redirect_to version_or_idea_path(@idea, @version)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -53,11 +53,11 @@ class TextsController < ApplicationController
   
   def destroy
     begin
-      find_idea_and_branch_by_params
-      @text = @idea.file(Text::name_from_uuid(params[:id]), @branch)
-      @idea.create_version(@text, @current_user, "Deleted text", @branch, true)
+      find_idea_and_version_by_params
+      @text = @idea.file(Text::name_from_uuid(params[:id]), @version)
+      @idea.create_history(@text, @current_user, "Deleted text", @version, true)
       flash[:notice] = "Deleted Text"
-      redirect_to branch_or_idea_path(@idea, @branch)
+      redirect_to version_or_idea_path(@idea, @version)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path

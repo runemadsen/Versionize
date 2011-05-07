@@ -2,7 +2,7 @@ class Idea < ActiveRecord::Base
 
   include Grit
   
-  has_many :branches
+  has_many :versions
   has_many :collaborations
   has_many :users, :through => :collaborations
   
@@ -47,44 +47,44 @@ class Idea < ActiveRecord::Base
     false
   end
     
-  def next_order(branch = nil)
-    branch = branch.nil? ? branches.first : branch
-    self.repository.tree(branch.alias).contents.count
+  def next_order(version = nil)
+    version = version.nil? ? versions.first : version
+    self.repository.tree(version.alias).contents.count
   end
   
   def create_repo user
     @repository = Repo.init_bare(self.repo)
     collaborations.create(:user => user, :owner => true)
-    branches.create(:name => "Original", :alias => "master")
+    versions.create(:name => "Original", :alias => "master")
   end
   
-  def create_version(model, user, commit_msg, branch = nil, delete = false)
-    branch = branch.nil? ? branches.first : branch  
+  def create_history(model, user, commit_msg, version = nil, delete = false)
+    version = version.nil? ? versions.first : version  
     index = Index.new(self.repository)
-    index.read_tree(branch.alias)
+    index.read_tree(version.alias)
     if delete
       index.delete(model.generate_name)
     else
       index.add(model.generate_name, model.to_json)
     end
-    index.commit(commit_msg, self.repository.commit_count > 0 ? [self.repository.commit(branch.alias)] : nil, Actor.new("Versionize User", user.email), nil, branch.alias)
+    index.commit(commit_msg, self.repository.commit_count > 0 ? [self.repository.commit(version.alias)] : nil, Actor.new("Versionize User", user.email), nil, version.alias)
   end
   
-  def create_branch(oldbranch, newbranch, user)
-    master = branches.where(:alias => oldbranch).first
-    branch = branches.create(:name => newbranch, :alias => Branch.clean_alias(newbranch), :parent_id => master.id)
+  def create_version(oldversion, newversion, user)
+    master = versions.where(:alias => oldversion).first
+    version = versions.create(:name => newversion, :alias => Version.clean_alias(newversion), :parent_id => master.id)
     index = Index.new(self.repository)
-    index.read_tree(oldbranch)
-    index.commit("Created branch: " + branch.name, [self.repository.commit(oldbranch)], Actor.new("Versionize User", user.email), nil, branch.alias)
+    index.read_tree(oldversion)
+    index.commit("Created version: " + version.name, [self.repository.commit(oldversion)], Actor.new("Versionize User", user.email), nil, version.alias)
   end
   
-  def commits(branch)
-    branch.parent.nil? ? repository.commits(branch.alias) : repository.commits_between(branch.parent.alias, branch.alias).reverse # is this reverse?
+  def commits(version)
+    version.parent.nil? ? repository.commits(version.alias) : repository.commits_between(version.parent.alias, version.alias).reverse # is this reverse?
   end
   
-  def file(file_name, branch = nil)
-    branch = branch.nil? ? branches.first : branch 
-    blob_to_model(self.repository.tree(branch.alias)/file_name)
+  def file(file_name, version = nil)
+    version = version.nil? ? versions.first : version 
+    blob_to_model(self.repository.tree(version.alias)/file_name)
   end
   
   def files(treeish)

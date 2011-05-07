@@ -6,7 +6,7 @@ class HistoryController < ApplicationController
   
   def show
     begin
-      find_idea_and_branch_by_params
+      find_idea_and_version_by_params
       @tree = @idea.files(params[:id])
     rescue Exception => e
       flash[:error] = e.message

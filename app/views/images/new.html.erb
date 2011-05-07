@@ -19,7 +19,7 @@
 
 <h2>Insert link to image</h2>
 
-<%= form_tag idea_branch_links_path(@idea, @branch.alias) do %>
+<%= form_tag idea_version_links_path(@idea, @version.alias) do %>
 
 	<%= text_field_tag "link[url]", 'http://', {:class => "input_box input_link"} %><br /><br />
 	

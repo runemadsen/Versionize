@@ -1,7 +1,7 @@
 module VideosHelper
   
-  def new_video_branch_or_idea_path idea, branch
-     branch.alias == "master" || branch.nil? ? new_idea_video_path(idea) : new_idea_branch_video_path(idea, branch.alias)
+  def new_video_version_or_idea_path idea, version
+     version.alias == "master" || version.nil? ? new_idea_video_path(idea) : new_idea_version_video_path(idea, version.alias)
    end
    
 end

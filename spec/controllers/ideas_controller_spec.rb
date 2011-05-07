@@ -27,10 +27,10 @@ describe IdeasController do
         @idea.create_repo(@user)
         @private_idea.create_repo(@user)
         @public_idea.create_repo(@user)
-        @text = Text.new :body => "Text for master branch", :order => 1
-        @idea.create_version(@text, users(:rune), "Save text", @idea.branches.first)
-        @private_idea.create_version(@text, users(:rune), "Save text", @private_idea.branches.first)
-        @public_idea.create_version(@text, users(:rune), "Save text", @public_idea.branches.first)
+        @text = Text.new :body => "Text for master version", :order => 1
+        @idea.create_history(@text, users(:rune), "Save text", @idea.versions.first)
+        @private_idea.create_history(@text, users(:rune), "Save text", @private_idea.versions.first)
+        @public_idea.create_history(@text, users(:rune), "Save text", @public_idea.versions.first)
       end
       
       after do

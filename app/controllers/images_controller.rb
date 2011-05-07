@@ -5,7 +5,7 @@ class ImagesController < ApplicationController
   
   def new
     begin
-      find_idea_and_branch_by_params
+      find_idea_and_version_by_params
       expiration = 20.years.from_now
       key = "users/#{current_user.id}/images/#{Time.now.strftime('%Y%m%d%H%M%S')}"
 
@@ -19,7 +19,7 @@ class ImagesController < ApplicationController
             {'key' => key},
             {'acl' => 'public-read'},
             ['content-length-range', 0, 10000000],
-            {'success_action_redirect' => upload_success_idea_branch_images_url(@idea, @branch.alias)}
+            {'success_action_redirect' => upload_success_idea_version_images_url(@idea, @version.alias)}
           ]
         }
       )
@@ -32,8 +32,8 @@ class ImagesController < ApplicationController
   
   def edit
     begin
-      find_idea_and_branch_by_params
-      @image = @idea.file(Image::name_from_uuid(params[:id]), @branch)
+      find_idea_and_version_by_params
+      @image = @idea.file(Image::name_from_uuid(params[:id]), @version)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -42,12 +42,12 @@ class ImagesController < ApplicationController
   
   def upload_succes
     begin
-      find_idea_and_branch_by_params
+      find_idea_and_version_by_params
       @image = Image.new(:key => params[:key])
-      @image.order = @idea.next_order(@branch)
-      @idea.create_version(@image, @current_user, "Added Image", @branch)
+      @image.order = @idea.next_order(@version)
+      @idea.create_history(@image, @current_user, "Added Image", @version)
       flash[:notice] = "Saved image"
-      redirect_to branch_or_idea_path(@idea, @branch)
+      redirect_to version_or_idea_path(@idea, @version)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -56,11 +56,11 @@ class ImagesController < ApplicationController
   
   def destroy
     begin
-      find_idea_and_branch_by_params
-      @image = @idea.file(Image::name_from_uuid(params[:id]), @branch)
-      @idea.create_version(@image, @current_user, "Deleted image", @branch, true)
+      find_idea_and_version_by_params
+      @image = @idea.file(Image::name_from_uuid(params[:id]), @version)
+      @idea.create_history(@image, @current_user, "Deleted image", @version, true)
       flash[:notice] = "Removed Image"
-      redirect_to branch_or_idea_path(@idea, @branch)
+      redirect_to version_or_idea_path(@idea, @version)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path

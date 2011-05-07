@@ -12,15 +12,6 @@
 
 ActiveRecord::Schema.define(:version => 20110429003003) do
 
-  create_table "branches", :force => true do |t|
-    t.string   "name"
-    t.string   "alias"
-    t.integer  "idea_id"
-    t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "collaborations", :force => true do |t|
     t.integer  "idea_id"
     t.integer  "user_id"
@@ -70,5 +61,14 @@ ActiveRecord::Schema.define(:version => 20110429003003) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.string   "name"
+    t.string   "alias"
+    t.integer  "idea_id"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

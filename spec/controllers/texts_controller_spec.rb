@@ -14,7 +14,7 @@ describe TextsController do
     @idea.create_repo(@user)
     @text = Text.new(:body => "This is my text")
     @text.order = @idea.next_order
-    @idea.create_version(@text, @user, "Added text", @idea.branches.first)
+    @idea.create_history(@text, @user, "Added text", @idea.versions.first)
   end
 
   after do
@@ -23,37 +23,37 @@ describe TextsController do
   
   describe "GET new" do
     it "should show the text form" do
-      get :new, :idea_id => @idea.id, :branch_id => "master"
+      get :new, :idea_id => @idea.id, :version_id => "master"
       assigns[:idea].should_not be_nil
-      assigns[:branch].should_not be_nil
+      assigns[:version].should_not be_nil
       response.should be_success
     end
   end
   
   describe "POST create" do
     it "should save text " do
-      post :create, { :idea_id => 37, :branch_id => "master", :text => { :body => "This is some text" } }
+      post :create, { :idea_id => 37, :version_id => "master", :text => { :body => "This is some text" } }
       assigns[:idea].should_not be_nil
-      assigns[:branch].should_not be_nil
+      assigns[:version].should_not be_nil
       response.should redirect_to(idea_path(@idea))
     end
   end
   
   describe "GET edit" do
-    it "should show the edit form for specified branch" do
-      get :edit, :idea_id => @idea.id, :branch_id => "master", :id => @text.uuid
+    it "should show the edit form for specified version" do
+      get :edit, :idea_id => @idea.id, :version_id => "master", :id => @text.uuid
       assigns[:idea].should_not be_nil
-      assigns[:branch].should_not be_nil
+      assigns[:version].should_not be_nil
       assigns[:text].should_not be_nil
       response.should be_success
     end
   end
   
   describe "DELETE destroy" do
-    it "should delete image for specified branch" do
-      delete :destroy, :idea_id => @idea.id, :branch_id => "master", :id => @text.uuid
+    it "should delete image for specified version" do
+      delete :destroy, :idea_id => @idea.id, :version_id => "master", :id => @text.uuid
       assigns[:idea].should_not be_nil
-      assigns[:branch].should_not be_nil
+      assigns[:version].should_not be_nil
       assigns[:text].should_not be_nil
       response.should redirect_to(idea_path(@idea))
     end
