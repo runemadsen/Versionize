@@ -6,7 +6,7 @@ class TextsController < ApplicationController
 
   def new
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -15,7 +15,7 @@ class TextsController < ApplicationController
   
   def edit
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       @text = @idea.file(Text::name_from_uuid(params[:id]), @version)
     rescue Exception => e
       flash[:error] = e.message
@@ -25,7 +25,7 @@ class TextsController < ApplicationController
 
   def create
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       @text = Text.new(:body => params[:body])
       @text.order = @idea.next_order(@version)
       @idea.create_history(@text, @current_user, "Added text", @version)
@@ -39,7 +39,7 @@ class TextsController < ApplicationController
   
   def update
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       @text = @idea.file(Text::name_from_uuid(params[:id]), @version)
       @text.update(:body => params[:body])
       @idea.create_history(@text, @current_user, "Updated text", @version)
@@ -53,7 +53,7 @@ class TextsController < ApplicationController
   
   def destroy
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       @text = @idea.file(Text::name_from_uuid(params[:id]), @version)
       @idea.create_history(@text, @current_user, "Deleted text", @version, true)
       flash[:notice] = "Deleted Text"

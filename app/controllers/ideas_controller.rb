@@ -15,7 +15,7 @@ class IdeasController < ApplicationController
       @tree = @idea.files("master")
       if @idea.is_collaborator?(current_user)
         @edit = true
-      elsif @idea.access == Idea::PUBLIC
+      elsif @idea.public?
         @edit = false
       else
         flash[:error] = "You do not have access to this idea"

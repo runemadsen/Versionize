@@ -1,16 +1,11 @@
 module ApplicationHelper
   
-  def find_idea_and_version_by_params
-    @idea = current_user.published_idea params[:idea_id]
-    raise Exception, "You do not have access to this idea, or it doesn't exist" if @idea.nil?
-    @version = @idea.versions.find_by_alias(params[:version_id])
-    raise Exception, "You have specified a wrong version" if @version.nil?
-  end
-  
-  def find_idea_and_version_by_id
-    @idea = current_user.published_idea params[:idea_id]
-    raise Exception, "You do not have access to this idea, or it doesn't exist" if @idea.nil?
-    @version = @idea.versions.find_by_alias(params[:id])
+  def find_idea_and_version_by_params(idea_id, version_id, throw_exception = true)
+    @idea = Idea.includes([:collaborations]).find_by_id_and_published(params[:idea_id], true)
+    if(throw_exception && !@idea.is_collaborator?(current_user))
+      raise Exception, "You do not have access to this idea, or it doesn't exist" 
+    end
+    @version = @idea.versions.find_by_alias(version_id)
     raise Exception, "You have specified a wrong version" if @version.nil?
   end
   

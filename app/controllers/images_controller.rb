@@ -5,7 +5,7 @@ class ImagesController < ApplicationController
   
   def new
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       expiration = 20.years.from_now
       key = "users/#{current_user.id}/images/#{Time.now.strftime('%Y%m%d%H%M%S')}"
 
@@ -32,7 +32,7 @@ class ImagesController < ApplicationController
   
   def edit
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       @image = @idea.file(Image::name_from_uuid(params[:id]), @version)
     rescue Exception => e
       flash[:error] = e.message
@@ -42,7 +42,7 @@ class ImagesController < ApplicationController
   
   def upload_succes
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       @image = Image.new(:key => params[:key])
       @image.order = @idea.next_order(@version)
       @idea.create_history(@image, @current_user, "Added Image", @version)
@@ -56,7 +56,7 @@ class ImagesController < ApplicationController
   
   def destroy
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       @image = @idea.file(Image::name_from_uuid(params[:id]), @version)
       @idea.create_history(@image, @current_user, "Deleted image", @version, true)
       flash[:notice] = "Removed Image"

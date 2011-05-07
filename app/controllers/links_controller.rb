@@ -6,7 +6,7 @@ class LinksController < ApplicationController
    
   def new
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
     rescue Exception => e
       flash[:error] = e.message
       redirect_to ideas_path
@@ -15,7 +15,7 @@ class LinksController < ApplicationController
    
   def edit
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       @link = @idea.file(Link::name_from_uuid(params[:id]), @version)
     rescue Exception => e
       flash[:error] = e.message
@@ -25,7 +25,7 @@ class LinksController < ApplicationController
   
   def create
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       params[:link][:notes] = params[:link][:notes] == "Notes (optional)" ? nil : params[:link][:notes]
       @link = Link.new(params[:link])
       @link.order = @idea.next_order(@version)
@@ -40,7 +40,7 @@ class LinksController < ApplicationController
   
   def update
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       params[:link][:notes] = params[:link][:notes] == "Notes (optional)" ? nil : params[:link][:notes]
       @link = @idea.file(Link::name_from_uuid(params[:id]), @version)
       @link.update(params[:link])
@@ -55,7 +55,7 @@ class LinksController < ApplicationController
   
   def destroy
     begin
-      find_idea_and_version_by_params
+      find_idea_and_version_by_params(params[:idea_id], params[:version_id])
       @link = @idea.file(Link::name_from_uuid(params[:id]), @version)
       @idea.create_history(@link, @current_user, "Deleted link", @version, true)
       flash[:notice] = "Deleted Link"

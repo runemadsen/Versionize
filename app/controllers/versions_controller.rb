@@ -5,26 +5,28 @@ class VersionsController < ApplicationController
   
   def show
     begin
-      find_idea_and_version_by_id
+      find_idea_and_version_by_params(params[:idea_id], params[:id], false)
       @history = 0
       @tree = @idea.files(@version.alias)
+      
+      if @idea.is_collaborator?(current_user)
+        @edit = true
+        render 'ideas/show'
+      elsif @idea.public?
+        @edit = false
+        render 'ideas/show'
+      else
+        flash[:error] = "You do not have access to this idea"
+        redirect_to ideas_path
+      end
+      
     rescue Exception => e
       puts e
       flash[:error] = e.message
       redirect_to ideas_path
-      return
     end
     
-    if @idea.is_collaborator?(current_user)
-      @edit = true
-      render 'ideas/show'
-    elsif @idea.access == Idea::PUBLIC
-      @edit = false
-      render 'ideas/show'
-    else
-      flash[:error] = "You do not have access to this idea"
-      redirect_to ideas_path
-    end
+    
      
   end
   
