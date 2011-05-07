@@ -194,7 +194,7 @@ div.edit_box {
 /* Sidebar
 _____________________________________________ */
 
-#sidebar h2 {
+#sidebar h2:first-child {
 	margin-top: 0;
 }
 

@@ -16,7 +16,7 @@
 	<% end %>
 	
 </div>
-<div class="grid_3">
+<div class="grid_3" id="sidebar">
 	
 	<h2>Versions</h2>
 	<ul id="versions">
@@ -36,7 +36,7 @@
 	<ul id="history">
 	<% @idea.commits(@branch).each_with_index do |commit, i| %>
 		<% c = (i % 9) + 1 %>
-		<li><span class="history_date background_color<%= c %>"><%= commit.date.strftime("%m/%d/%Y") %></span> <%= link_to commit.message, i == 0 ? idea_path(@idea) : idea_branch_version_path(@idea, @branch.alias, commit.sha), :class => "font_color#{c}" %></li>
+		<li><span class="history_date background_color<%= c %>"><%= commit.date.strftime("%m/%d/%Y") %></span> <%= link_to commit.message, i == 0 ? branch_or_idea_path(@idea, @branch) : idea_branch_version_path(@idea, @branch.alias, commit.sha), :class => "font_color#{c}" %></li>
 	<% end %>
 	<% unless @branch.parent.nil? %>
 		This branch came from <%= @branch.parent.name %>
@@ -61,9 +61,9 @@
 	<%= link_to (@idea.collaborations.count > 1 ? "Edit collaborators" : "Add collaborators to idea"), idea_collaborations_path(@idea), :class => "sidebar_link background_color3" %>
 	<% end %>
 	
-		<!-- <div id="drop_box">
-					<div id="placeholder">Drop Idea Items Here</div>
-				</div> -->
+		<div id="drop_box">
+			<div id="placeholder">Drop Idea Items Here</div>
+		</div>
 		
 		<%= link_to("Delete idea", idea_path(@idea), :method => :delete, :confirm => "Are you sure you want to delete the idea? This will delete all branches!", :class => "sidebar_link font_color1") if @idea.is_owner? @current_user %>
 	
