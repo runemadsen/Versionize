@@ -123,6 +123,30 @@ div.message_box {
 	color: #544848;
 }
 
+/* Menu
+_____________________________________________ */
+
+ul#menu {
+	margin-top: 2px;
+}
+
+ul#menu li {
+	float: left;
+	margin-left: 15px;
+	padding: 3px 10px;
+	background-color: #252525;
+}
+
+ul#menu li:first-child {
+	margin-left: 35px;
+}
+
+ul#menu li a {
+	color: #FFF;
+	text-decoration: none;
+	font-size: 13px;
+}
+
 
 /* Idea media
 _____________________________________________ */
