@@ -17,6 +17,8 @@
 	  
 		<%= f.check_box :remember_me, :class => "front_input_remember" %><%= f.label :remember_me, :class => "input_remember_label" %>
 		<%= f.submit "Login", :class => "input_submit" %>
+		<%= link_to "Have an invite code?", new_user_path, :id => "new_user_link" %>
+		<div class="clear"></div>
 	<% end %>
 	
 </div>

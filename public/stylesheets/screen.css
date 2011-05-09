@@ -96,6 +96,12 @@ ul.idea_list li a.collaborator {
 /* New user
 _____________________________________________ */
 
+#new_user_link {
+	float: right;
+	font-size: 12px;
+	margin-top: 10px;
+}
+
 #new_user h3 {
 	margin-top: 0px;
 	font-weight: normal;
