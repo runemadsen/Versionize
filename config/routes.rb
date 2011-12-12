@@ -1,6 +1,6 @@
 Versionize::Application.routes.draw do
+  
   get "home/index"
-
   get "user_sessions/new"
   
   resources :user_sessions

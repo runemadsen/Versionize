@@ -5,7 +5,7 @@ development:
   database: versionize_development
   host: localhost
   username: root
-  password: Enurmadsen1
+  password: 
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
