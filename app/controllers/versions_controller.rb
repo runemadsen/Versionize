@@ -25,9 +25,6 @@ class VersionsController < ApplicationController
       flash[:error] = e.message
       redirect_to ideas_path
     end
-    
-    
-     
   end
   
   def new 
