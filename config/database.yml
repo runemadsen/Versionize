@@ -15,11 +15,11 @@ test:
     database: versionize_test
     host: localhost
     username: root
-    password: Enurmadsen1
+    password: REPLACEME
 
 production:
     adapter: mysql2
     database: versionize_production
     host: localhost
     username: root
-    password: Enurmadsen1
+    password: REPLACEME
